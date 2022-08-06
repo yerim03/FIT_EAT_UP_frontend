@@ -1,7 +1,7 @@
 # 졸업 프로젝트
 ## FIT_EAT_UP_frontend
 기본 Navigator 구조
-![Navigator구조](./../%EC%A1%B8%ED%94%84_%ED%94%84%EB%A1%A0%ED%8A%B8_navigator%EA%B5%AC%EC%A1%B0.png)
+![Navigator구조](./%EC%A1%B8%ED%94%84_%ED%94%84%EB%A1%A0%ED%8A%B8_navigator%EA%B5%AC%EC%A1%B0.png)
 
 
 version 0.0.0 
