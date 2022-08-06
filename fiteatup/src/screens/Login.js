@@ -4,13 +4,15 @@ import { Text, StyleSheet, View, Button } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Axios from "axios";
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
 
     //로그인 버튼 클릭 시 동작
-    const handleLoginButtonPress = () => {};
+    const handleLoginButtonPress = () => { };
+
 
     return(
         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>

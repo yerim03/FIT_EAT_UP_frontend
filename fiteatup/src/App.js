@@ -7,7 +7,7 @@ import MainStack from './navigators/MainStack';
 const App = () => {
     return(
         <NavigationContainer>
-            <AuthStack />
+            <MainStack />
         </NavigationContainer>
     );
 };

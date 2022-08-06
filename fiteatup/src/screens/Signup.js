@@ -22,31 +22,18 @@ const Signup = () => {
     //회원가입 버튼 클릭 시 동작
     // const handleSignupButtonPress = (e) => {
     //     e.preventDefault();
-    // //
-    // //     console.log(inputs.username, inputs.password);
-    // //
-    //     Axios.post("http://127.0.0.1:8000/accounts/signup/", {id, password})
+
+    //     Axios.post("http://10.0.2.2:8000/accounts/signup/", {username: id, password})
     //         .then(response => {
     //             console.log('response : ', response);
     //         })
     //         .catch(error => {
-    //             console.log("error : ", error);
+    //             console.log("error : ", error.response.data);
     //         })
     // };
 
     // const handleSignupButtonPress = () => {
-    //     fetch("https://jsonplaceholder.typicode.com/todos")
-    //     .then((response) => response.json())
-    //     .then( response => console.log(response))
-    // }
-
-    const handleSignupButtonPress = () => {
-        fetch("http://localhost:8000/accounts/signup/")
-        .then((response) => response.json())
-        .then( console.log("success"))
-    }
-    // const handleSignupButtonPress = () => {
-    //     fetch("http://127.0.0.1:8000/accounts/signup/", {
+    //     fetch("http://localhost:8000/accounts/signup/", {
     //         method: "POST",
     //         headers: {
     //             "Content-Type": "application/json",

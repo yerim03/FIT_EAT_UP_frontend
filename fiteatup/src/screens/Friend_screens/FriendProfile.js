@@ -7,7 +7,8 @@ const FriendProfile = () => {
     return(
         <View style={styles.container}>
             <MyProfileImage />
-            <Text>Friend's ID</Text>
+            <View style={{ height: 10 }} />
+            <Text style={styles.nickname}>Friend's Nickname</Text>
         </View>
     );
 };
@@ -17,6 +18,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffff',
         padding: 20,
+    },
+    nickname: {
+        fontSize: 17,
     },
 });
 

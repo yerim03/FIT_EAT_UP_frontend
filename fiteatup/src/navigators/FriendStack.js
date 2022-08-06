@@ -21,6 +21,7 @@ const FreindStack = ({ navigation }) => {
                 component={Friend}
                 options={{ headerTitle: '친구 목록',
                             headerTitleStyle: {fontSize: 25, fontWeight: 'bold'},
+                            // 우측 상단의 친구추가 페이지(AddFriend.js)로 이동하는 버튼 생성
                             headerRight: () => {
                                 return(
                                     <Ionicons 
@@ -28,7 +29,8 @@ const FreindStack = ({ navigation }) => {
                                         size={35} 
                                         color="#404040"
                                         style={{ marginRight: 10 }}
-                                        onPress={() => navigation.navigate("AddFriend")} />
+                                        onPress={() => navigation.navigate("AddFriend")} 
+                                    />
                                 );
                             },
                         }} 
@@ -38,6 +40,7 @@ const FreindStack = ({ navigation }) => {
                 component={FriendProfile} 
                 options={{ headerTitle: '프로필', 
                             headerTitleStyle: {fontWeight: 'bold'},
+                            // 우측 상단의 해당 친구를 삭제하는 버튼 생성
                             headerRight: () => {
                                 return(
                                     <MaterialIcons 
@@ -45,6 +48,7 @@ const FreindStack = ({ navigation }) => {
                                         size={35} 
                                         color="#404040"
                                         style={{ marginRight: 10 }} 
+                                        // onPress={}
                                     />
                                 );
                             }, 
