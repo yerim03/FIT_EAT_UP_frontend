@@ -20,17 +20,17 @@ const Signup = () => {
 
 
     //회원가입 버튼 클릭 시 동작
-    // const handleSignupButtonPress = (e) => {
-    //     e.preventDefault();
+    const handleSignupButtonPress = (e) => {
+        e.preventDefault();
 
-    //     Axios.post("http://10.0.2.2:8000/accounts/signup/", {username: id, password})
-    //         .then(response => {
-    //             console.log('response : ', response);
-    //         })
-    //         .catch(error => {
-    //             console.log("error : ", error.response.data);
-    //         })
-    // };
+        Axios.post("http://10.0.2.2:8000/accounts/signup/", {username: id, password})
+            .then(response => {
+                console.log('response : ', response);
+            })
+            .catch(error => {
+                console.log("error : ", error.response.data);
+            })
+    };
 
     // const handleSignupButtonPress = () => {
     //     fetch("http://localhost:8000/accounts/signup/", {
