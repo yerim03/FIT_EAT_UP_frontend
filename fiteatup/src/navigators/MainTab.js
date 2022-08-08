@@ -30,6 +30,7 @@ const MainTab = () => {
                     return TabIcon({ ...props, iconName });
                 },
                 headerShown: false,
+                //하단 탭 바 속성
                 tabBarShowLabel: false,
                 tabBarActiveTintColor: '#404040',
                 tabBarInactiveTintColor: '#E0E0E0',

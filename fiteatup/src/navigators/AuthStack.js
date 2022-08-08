@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerTitle: " " }}>
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen 
                 name="Signup" 

@@ -1,12 +1,13 @@
 //회원가입 화면
 import React, { useState } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, Alert } from 'react-native';
 import Input from "../components/Input";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Axios from "axios";
+
 
 const Signup = () => {
     const [id, setId] = useState('');
@@ -26,6 +27,7 @@ const Signup = () => {
         Axios.post("http://10.0.2.2:8000/accounts/signup/", {username: id, password})
             .then(response => {
                 console.log('response : ', response);
+                Alert.alert("Signup Success!!", "회원가입이 완료되었습니다!");
             })
             .catch(error => {
                 console.log("error : ", error.response.data);

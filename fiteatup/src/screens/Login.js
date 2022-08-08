@@ -1,17 +1,32 @@
 //로그인 화면
 import React, { useState } from "react";
-import { Text, StyleSheet, View, Button } from "react-native";
+import { Text, StyleSheet, View, Button, Alert } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Axios from "axios";
+
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
 
     //로그인 버튼 클릭 시 동작
-    const handleLoginButtonPress = () => { };
+    const handleLoginButtonPress = () => { 
+        Axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password })
+            .then(response => {
+                console.log("성공: ", response);
+                console.log("성공끝")
+                Alert.alert("Login Success!!", "로그인에 성공했습니다!",
+                    [{ text: "ok", 
+                        onPress: () => navigation.navigate("MainStack")
+                    }]
+                );
+            })
+            .catch(error => {
+                console.log("Error : ", error.response);
+            })
+    };
 
 
     return(

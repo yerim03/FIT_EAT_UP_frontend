@@ -1,13 +1,22 @@
 import React from 'react';
 // import {View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import AuthStack from './navigators/AuthStack';
 import MainStack from './navigators/MainStack';
+// import { Login, Signup } from './screens';
+
+const Stack = createStackNavigator();
 
 const App = () => {
     return(
         <NavigationContainer>
-            <AuthStack />
+            <Stack.Navigator>
+                {/* <Stack.Screen name="Login" component={Login}/>
+                <Stack.Screen name="Signup" component={Signup}/> */}
+                <Stack.Screen name="AuthStack" component={AuthStack}/>
+                <Stack.Screen name="MainStack" component={MainStack}/>
+            </Stack.Navigator>
         </NavigationContainer>
     );
 };
