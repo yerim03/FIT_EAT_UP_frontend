@@ -1,7 +1,6 @@
 //회원가입 화면
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, Alert } from 'react-native';
-import Input from "../components/Input";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';

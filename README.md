@@ -52,4 +52,5 @@ version 0.2.0
 
 version 0.2.1
 + 로그인 기능 구현
++ 로그인 성공 시 AsyncStorage 에 토큰 저장
 + 로그인 후 MainStack으로 화면전환(다시 수정할 예정)

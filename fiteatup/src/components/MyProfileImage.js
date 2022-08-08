@@ -1,6 +1,7 @@
 //커스텀 컴포넌트 - 프로필이미지를 나타내는 컴포넌트
 import React from 'react';
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet } from 'react-native';
+
 
 const MyProfileImage = () => {
     return(

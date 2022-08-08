@@ -1,6 +1,7 @@
 //커스텀 컴포넌트 - TextInput
 import React from 'react';
-import { Text, TextInput, View, StyleSheet} from "react-native";
+import { Text, TextInput, View, StyleSheet} from 'react-native';
+
 
 const MyInput = ( props ) => {
     return(

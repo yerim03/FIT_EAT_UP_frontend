@@ -5,6 +5,7 @@ import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = ({ navigation }) => {
@@ -12,20 +13,22 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
 
     //로그인 버튼 클릭 시 동작
-    const handleLoginButtonPress = () => { 
-        Axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password })
-            .then(response => {
-                console.log("성공: ", response);
-                console.log("성공끝")
-                Alert.alert("Login Success!!", "로그인에 성공했습니다!",
-                    [{ text: "ok", 
-                        onPress: () => navigation.navigate("MainStack")
-                    }]
-                );
-            })
-            .catch(error => {
-                console.log("Error : ", error.response);
-            })
+    const handleLoginButtonPress = async() => { 
+        await Axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password })
+                .then(response => {
+                    console.log("성공: ", response.data, response.config.data);
+                    console.log("로그인성공끝");
+                    AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
+                    AsyncStorage.getItem('token', (err, result) => { console.log('저장된 토큰은 ', JSON.parse(result)); })
+                    Alert.alert("Login Success!!", "로그인에 성공했습니다!",
+                        [{ text: "ok", 
+                            onPress: () => navigation.navigate("MainStack") //alert창에서 ok 버튼을 클릭하면 MainStack으로 전환
+                        }]
+                    );
+                })
+                .catch(error => {
+                    console.log("Error : ", error.response);
+                })
     };
 
 
