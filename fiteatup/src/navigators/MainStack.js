@@ -9,7 +9,8 @@ const MainStack = () => {
     return(
         <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainTab} options={{ headerShown: false }}/>
-            <Stack.Screen name="RestaurantInfo" component={RestaurantInfo}/>
+            <Stack.Screen name="RestaurantInfo" component={RestaurantInfo}
+                            options={{ headerTitleAlign: 'center', headerTitle: '' }}/>
         </Stack.Navigator>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-// import {View, StyleSheet } from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStack from './navigators/AuthStack';
@@ -11,10 +11,10 @@ const Stack = createStackNavigator();
 const App = () => {
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {/* <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Signup" component={Signup}/> */}
-                <Stack.Screen name="AuthStack" component={AuthStack}/>
+                {/* <Stack.Screen name="AuthStack" component={AuthStack}/> */}
                 <Stack.Screen name="MainStack" component={MainStack}/>
             </Stack.Navigator>
         </NavigationContainer>

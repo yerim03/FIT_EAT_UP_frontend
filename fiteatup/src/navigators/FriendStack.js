@@ -48,7 +48,7 @@ const FreindStack = ({ navigation }) => {
                                         size={35} 
                                         color="#404040"
                                         style={{ marginRight: 10 }} 
-                                        // onPress={}
+                                        // onPress={} 누르면 친구목록에서 친구 삭제
                                     />
                                 );
                             }, 

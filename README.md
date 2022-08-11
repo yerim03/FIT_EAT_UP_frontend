@@ -54,3 +54,11 @@ version 0.2.1
 + 로그인 기능 구현
 + 로그인 성공 시 AsyncStorage 에 토큰 저장
 + 로그인 후 MainStack으로 화면전환(다시 수정할 예정)
+
+version 0.2.2
++ ResultImage 컴포넌트 : 결과 UI 에 사용될 이미지 컴포넌트 생성
++ 추천결과 UI(HomeResult.js) 구성
++ 검색 UI(Search.js) 구성(수정 예정)
++ 검색결과 UI(SearchResult.js) 구성
++ 검색결과 UI에서 해당 음식점 사진을 누르면 음식점 상세정보 UI(RestuarantInfo.js)로 이동
++ SafeAreaView 적용

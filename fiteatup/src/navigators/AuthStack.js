@@ -9,7 +9,9 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return(
-        <Stack.Navigator screenOptions={{ headerTitle: " " }}>
+        <Stack.Navigator screenOptions={{ headerTitle: " ", 
+                                        // cardStyle: { backgroundColor: '#ffffff' }
+                                        }}>
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen 
                 name="Signup" 

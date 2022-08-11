@@ -1,6 +1,6 @@
 //회원가입 화면
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, SafeAreaView } from 'react-native';
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';
@@ -52,45 +52,45 @@ const Signup = () => {
     // };
 
     return(
-        <KeyboardAwareScrollView 
-            contentContainerStyle={{ flex: 1 }}
-            extraScrollHeight={20}>
-            <View style={styles.container}>
-                <Text style={styles.title}>SignUp</Text>
-                <MyProfileImage />
-                <MyInput
-                    label="ID"
-                    value={id}
-                    onChangeText={text => setId(text)}
-                    // onSubmitEditing={() => {}}
-                    placeholder="아이디(영문, 숫자 포함 몇자 이상)"
-                />
-                <MyInput
-                    label="Password"
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    // onSubmitEditing={() => passwordConfirmRef.current.focus()}
-                    placeholder="비밀번호(8자 이상)"
-                    isPassword
-                />
-                <MyInput
-                    label="PasswordConfirm"  
-                    value={passwordConfirm}
-                    onChangeText={text => setPasswordConfirm(text)}
-                    // onSubmitEditing={() => nameRef.current.focus()}
-                    placeholder="비밀번호 확인"
-                    isPassword
-                />
-                <MyInput
-                    label="Nickname"
-                    value={name}
-                    onChangeText={text => setName(text)}
-                    // onSubmitEditing={() => handleSignupButtonPress}
-                    placeholder="사용할 닉네임을 입력하세요"
-                />
-                <View style={{ height: 40 }} />
-                <MyButton title="회원가입완료" onPress={ handleSignupButtonPress }/>
-            </View>
+        <KeyboardAwareScrollView extraScrollHeight={20}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={styles.container}>
+                    {/* <Text style={styles.title}>SignUp</Text> */}
+                    <MyProfileImage />
+                    <MyInput
+                        label="ID"
+                        value={id}
+                        onChangeText={text => setId(text)}
+                        // onSubmitEditing={() => {}}
+                        placeholder="아이디(영문, 숫자 포함 몇자 이상)"
+                    />
+                    <MyInput
+                        label="Password"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        // onSubmitEditing={() => passwordConfirmRef.current.focus()}
+                        placeholder="비밀번호(8자 이상)"
+                        isPassword
+                    />
+                    <MyInput
+                        label="PasswordConfirm"  
+                        value={passwordConfirm}
+                        onChangeText={text => setPasswordConfirm(text)}
+                        // onSubmitEditing={() => nameRef.current.focus()}
+                        placeholder="비밀번호 확인"
+                        isPassword
+                    />
+                    <MyInput
+                        label="Nickname"
+                        value={name}
+                        onChangeText={text => setName(text)}
+                        // onSubmitEditing={() => handleSignupButtonPress}
+                        placeholder="사용할 닉네임을 입력하세요"
+                    />
+                    <View style={{ height: 40 }} />
+                    <MyButton title="회원가입완료" onPress={ handleSignupButtonPress }/>
+                </View>
+            </SafeAreaView>
         </KeyboardAwareScrollView>
     );
 };
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingBottom: 80,
     },
     title: {
         fontSize: 35,
