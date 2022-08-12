@@ -9,14 +9,14 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return(
-        <Stack.Navigator screenOptions={{ headerTitle: " ", 
-                                        // cardStyle: { backgroundColor: '#ffffff' }
-                                        }}>
-            <Stack.Screen name="Login" component={Login}/>
+        <Stack.Navigator>
+            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
             <Stack.Screen 
                 name="Signup" 
                 component={Signup}
-                options={{ headerBackTitleVisible: false,
+                options={{ headerTitle: "회원가입",
+                            headerTitleAlign: 'center',
+                            headerBackTitleVisible: false,
                             headerBackImage: HeaderBackButton}}
             />
         </Stack.Navigator>

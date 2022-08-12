@@ -1,4 +1,4 @@
-//커스텀 컴포넌트 - 친구 프로필 이미지
+//커스텀 컴포넌트 - 친구의 프로필 이미지
 //MyProfileImage 컴포넌트보다 크기를 작게 만든 것
 import React from 'react';
 import { Text, Image, StyleSheet, TouchableOpacity } from 'react-native';

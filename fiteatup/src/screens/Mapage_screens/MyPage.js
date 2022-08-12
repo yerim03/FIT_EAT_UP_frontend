@@ -1,13 +1,32 @@
 import React from 'react';
-import { Text, SafeAreaView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, 
+        SafeAreaView, 
+        View, 
+        StyleSheet, 
+        TouchableOpacity, 
+        Alert } from 'react-native';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
 import { MaterialCommunityIcons, AntDesign, MaterialIcons } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyPage = ({ navigation }) => {
 
     //로그아웃 버튼 클릭 시 실행함수
-    const handleLogoutButtononPress = () => {};
+    const handleLogoutButtononPress = async() => {
+        AsyncStorage.getItem('token', (err,result) => { console.log('로그아웃 전 현재 저장된 토큰은 ', JSON.parse(result)); })
+        try{
+            AsyncStorage.clear();
+            Alert.alert("Logout Success!!", "로그아웃이 완료되었습니다.",
+                [{ text: "OK",
+                    onPress: () => navigation.navigate("AuthStack")
+                }]
+            );
+        }
+        catch(error) {
+            console.log(error);
+        }
+    };
 
     return(
         <SafeAreaView style={{ flex: 1 }}>

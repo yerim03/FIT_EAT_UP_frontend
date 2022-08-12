@@ -1,4 +1,5 @@
 //커스텀 컴포넌트 - TextInput
+//TextInput 안에 속성들 수정예정
 import React from 'react';
 import { Text, TextInput, View, StyleSheet} from 'react-native';
 
