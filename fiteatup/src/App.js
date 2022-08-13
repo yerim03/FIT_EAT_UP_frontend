@@ -13,7 +13,7 @@ const App = () => {
     return(
     <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="AuthStack" component={AuthStack}/>
+            {/* <Stack.Screen name="AuthStack" component={AuthStack}/> */}
             <Stack.Screen name="MainStack" component={MainStack}/>
         </Stack.Navigator>
     </NavigationContainer>
