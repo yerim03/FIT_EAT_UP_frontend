@@ -7,7 +7,6 @@ import { View,
          } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
-import { useSafeAreaInsets } from "react-native-safe-area-context"; //노치디자인 대응(SafeAreaView 대신 사용)
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,7 +17,6 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState(''); //입력 password
     const [disabled, setDisabled ] = useState(true); //로그인 버튼 disabled 여부
 
-    const insets = useSafeAreaInsets(); //노치디자인
 
     //id, password 초기화
     const onReset = () => {
@@ -56,7 +54,7 @@ const Login = ({ navigation }) => {
 
     return(
         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
-            <View style={styles.container} insets={insets}>
+            <View style={styles.container}>
                 <View style={{ height: 80 }} />
                 <Text style={styles.title}>Login</Text>
                 <View style={{ height: 50 }} />

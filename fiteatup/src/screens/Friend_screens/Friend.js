@@ -2,8 +2,8 @@
 // 추가한 친구 수에 따라 다르게 표시될 예정
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
 import FriendProfileImage from '../../components/FriendProfileImage';
+
 
 const Friend = ({ navigation }) => {
     return(
@@ -30,11 +30,9 @@ const Friend = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
         paddingHorizontal: 20,
-        paddingTop: 30,
+        paddingVertical: 10,
     },
     area: {
         // backgroundColor: 'red',

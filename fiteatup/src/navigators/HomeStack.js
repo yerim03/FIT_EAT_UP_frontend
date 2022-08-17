@@ -9,7 +9,8 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
     return(
         <Stack.Navigator 
-            screenOptions={{ 
+            screenOptions={{
+                cardStyle: { backgroundColor: '#ffffff'},
                 headerTitleAlign: 'center',
                 headerBackTitleVisible: false, 
                 headerBackImage: HeaderBackButton,

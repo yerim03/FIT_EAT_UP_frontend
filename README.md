@@ -61,7 +61,7 @@ version 0.2.2
 + 검색 UI(Search.js) 구성(수정 예정)
 + 검색결과 UI(SearchResult.js) 구성
 + 검색결과 UI에서 해당 음식점 사진을 누르면 음식점 상세정보 UI(RestuarantInfo.js)로 이동
-+ SafeAreaView 적용
++ ~~SafeAreaView 적용~~
 
 version 0.2.3 	
 - 로그아웃 시 AsyncStorage에 저장된 토큰 삭제
@@ -69,4 +69,10 @@ version 0.2.3
 - 로그인 에러메세지(id, password가 맞지 않으면 에러메시지 출력) 완료
 - 회원가입 완료하면 로그인 화면으로 전환
 - 로그인, 회원가입 버튼 비활성화 : 모든 입력값을 입력했을 때만 로그인 버튼, 회원가입 버튼 활성화 되도록 설정
-- 회원가입 에러메세지 완료 (id, password 중복확인은 X)
+- 회원가입 에러메세지 완료
+- 회원가입 id, nickname 중복확인 완료
+
+version 0.2.4
+- 홈 UI(Home.js) 구성
+- 음식점 상세정보 UI(RestaurantInfo.js) 구성(진행 중)
+- SafeAreaView 적용

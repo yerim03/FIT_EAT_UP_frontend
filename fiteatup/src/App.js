@@ -12,8 +12,9 @@ const Stack = createStackNavigator();
 const App = () => {
     return(
     <NavigationContainer>
+        <StatusBar />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen name="AuthStack" component={AuthStack}/> */}
+            <Stack.Screen name="AuthStack" component={AuthStack}/>
             <Stack.Screen name="MainStack" component={MainStack}/>
         </Stack.Navigator>
     </NavigationContainer>

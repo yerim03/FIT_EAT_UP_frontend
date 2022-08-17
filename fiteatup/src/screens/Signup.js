@@ -1,5 +1,5 @@
 //회원가입 화면
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, 
         View, 
         Text, 
@@ -22,12 +22,13 @@ const Signup = ({ navigation }) => {
 
     //오류메세지 저장
     const [idErrorMsg, setIdErrorMsg] = useState('');   //id 오류 메세지
-    const [pwdErrorMsg, setpwdErrorMsg] = useState('');    //password 오류 메세지
-    const [pwdConfrimMsg, setPwdConfrimMsg] = useState(''); //passwordConfrim 오류 메세지
+    const [passwordErrorMsg, setPasswordErrorMsg] = useState('');    //password 오류 메세지
+    const [passwordConfrimMsg, setPasswordConfrimMsg] = useState(''); //passwordConfrim 오류 메세지
     const [nickNameErrorMsg, setnickNameErrorMsg] = useState(''); //nickname 오류 메세지
 
     //유효성 검사
     const [isPassword, setIsPassword] = useState(false);    //password 유효성
+    const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);  //passwordconfirm 유효성
 
     //id, password 정규표현식
     const idRegex = /^[A-Za-z0-9]{6,}$/; //id 규칙(영문 또는 숫자 6자 이상)
@@ -44,10 +45,15 @@ const Signup = ({ navigation }) => {
 
     //ID 중복확인
     // const onSubmitId = () => {
-    //     axios.post("http://10.0.2.2:8000/accounts/signup/", {username: id})
-    //         .then(response => { console.log('response : ', response); })
+    //     axios.post("http://10.0.2.2:8000/accounts/signup/", { username: id, password, nickname: nickname })
+    //         .then(response => {
+    //                 console.log('response : ', response);
+    //                 console.log('사용가능한 아이디입니다.');})
     //         .catch(err => {
     //             console.log("iderror : ", err.response.data);
+    //             if(err.response.data.username){
+    //                 console.log("이미 사용중인 아이디입니다!")
+    //             }
     //         })
     // };
 
@@ -68,11 +74,11 @@ const Signup = ({ navigation }) => {
         const CurrentPWD = password;
         setPassword(CurrentPWD);
         if(!passwordRegex.test(CurrentPWD)){
-            setpwdErrorMsg('영문+숫자+특수문자 조합 8자리 이상으로 입력해주세요.');
+            setPasswordErrorMsg('영문+숫자+특수문자 조합 8자리 이상으로 입력해주세요.');
             setIsPassword(false);
         }
         else{
-            setpwdErrorMsg('사용가능한 비밀번호입니다!');
+            setPasswordErrorMsg('사용가능한 비밀번호입니다!');
             setIsPassword(true);
         }
     };
@@ -82,19 +88,15 @@ const Signup = ({ navigation }) => {
         const CurrentPWDConfrim = passwordConfirm;
         setPasswordConfirm(CurrentPWDConfrim);
         if( password !== CurrentPWDConfrim){
-            setPwdConfrimMsg('비밀번호가 일치하지 않습니다.');
+            setPasswordConfrimMsg('비밀번호가 일치하지 않습니다.');
+            setIsPasswordConfirm(false);
         }
         else{
-            setPwdConfrimMsg('');
+            setPasswordConfrimMsg('비밀번호가 일치합니다!');
+            setIsPasswordConfirm(true);
         }
     };
 
-    //닉네임 중복확인
-    // const onSubmitNickname = () => {
-    //     axios.post("http://10.0.2.2:8000/accounts/uniquecheck/nickname", {nickname: nickname})
-    //         .then(res=> { console.log("가능", res)})
-    //         .catch(err => { console.log("확인불가능", err) })
-    // };
 
     //회원가입 완료 버튼 disabled
     // id, password, passwordConfirm, nickname 4개가 모두 입력되어야만 버튼이 활성화되도록 함
@@ -113,13 +115,21 @@ const Signup = ({ navigation }) => {
                 onReset();
             })
             .catch(err => {
-                console.log("error : ", err.response.data);
+                if(err.response.data.username) {
+                    Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
+                    console.log("iderror : ", err.response.data.username);
+                }
+                
+                if(err.response.data.nickname) {
+                    Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
+                    console.log("nicknameerror : ", err.response.data.nickname);
+                }
             })
     };
 
 
     return(
-        <KeyboardAwareScrollView extraScrollHeight={20}>
+        <KeyboardAwareScrollView extraScrollHeight={30}>
             <View style={styles.container}>
                 <TouchableOpacity>
                     <MyProfileImage />
@@ -132,6 +142,7 @@ const Signup = ({ navigation }) => {
                     placeholder="아이디(영문 또는 숫자 6글자 이상)"
                 />
                 <Text style={styles.errortext}>{idErrorMsg}</Text>
+                {/* <Button title="중복확인" onPress={onSubmitId}/> */}
                 <MyInput
                     label="Password"
                     value={password}
@@ -139,7 +150,7 @@ const Signup = ({ navigation }) => {
                     onSubmitEditing={() => {}}
                     placeholder="비밀번호(영문 또는 숫자 또는 특수문자 8자 이상)"
                 />
-                <Text style={isPassword ? styles.correcttext : styles.errortext}>{pwdErrorMsg}</Text>
+                <Text style={isPassword ? styles.correcttext : styles.errortext}>{passwordErrorMsg}</Text>
                 <MyInput
                     label="PasswordConfirm"  
                     value={passwordConfirm}
@@ -147,7 +158,7 @@ const Signup = ({ navigation }) => {
                     onSubmitEditing={() => {}}
                     placeholder="비밀번호 확인"
                 />
-                <Text style={styles.errortext}>{pwdConfrimMsg}</Text>
+                <Text style={isPasswordConfirm ?  styles.correcttext : styles.errortext}>{passwordConfrimMsg}</Text>
                 <MyInput
                     label="Nickname"
                     value={nickname}
@@ -156,7 +167,7 @@ const Signup = ({ navigation }) => {
                     placeholder="사용할 닉네임을 입력하세요"
                 />
                 <Text style={styles.errortext}>{nickNameErrorMsg}</Text>
-                {/* <Button title="중복확인" onPress={onSubmitNickname} /> */}
+                {/* <Button title="중복확인" onPress={onSubmitId}/> */}
                 <View style={{ height: 45 }} />
                 <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
             </View>

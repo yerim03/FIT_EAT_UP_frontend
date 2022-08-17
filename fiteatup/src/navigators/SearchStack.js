@@ -10,6 +10,7 @@ const SearchStack = () => {
     return(
         <Stack.Navigator 
             screenOptions={{ 
+                cardStyle: { backgroundColor: '#ffffff'},
                 headerTitleAlign: 'center',
                 headerBackTitleVisible: false, 
                 headerBackImage: HeaderBackButton,

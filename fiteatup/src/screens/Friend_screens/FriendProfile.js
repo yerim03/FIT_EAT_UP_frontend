@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#ffffff',
         padding: 20,
     },
     nickname: {
