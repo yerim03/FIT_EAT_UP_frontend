@@ -19,9 +19,7 @@ const MyPageStack = () => {
             <Stack.Screen 
                 name="MyPage" 
                 component={MyPage} 
-                options={{ headerTitle: '마이페이지',
-                            headerTitleStyle: {fontSize: 25, fontWeight: 'bold'},
-                }} />
+                options={{ headerShown: false, }} />
             <Stack.Screen 
                 name="VisitList" 
                 component={VisitList} 

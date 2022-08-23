@@ -1,11 +1,10 @@
 //회원가입 화면
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, 
-        View, 
+import { View, 
         Text, 
+        StyleSheet, 
         Alert,
-        Button,
-        TouchableOpacity } from 'react-native';
+         } from 'react-native';
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';
@@ -18,6 +17,7 @@ const Signup = ({ navigation }) => {
     const [nickname, setNickName] = useState('');   //입력 nickname
     const [password, setPassword] = useState('');   //입력 password
     const [passwordConfirm, setPasswordConfirm] = useState(''); //입력 password확인
+    const [photoUrl, setPhotoUrl] = useState(); //입력 image
     const [disabled, setDisabled] = useState(true);    //회원가입 버튼 disabled 여부
 
     //오류메세지 저장
@@ -131,9 +131,7 @@ const Signup = ({ navigation }) => {
     return(
         <KeyboardAwareScrollView extraScrollHeight={30}>
             <View style={styles.container}>
-                <TouchableOpacity>
-                    <MyProfileImage />
-                </TouchableOpacity>
+                <MyProfileImage url={photoUrl} showButton onChangeImage={url => setPhotoUrl(url)}/>
                 <MyInput
                     label="ID"
                     value={id}
@@ -142,7 +140,6 @@ const Signup = ({ navigation }) => {
                     placeholder="아이디(영문 또는 숫자 6글자 이상)"
                 />
                 <Text style={styles.errortext}>{idErrorMsg}</Text>
-                {/* <Button title="중복확인" onPress={onSubmitId}/> */}
                 <MyInput
                     label="Password"
                     value={password}
@@ -164,10 +161,9 @@ const Signup = ({ navigation }) => {
                     value={nickname}
                     onChangeText={text => setNickName(text)}
                     onSubmitEditing={() => {}}
-                    placeholder="사용할 닉네임을 입력하세요"
+                    placeholder="사용할 이름을 입력하세요"
                 />
                 <Text style={styles.errortext}>{nickNameErrorMsg}</Text>
-                {/* <Button title="중복확인" onPress={onSubmitId}/> */}
                 <View style={{ height: 45 }} />
                 <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
             </View>

@@ -1,8 +1,8 @@
 //로그인 화면
-import React, { useState, useEffect } from "react";
-import { View, 
+import React, { useState, useEffect, useContext } from "react";
+import { Text, 
+        View, 
         StyleSheet, 
-        Text, 
         Alert,
          } from "react-native";
 import MyInput from "../components/MyInput";
@@ -31,24 +31,23 @@ const Login = ({ navigation }) => {
     }, [id, password]);
 
     //로그인 버튼 클릭 시 동작 - 로그인 기능
-    const handleLoginButtonPress = async() => { 
-        await axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password: password })
-                .then(response => {
-                    console.log("성공: \n", response);
-                    console.log("로그인성공끝");    //나중에 지울거
-                    AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
-                    AsyncStorage.getItem('token', (error, result) => { console.log('저장된 토큰은 ', JSON.parse(result)); })    //나중에 지울거
-                    Alert.alert("Login Success!!", "로그인에 성공했습니다!",
-                        [{ text: "OK", 
-                            onPress: () => navigation.navigate("MainStack") //alert창에서 OK 버튼을 클릭하면 MainStack으로 전환
-                        }]
-                    );
-                    onReset();
-                })
-                .catch(err => {
-                    Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.")
-                    console.log("Error : \n", err.response.data);
-                })
+    const handleLoginButtonPress = () => { 
+        axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password: password })
+            .then(response => {
+                console.log("성공: \n", response);
+                console.log("로그인성공끝");    //나중에 지울거
+                AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });                
+                Alert.alert("Login Success!!", "로그인에 성공했습니다!",
+                    [{ text: "OK", 
+                        onPress: () => navigation.navigate("MainStack") //alert창에서 OK 버튼을 클릭하면 MainStack으로 전환
+                    }]
+                );
+                onReset();
+            })
+            .catch(err => {
+                Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.")
+                console.log("Login Error : \n", err.response.data);
+            })
     };
 
 
@@ -65,6 +64,7 @@ const Login = ({ navigation }) => {
                     onSubmitEditing={() => {}}
                     placeholder="ID를 입력해주세요."
                 />
+                <View style={{ height: 5 }} />
                 <MyInput
                     label="Password"
                     value={password}
@@ -75,6 +75,7 @@ const Login = ({ navigation }) => {
                 />
                 <View style={{ height: 50 }} />
                 <MyButton title="로그인" onPress={ handleLoginButtonPress } disabled={disabled}/>
+                <View style={{ height: 12 }} />
                 <MyButton title="회원가입" onPress={()=> navigation.navigate("Signup")}/>
             </View>
         </KeyboardAwareScrollView>

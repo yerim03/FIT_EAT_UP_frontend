@@ -3,12 +3,12 @@ import { Text, View, StyleSheet } from 'react-native';
 import MyProfileImage from '../../components/MyProfileImage';
 
 
-const FriendProfile = () => {
+const FriendProfile = ({ route }) => {
     return(
         <View style={styles.container}>
             <MyProfileImage />
             <View style={{ height: 10 }} />
-            <Text style={styles.nickname}>Friend's Nickname</Text>
+            <Text style={styles.nickname}>{route.params.title}</Text>
         </View>
     );
 };

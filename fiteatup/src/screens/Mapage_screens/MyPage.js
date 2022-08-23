@@ -2,11 +2,12 @@ import React from 'react';
 import { Text, 
         View, 
         StyleSheet, 
-        TouchableOpacity, 
+        TouchableOpacity,
+        SafeAreaView, 
         Alert } from 'react-native';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
-import { MaterialCommunityIcons, AntDesign, MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyPage = ({ navigation }) => {
@@ -15,61 +16,58 @@ const MyPage = ({ navigation }) => {
     const handleLogoutButtononPress = async() => {
         AsyncStorage.getItem('token', (err,result) => { console.log('로그아웃 전 현재 저장된 토큰은 ', JSON.parse(result)); })
         try{
-            AsyncStorage.clear();
+            await AsyncStorage.clear(); //로그아웃 시 토큰 삭제
             Alert.alert("Logout Success!!", "로그아웃이 완료되었습니다.",
                 [{ text: "OK",
-                    onPress: () => navigation.navigate("AuthStack")
+                    onPress: () => navigation.navigate("AuthStack") //AuthStack의 Login 스크린으로 이동
                 }]
             );
         }
         catch(error) {
-            console.log(error);
+            console.log("Logout Error : ", error);
         }
     };
 
     return(
-        <View style={styles.container}>
-            <View style={styles.profileArea}>
-                <MyProfileImage />
-                <View style={{ width : 20}} />
-                <Text style={styles.nickname}> 나의 ID</Text>
-            </View>
-            <View style={{ height: 35 }} />
-            
-
-            <TouchableOpacity 
-                style={styles.area} 
-                onPress={() => navigation.navigate("VisitList")}
-            >
-                <MaterialCommunityIcons name="clipboard-text" size={27} color="black" style={{ marginHorizontal: 10 }} />
-                <Text style={styles.nickname}>가본 장소</Text>
-            </TouchableOpacity>
-            <View style={styles.line } />
-
-            <TouchableOpacity 
-                style={styles.area}
-                onPress={() => navigation.navigate("GoodList")}
-            >
-                <AntDesign name="like1" size={27} color="black" style={{ marginHorizontal: 10 }} />
-                <Text style={styles.nickname}>좋아요 장소</Text>  
-            </TouchableOpacity>
-            <View style={styles.line } />
-
-            <TouchableOpacity 
-                style={styles.area}
-                onPress={() => navigation.navigate("ProfileEdit")}
-            >
-                <MaterialIcons name="edit" size={27} color="black" style={{ marginHorizontal: 10 }} />
-                <Text style={styles.nickname}>프로필 수정</Text>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <Text style={styles.title}>내 정보</Text>
+                <View style={styles.profileArea}>
+                    <MyProfileImage />
+                    <Text style={styles.nickname}> 나의 Nickname</Text>
+                </View>
+                <View style={{ height: 30 }} />
+                
+                <TouchableOpacity 
+                    style={styles.settingArea}
+                    onPress={() => navigation.navigate("GoodList")}
+                    activeOpacity={0.8}
+                >
+                    <Ionicons name="heart" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <Text style={styles.settingTitle}>좋아요</Text>  
                 </TouchableOpacity>
-            <View style={styles.line } />
 
-            {/* <MyButton title="가본 장소" onPress={() => navigation.navigate("VisitList")} />
-            <MyButton title="좋아요 장소" onPress={() => navigation.navigate("GoodList")} />
-            <MyButton title="프로필 수정" onPress={() => navigation.navigate("ProfileEdit")} /> */}
-            <View style={{ height: 100 }} />
-            <MyButton title="로그아웃" onPress={ handleLogoutButtononPress } />
-        </View>
+                <TouchableOpacity 
+                    style={styles.settingArea} 
+                    onPress={() => navigation.navigate("VisitList")}
+                    activeOpacity={0.8}
+                >
+                    <Ionicons name="location" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <Text style={styles.settingTitle}>가봤어요</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.settingArea}
+                    onPress={() => navigation.navigate("ProfileEdit")}
+                    activeOpacity={0.8}
+                >
+                    <MaterialIcons name="edit" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <Text style={styles.settingTitle}>프로필 수정</Text>
+                    </TouchableOpacity>
+                <View style={{ height: 100 }} />
+                <MyButton title="로그아웃" onPress={ handleLogoutButtononPress } />
+            </View>
+        </SafeAreaView>
     );
 };
 
@@ -77,16 +75,16 @@ const MyPage = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingTop: 40,
+        // alignItems: 'center',
+        padding: 20,
     },
     title: {
-        fontSize: 25,
+        fontSize: 21,
         fontWeight: 'bold',
+        color: '#404040',
     },
     profileArea: {
-        height: 120,
+        height: 150,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
@@ -94,18 +92,20 @@ const styles = StyleSheet.create({
     nickname: {
         fontSize: 20,
         fontWeight: 'bold',  
+        marginHorizontal: 20,
     },
-    area: {
-        height: 60,
+    settingTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        paddingLeft: 10,
+    },
+    settingArea: {
+        paddingVertical: 17,
         width: '100%',
         flexDirection: 'row',
-        // backgroundColor: "red",
         alignItems: 'center',
-    },
-    line: {
-        height:3,
-        width: '100%',
-        backgroundColor: "#E0E0E0"
+        borderBottomWidth: 1,
+        borderColor: '#C0C0C0',
     },
 });
 export default MyPage;

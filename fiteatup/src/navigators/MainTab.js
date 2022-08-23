@@ -19,29 +19,32 @@ const MainTab = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: props => {
                     let iconName = '';
+                    let size;
                     if(route.name === 'HomeStack') {
-                        iconName = props.focused? 'md-home' : 'md-home-outline';}
+                        iconName = props.focused? 'md-home' : 'md-home-outline';
+                        size = 27;}
                     else if(route.name === 'SearchStack') {
-                        iconName = props.focused? 'md-search' : 'md-search-outline';}
+                        iconName = props.focused? 'md-search' : 'md-search-outline';
+                        size = 27;}
                     else if(route.name === 'FreindStack') {
-                        iconName = props.focused? 'md-people' : 'md-people-outline';}
+                        iconName = props.focused? 'md-people' : 'md-people-outline';
+                        size = 27;}
                     else  {
-                        iconName = props.focused? 'md-person' : 'md-person-outline';}
-                    return TabIcon({ ...props, iconName });
+                        iconName = props.focused? 'md-person' : 'md-person-outline';
+                        size = 27;}
+                    return TabIcon({ ...props, iconName, size });
                 },
                 headerShown: false,
                 //하단 탭 바 속성
-                tabBarShowLabel: false,
                 tabBarActiveTintColor: '#404040',
-                tabBarInactiveTintColor: '#E0E0E0',
-                tabBarActiveBackgroundColor: '#E0E0E0',
-                tabBarInactiveBackgroundColor: '#404040',
+                tabBarInactiveTintColor: '#C0C0C0',
+                tabBarActiveBackgroundColor: '#F0F0F0',
             })}
         >   
-            <Tab.Screen name="HomeStack" component={HomeStack}/>
-            <Tab.Screen name="SearchStack" component={SearchStack}/>
-            <Tab.Screen name="FreindStack" component={FreindStack}/>
-            <Tab.Screen name="MyPageStack" component={MyPageStack}/>
+            <Tab.Screen name="HomeStack" component={HomeStack} options={{ tabBarLabel: '홈', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
+            <Tab.Screen name="SearchStack" component={SearchStack} options={{ tabBarLabel: '검색', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
+            <Tab.Screen name="FreindStack" component={FreindStack} options={{ tabBarLabel: '친구', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
+            <Tab.Screen name="MyPageStack" component={MyPageStack} options={{ tabBarLabel: '내정보', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
         </Tab.Navigator>
     );
 };

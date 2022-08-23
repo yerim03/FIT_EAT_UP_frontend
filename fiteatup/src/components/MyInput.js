@@ -1,7 +1,7 @@
 //커스텀 컴포넌트 - TextInput
 //TextInput 안에 속성들 수정예정
 import React from 'react';
-import { Text, TextInput, View, StyleSheet} from 'react-native';
+import { View, Text, TextInput, StyleSheet} from 'react-native';
 
 
 const MyInput = ( props ) => {
@@ -28,7 +28,7 @@ const MyInput = ( props ) => {
 const styles = StyleSheet.create({
     input: {
         flexDirection: 'column',
-        marginVertical: 4,
+        marginVertical: 5,
         width: '100%',
     },
     label:{
@@ -43,16 +43,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         borderRadius: 6,
         borderColor: '#404040',
-        borderWidth: 2,
-        padding: 15,
+        borderWidth: 1.5,
+        padding: 13,
     },
     disabledinputbox: {
         alignItems: 'center',
-        backgroundColor: '#E0E0E0',
+        backgroundColor: '#F0F0F0',
         borderRadius: 6,
         borderColor: '#404040',
-        borderWidth: 2,
-        padding: 15,
+        borderWidth: 1.5,
+        padding: 13,
     },
 });
 export default MyInput;

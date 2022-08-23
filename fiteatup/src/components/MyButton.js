@@ -9,6 +9,7 @@ const MyButton = ( props ) => {
             style={props.disabled ? styles.bntDisabled : styles.bnt}
             onPress={props.onPress}
             disabled={props.disabled}
+            activeOpacity={0.7}
         >
             <Text style={styles.bnttitle}>{props.title}</Text>
         </TouchableOpacity>
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         width: '100%',
         padding: 12,
-        marginVertical: 6,
+        // marginVertical: 6,
     },
     bntDisabled: {
         alignItems: 'center',
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         width: '100%',
         padding: 12,
-        marginVertical: 6,
+        // marginVertical: 6,
         opacity: 0.5,
     },
     bnttitle: {
