@@ -4,18 +4,18 @@ import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, } from 'react-native';
 
 
-const FriendProfileImage = ({ url, isHome, isClick, onPress }) => {
-    if(isHome){
+const FriendProfileImage = ({ url }) => {
+    // if(isHome){
+    //     return(
+    //         <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+    //             <Image style={isClick ? styles.clickImage: styles.image} source={{ uri: url}}/>
+    //         </TouchableOpacity>
+    //     );
+    // } else{
         return(
-            <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-                <Image style={isClick ? styles.clickImage: styles.image} source={{ uri: url}}/>
-            </TouchableOpacity>
+            <Image style={styles.image} source={{ uri: url}}/>
         );
-    } else{
-        return(
-            <Image style={styles.image} />
-        );
-    }
+    // }
 };
 
 const styles = StyleSheet.create({
@@ -26,16 +26,16 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         margin: 5,
     },
-    clickImage: {
-        backgroundColor: "#E0E0E0",
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        margin: 5,
-        borderWidth: 2,
-        borderColor: 'black',
-        opacity: 0.5,
-    }
+    // clickImage: {
+    //     backgroundColor: "#E0E0E0",
+    //     width: 70,
+    //     height: 70,
+    //     borderRadius: 35,
+    //     margin: 5,
+    //     borderWidth: 2,
+    //     borderColor: 'black',
+    //     opacity: 0.5,
+    // }
 });
 
 

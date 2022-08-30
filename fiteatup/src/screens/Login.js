@@ -4,12 +4,14 @@ import { Text,
         View, 
         StyleSheet, 
         Alert,
+        ActionSheetIOS,
          } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useUserDispatch } from "../context/UserContext";
 
 
 const Login = ({ navigation }) => {
@@ -17,6 +19,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState(''); //입력 password
     const [disabled, setDisabled ] = useState(true); //로그인 버튼 disabled 여부
 
+    const dispatch = useUserDispatch();
 
     //id, password 초기화
     const onReset = () => {
@@ -30,26 +33,40 @@ const Login = ({ navigation }) => {
         setDisabled(!(id && password));
     }, [id, password]);
 
+    const getUserData = async (token) => {;
+        await axios.get("http://10.0.2.2:8000/accounts/user/", 
+                { headers: { 
+                    Authorization: `jwt ${token}`}
+                })
+            .then(res => { console.log("정보 가져오기 완료"); 
+                                //context api로 user 정보 관리
+                                dispatch({type: "LOGIN", 
+                                          userData : { 
+                                                pk: res.data.pk, 
+                                                id: res.data.username,
+                                                nickname: res.data.nickname,
+                                                token: token}})
+                                console.log('context api 완료')})
+            .catch(err => console.log(err.message))
+    };
+
+    
     //로그인 버튼 클릭 시 동작 - 로그인 기능
-    const handleLoginButtonPress = () => { 
+    const handleLoginButtonPress = () => {
         axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password: password })
             .then(response => {
-                console.log("성공: \n", response);
-                console.log("로그인성공끝");    //나중에 지울거
-                AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });                
-                Alert.alert("Login Success!!", "로그인에 성공했습니다!",
-                    [{ text: "OK", 
-                        onPress: () => navigation.navigate("MainStack") //alert창에서 OK 버튼을 클릭하면 MainStack으로 전환
-                    }]
-                );
+                console.log("로그인 성공");
+                AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
+                getUserData(response.data.token);   // accounts/toekn에서 얻은 토큰으로 user정보 가져오기
+                Alert.alert('FIT_EAT_UP',  '환영합니다!');
                 onReset();
             })
             .catch(err => {
                 Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.")
-                console.log("Login Error : \n", err.response.data);
+                console.log("Login Error : ", err.response.data);
             })
     };
-
+    
 
     return(
         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>

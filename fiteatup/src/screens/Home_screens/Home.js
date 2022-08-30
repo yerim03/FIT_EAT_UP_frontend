@@ -1,5 +1,5 @@
 //홈 화면
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, 
         View,
         StyleSheet, 
@@ -9,6 +9,7 @@ import { Text,
         FlatList } from 'react-native';
 import MyButton from '../../components/MyButton';
 import FriendProfileImage from '../../components/FriendProfileImage';
+import { useUserState } from '../../context/UserContext';
 
 
 
@@ -16,10 +17,15 @@ const Home = ({ navigation }) => {
     const [isClick, setIsClick] =useState(false);
     const url = "https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg";
 
+    const { user } = useUserState();    //삭제할 것
+    useEffect(() => {
+        console.log('home에서', user);
+    }, [])
+    
     //방문장소 확인하는 OX 버튼
-    const OXButton = ({ title }) => {
+    const OXButton = ({ title, onPress }) => {
         return(
-            <TouchableOpacity style={styles.oxButton} activeOpacity={0.8}>
+            <TouchableOpacity style={styles.oxButton} onPress={onPress} activeOpacity={0.8}>
                 <Text style={{ color: '#ffffff', fontSize: 20,}}>{title}</Text>
             </TouchableOpacity>
         );
@@ -73,8 +79,8 @@ const Home = ({ navigation }) => {
             <Text style={styles.smalltitle}>방문한 장소가 맞나요? 확인해보세요!</Text>
             <View style={styles.checkArea}></View>
             <View style={styles.buttonArea}>
-                <OXButton title="O"/>
-                <OXButton title="X"/>
+                <OXButton title="O" onPress={() => {console.log("사용자의 방문장소 리스트에 추가되도록 작성")}}/>
+                <OXButton title="X" onPress={() => {console.log("아무반응 없")}}/>
             </View>
             
         </View>

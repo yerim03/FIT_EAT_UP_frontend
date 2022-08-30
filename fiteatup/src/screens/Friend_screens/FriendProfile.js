@@ -6,7 +6,7 @@ import MyProfileImage from '../../components/MyProfileImage';
 const FriendProfile = ({ route }) => {
     return(
         <View style={styles.container}>
-            <MyProfileImage />
+            <MyProfileImage url={route.params.url}/>
             <View style={{ height: 10 }} />
             <Text style={styles.nickname}>{route.params.title}</Text>
         </View>

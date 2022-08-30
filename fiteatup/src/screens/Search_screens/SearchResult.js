@@ -1,43 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import ResultImage from '../../components/ResultImage';
 import MyInput from '../../components/MyInput';
+import axios from 'axios';
 
-const SearchResult = ({ navigation }) => {
 
-    const Result = () => {
-        return(
-            <View style={{ flexDirection: 'row' }}>
-                <ResultImage onPress={() => navigation.navigate("RestaurantInfo")}/>
-                <ResultImage onPress={() => navigation.navigate("RestaurantInfo")} />
-            </View>
-        );
-    };
+const SearchResult = ({ navigation, route }) => {
+
+    //serachword의 데이터 값
+    // const [place, setPlace] = useState([]);
+
+    // const SearchData = async () => {
+    //     await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${route.params.searchword}&size=10`,
+    //                     { headers: { 
+    //                         Authorization: 'KakaoAK'}})
+    //             .then((res) => { setPlace(res.data.documents)} );
+    // };
+
+    // useEffect(() => {
+    //     SearchData();
+    //     console.log('place: ', place);
+    // }, []);
+
+
+    // const url = `https://dapi.kakao.com/v2/local/search/keyword.json?query=${route.params.searchword}&size=10`
+    // useEffect(() => {
+    //     const fetchData = async() => {
+    //         const result = await axios.get(url, 
+    //             {headers: { 
+    //                 Authorization: 'KakaoAK'}});
+    //         setPlace(result.data.documents);
+    //     }
+    //     fetchData();
+    // }, []);
 
     return(
         <View style={styles.container}>
-            <MyInput style={styles.title} disabled/>
+            <MyInput style={styles.title} disabled value={route.params.searchword}/>
             <View style={styles.resultArea}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.result}>
-                    <ResultImage foodname="음식점 1" onPress={() => navigation.navigate("RestaurantInfo")}/>
-                    <ResultImage foodname="음식점 2" onPress={() => navigation.navigate("RestaurantInfo")} />
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")}/>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")} />
+                </View>
+                
+                <View style={styles.result}>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")}/>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")} />
                 </View>
                 <View style={styles.result}>
-                    <ResultImage foodname="음식점 3" onPress={() => navigation.navigate("RestaurantInfo")}/>
-                    <ResultImage foodname="음식점 4" onPress={() => navigation.navigate("RestaurantInfo")} />
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")}/>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")} />
                 </View>
                 <View style={styles.result}>
-                    <ResultImage foodname="음식점 5" onPress={() => navigation.navigate("RestaurantInfo")}/>
-                    <ResultImage foodname="음식점 6" onPress={() => navigation.navigate("RestaurantInfo")} />
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")}/>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")} />
                 </View>
+
                 <View style={styles.result}>
-                    <ResultImage foodname="음식점 7" onPress={() => navigation.navigate("RestaurantInfo")}/>
-                    <ResultImage foodname="음식점 8" onPress={() => navigation.navigate("RestaurantInfo")} />
-                </View>
-                <View style={styles.result}>
-                    <ResultImage foodname="음식점 9" onPress={() => navigation.navigate("RestaurantInfo")}/>
-                    <ResultImage foodname="음식점 10" onPress={() => navigation.navigate("RestaurantInfo")} />
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")}/>
+                    <ResultImage foodname="12" onPress={() => navigation.navigate("RestaurantInfo")} />
                 </View>
                 </ScrollView>
             </View> 

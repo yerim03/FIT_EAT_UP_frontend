@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#404040',
         borderRadius: 6,
         width: '100%',
-        padding: 12,
+        padding: 13,
         // marginVertical: 6,
     },
     bntDisabled: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#404040',
         borderRadius: 6,
         width: '100%',
-        padding: 12,
+        padding: 13,
         // marginVertical: 6,
         opacity: 0.5,
     },

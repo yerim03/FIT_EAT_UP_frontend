@@ -1,31 +1,63 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { useUserDispatch, useUserState } from '../../context/UserContext';
 
 //우선 Nickname만 수정할 수 있도록 설정
 //ID, Password, PasswordConfirm은 disabled
 const ProfileEdit = () => {
+    const { user } = useUserState();
+    const dispatch = useUserDispatch();
+    const [changeNickname, setChangeNickname] = useState(user.userNickname);
     const [photoUrl, setPhotoUrl] = useState();
+
+
+    //프로필 수정 버튼 클릭 시 닉네임 수정
+    const handleEditButtonPress = async() => {
+        axios.put(`http://10.0.2.2:8000/accounts/user/${user.userPk}/update/`,
+                  {username: user.userId, nickname: changeNickname},
+                  { headers: { 
+                    Authorization: `jwt ${user.userToken}`}
+                  }
+                )
+            .then(res => {console.log('수정 후 data: ', res.data); 
+                          dispatch({type: "EDIT_NICKNAME",
+                                    userData : { 
+                                        pk: res.data.pk,
+                                        id: res.data.username,
+                                        nickname: res.data.nickname,
+                                        token: user.userToken}
+                                    });
+                          Alert.alert("닉네임 수정", "닉네임 수정이 완료되었습니다.");
+                })
+            .catch(err => {
+                if(err.response.data.nickname) {
+                    Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
+                    console.log('nicknameerror: ', err.response.data.nickname);
+                }
+            })
+    };
+
 
     return(
         <KeyboardAwareScrollView extraScrollHeight={20}>
             <View style={styles.container}>
                 <MyProfileImage url={photoUrl} showButton onChangeImage={url => setPhotoUrl(url)} />
-                <MyInput label="ID" disabled />
-                <View style={{ height: 5 }} />
-                <MyInput label="Password" disabled />
-                <View style={{ height: 5 }} />
-                {/* <MyInput label="PasswordConfirm" disabled /> */}
+                <MyInput value={user.userId} label="ID" disabled  />
+                <View style={{ height: 10 }} />
                 <MyInput
+                    value={changeNickname}
                     label="Nickname"
-                    onChangeText={() => {}}
+                    onChangeText={text => setChangeNickname(text)}
                     onSubmitEditing={() => {}}
                 />
                 <View style={{ height: 80 }}/>
-                <MyButton title="프로필 수정" />
+                <MyButton title="프로필 수정" onPress={handleEditButtonPress}/>
             </View>
         </KeyboardAwareScrollView>
     );

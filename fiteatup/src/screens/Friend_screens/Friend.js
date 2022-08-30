@@ -6,10 +6,10 @@ import FriendProfileImage from '../../components/FriendProfileImage';
 import { Ionicons } from '@expo/vector-icons';
 
 
-const Item = ({ item: {id, title}, onPress}) => {
+const Item = ({ item: {id, title, url}, onPress}) => {
     return(
-        <TouchableOpacity style={styles.itemContainer} onPress={() => onPress({ id, title })} >
-            <FriendProfileImage />
+        <TouchableOpacity style={styles.itemContainer} onPress={() => onPress({ id, title, url })} >
+            <FriendProfileImage url={url}/>
             <Text style={styles.itemTitle}>{title}</Text>
         </TouchableOpacity>
     );
@@ -37,7 +37,7 @@ const Friend = ({ navigation }) => {
                 </View>
 
                 <View style={{ alignSelf: 'flex-end' }}>
-                    <Text style={{ fontSize: 15, color: '#404040', }}>친구 수 : 7</Text>
+                    <Text style={{ fontSize: 15, color: '#404040', }}>친구 수 : </Text>
                 </View>
                 
                 <View style={{ flex: 1 }}>
@@ -82,21 +82,33 @@ const styles = StyleSheet.create({
 //임의의 데이터 생성
 const DATA = [
     { id: '0',
-      title: 'Name 0'},
+      title: 'Name 0',
+      url: "http://t1.daumcdn.net/news/201706/21/kedtv/20170621155930292vyyx.jpg",
+    },
     { id: '1',
-      title: 'Name 1'},
+      title: 'Name 1',
+      url: "http://t1.daumcdn.net/news/201706/21/kedtv/20170621155930292vyyx.jpg",
+    },
     { id: '2',
-      title: 'Name 2'},
+      title: 'Name 2',
+      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
+    },
     { id: '3',
-      title: 'Name 3' },
+      title: 'Name 3',
+      url: "https://images.dog.ceo/breeds/chihuahua/n02085620_1569.jpg",
+     },
     { id: '4',
-      title: 'Name 4' },
+      title: 'Name 4',
+      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
+     },
     { id: '5',
-      title: 'Name 5' },
+      title: 'Name 5',
+      url: "https://images.dog.ceo/breeds/chihuahua/n02085620_1569.jpg",
+     },
     { id: '6',
-      title: 'Name 6' },
-    { id: '7',
-      title: 'Name 7' },
+      title: 'Name 6',
+      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
+     },
 ];
 
 

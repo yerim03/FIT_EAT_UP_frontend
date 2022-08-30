@@ -85,3 +85,7 @@ version 0.2.5
 - 토큰 존재 여부에 따라 다른 화면이 렌더링 되도록 변경
 - expo image picker 사용하여 프로필 이미지 추가 기능 설정
 - 전반적인 디자인 수정(Home.js 는 추가수정 필요)
+
+version 0.2.6
+- 사용자 정보 출력  --> context api로 관리
+- 사용자 정보(nickname) 수정 기능 구현 --> context api로 관리

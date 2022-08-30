@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         borderColor: '#404040',
         borderWidth: 1.5,
         padding: 13,
+        color: 'black'
     },
 });
 export default MyInput;
