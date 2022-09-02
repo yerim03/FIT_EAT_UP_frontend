@@ -17,9 +17,9 @@ const MyPage = ({ navigation }) => {
     const dispatch = useUserDispatch();
 
     //로그아웃 버튼 클릭 시 실행함수
-    const handleLogoutButtononPress = async() => {
+    const handleLogoutButtononPress = () => {
         try{
-            await AsyncStorage.clear(); //로그아웃 시 토큰 삭제
+            // await AsyncStorage.clear(); //로그아웃 시 토큰 삭제
             dispatch({type: "LOGOUT", });
             Alert.alert('FIT_EAT_UP', '로그아웃이 완료되었습니다.');
         }

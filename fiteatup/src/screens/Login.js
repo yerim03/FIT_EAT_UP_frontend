@@ -1,16 +1,12 @@
 //로그인 화면
-import React, { useState, useEffect, useContext } from "react";
-import { Text, 
-        View, 
-        StyleSheet, 
-        Alert,
-        ActionSheetIOS,
-         } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API } from "../config";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch } from "../context/UserContext";
 
 
@@ -34,36 +30,36 @@ const Login = ({ navigation }) => {
     }, [id, password]);
 
     const getUserData = async (token) => {;
-        await axios.get("http://10.0.2.2:8000/accounts/user/", 
+        await axios.get(`${API.USER_DATA}`, 
                 { headers: { 
-                    Authorization: `jwt ${token}`}
+                    'Authorization': `jwt ${token}`}
                 })
             .then(res => { console.log("정보 가져오기 완료"); 
-                                //context api로 user 정보 관리
-                                dispatch({type: "LOGIN", 
-                                          userData : { 
-                                                pk: res.data.pk, 
-                                                id: res.data.username,
-                                                nickname: res.data.nickname,
-                                                token: token}})
-                                console.log('context api 완료')})
+                            //context api로 user 정보 관리
+                            dispatch({type: "LOGIN", 
+                                        userData : { 
+                                            pk: res.data.pk, 
+                                            id: res.data.username,
+                                            nickname: res.data.nickname,
+                                            token: token}})
+                            console.log('context api 완료')})
             .catch(err => console.log(err.message))
     };
 
     
     //로그인 버튼 클릭 시 동작 - 로그인 기능
     const handleLoginButtonPress = () => {
-        axios.post("http://10.0.2.2:8000/accounts/token/",{ username: id, password: password })
+        axios.post(`${API.LOGIN}`,{ username: id, password: password })
             .then(response => {
                 console.log("로그인 성공");
-                AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
+                // AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
                 getUserData(response.data.token);   // accounts/toekn에서 얻은 토큰으로 user정보 가져오기
-                Alert.alert('FIT_EAT_UP',  '환영합니다!');
+                Alert.alert('로그인 성공',  '환영합니다!');
                 onReset();
             })
             .catch(err => {
-                Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.")
-                console.log("Login Error : ", err.response.data);
+                Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.");
+                console.log("Login Error : ", err);
             })
     };
     

@@ -2,7 +2,8 @@
 import React, { createContext, useContext, useReducer, } from 'react';
 
 const initialState = {
-    user: null,
+    user: null, //사용자 정보
+    headers: {},    //헤더에 들어갈 사용자의 token
 };
 
 const reducer = (state, action) => {
@@ -16,6 +17,9 @@ const reducer = (state, action) => {
                     userNickname: action.userData.nickname,
                     userToken: action.userData.token,
                 },
+                headers: {
+                    Authorization: `jwt ${action.userData.token}`
+                }
             };
         case "EDIT_NICKNAME":   //닉네임 수정
             return {

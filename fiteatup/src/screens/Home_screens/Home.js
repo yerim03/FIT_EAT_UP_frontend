@@ -15,11 +15,12 @@ import { useUserState } from '../../context/UserContext';
 
 const Home = ({ navigation }) => {
     const [isClick, setIsClick] =useState(false);
-    const url = "https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg";
 
-    const { user } = useUserState();    //삭제할 것
+    const { user, headers } = useUserState();    //삭제할 것
+    
+    //삭제할 것
     useEffect(() => {
-        console.log('home에서', user);
+        console.log('home에서', user, headers);
     }, [])
     
     //방문장소 확인하는 OX 버튼

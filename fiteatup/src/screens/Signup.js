@@ -1,15 +1,12 @@
 //회원가입 화면
 import React, { useState, useEffect } from 'react';
-import { View, 
-        Text, 
-        StyleSheet, 
-        Alert,
-         } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
+import { API } from '../config';
 
 
 const Signup = ({ navigation }) => {
@@ -41,21 +38,6 @@ const Signup = ({ navigation }) => {
         setPasswordConfirm('');
         setNickName('');
     };
-
-
-    //ID 중복확인
-    // const onSubmitId = () => {
-    //     axios.post("http://10.0.2.2:8000/accounts/signup/", { username: id, password, nickname: nickname })
-    //         .then(response => {
-    //                 console.log('response : ', response);
-    //                 console.log('사용가능한 아이디입니다.');})
-    //         .catch(err => {
-    //             console.log("iderror : ", err.response.data);
-    //             if(err.response.data.username){
-    //                 console.log("이미 사용중인 아이디입니다!")
-    //             }
-    //         })
-    // };
 
     //아이디 오류 메세지
     const onChangeId = id => {
@@ -106,12 +88,12 @@ const Signup = ({ navigation }) => {
 
     //회원가입 버튼 클릭 시 동작
     const handleSignupButtonPress = () => {
-        axios.post("http://10.0.2.2:8000/accounts/signup/", { username: id, password, nickname: nickname })
+        axios.post(`${API.SIGNUP}`, { username: id, password, nickname: nickname, avatar_url: photoUrl })
             .then(response => {
                 console.log('response : ', response);
-                Alert.alert("Signup Success!!", "회원가입이 완료되었습니다!",
-                        [{ text: "OK ", 
-                            onPress: () => navigation.navigate("Login")}]);
+                Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",
+                        [{ text: "OK ", onPress: () => navigation.navigate("Login")}]
+                );
                 onReset();
             })
             .catch(err => {
@@ -119,7 +101,6 @@ const Signup = ({ navigation }) => {
                     Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
                     console.log("iderror : ", err.response.data.username);
                 }
-                
                 if(err.response.data.nickname) {
                     Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
                     console.log("nicknameerror : ", err.response.data.nickname);

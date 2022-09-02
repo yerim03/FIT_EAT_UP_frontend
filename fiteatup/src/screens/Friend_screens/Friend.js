@@ -1,50 +1,87 @@
-// 친구 목록이 뜨는 부분은 이런 식으로 뜰것이다 라는 예시이고,
-// 추가한 친구 수에 따라 다르게 표시될 예정
-import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+//친구 목록
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import FriendProfileImage from '../../components/FriendProfileImage';
 import { Ionicons } from '@expo/vector-icons';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import { API } from '../../config';
+import { useUserState } from '../../context/UserContext';
 
 
-const Item = ({ item: {id, title, url}, onPress}) => {
-    return(
-        <TouchableOpacity style={styles.itemContainer} onPress={() => onPress({ id, title, url })} >
-            <FriendProfileImage url={url}/>
-            <Text style={styles.itemTitle}>{title}</Text>
-        </TouchableOpacity>
-    );
-};
-
-//FlatList로 변경해서 구현할 것인지 고민
 const Friend = ({ navigation }) => {
-    const handleItemPress = params => {
-        navigation.navigate("FriendProfile", params);
-    };
+    const [friendList, setFriendList] = useState([{}]); //친구 리스트
+    const isFocused = useIsFocused();
+    const { headers } = useUserState();
 
-    const renderItem = ({ item }) => (
-        <Item item={item} onPress={handleItemPress}/>
-    );
+    //친구리스트 가져오기
+    useEffect(() => {
+        const getFriendList = async () => { 
+            const friends = await axios.get(`${API.FRIEND_LIST}`, { headers: headers } );
+            console.log(friends.data);
+            setFriendList(friends.data);              
+        };
+        getFriendList();
+    }, [isFocused]);
+
+
+    // const handleItemPress = params => {
+    //     navigation.navigate("FriendProfile", params);
+    // };
+    
+    //flatlist의 renderItem
+    const renderItem = ({ item: {pk, username, nickname, avatar_url} }) => {
+        const handleRemoveFriendButtononPress = () => {
+            Alert.alert("친구삭제", "친구를 삭제하시겠습니까?", 
+                        [{text: "취소", onPress: ()=> { console.log("취소") }, style: 'cancel'}, 
+                        {text:"삭제", 
+                         onPress: ()=> { 
+                            axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: headers })
+                                .then(res => { console.log('친구삭제 성공 : ', res.data)})
+                                .then(()=> navigation.replace('Friend'))
+                            }, 
+                         style: 'destructive'}
+                        ])
+        };
+        
+        return(
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} >
+                <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
+                <View style={{ flexDirection: 'column', flex: 1 }}>
+                    <Text style={styles.itemId}>{username}</Text>
+                    <Text style={styles.itemNickname}>{nickname}</Text>
+                </View>
+                <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
+                    <Text style={{ color: '#ffffff' }}>삭제</Text>
+                </TouchableOpacity>
+            </TouchableOpacity>
+        );
+        // <Item item={item} onPress={handleItemPress} />
+    };
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <View style={styles.titleArea}>
                     <Text style={styles.title}>친구 목록</Text>
-                    <TouchableOpacity activeOpacity={0.8} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10}} 
-                                        onPress={() => navigation.navigate("AddFriend")}>
+                    <TouchableOpacity 
+                        activeOpacity={0.8} 
+                        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10}} 
+                        onPress={() => { navigation.navigate("AddFriend") }}
+                    >
                         <Ionicons name="person-add" size={30} color="#404040" style={{ marginRight: 10 }}/>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{ alignSelf: 'flex-end' }}>
-                    <Text style={{ fontSize: 15, color: '#404040', }}>친구 수 : </Text>
+                    <Text style={{ fontSize: 15, color: '#404040', }}>친구 수 : {friendList.length}</Text>
                 </View>
                 
                 <View style={{ flex: 1 }}>
                     <FlatList 
-                        data={DATA}
+                        data={friendList}
                         renderItem={renderItem}
-                        keyExtractor={(item) => item.id}
+                        // keyExtractor={(item) => { console.log('heelo : ', item.pk);  }}
                     />
                 </View>
             </View>
@@ -73,43 +110,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',   
         paddingVertical: 3,
     },
-    itemTitle: {
-        fontSize: 17,
+    itemId: {
+        fontSize: 18,
         paddingHorizontal: 25,
     },
+    itemNickname: {
+        fontSize: 15,
+        paddingHorizontal: 25,
+        color: '#606060'
+    },
+    deleteButton: {
+        backgroundColor: '#404040',
+        paddingVertical: 8,
+        paddingHorizontal: 13,
+        borderRadius: 5,
+    },
 });
-
-//임의의 데이터 생성
-const DATA = [
-    { id: '0',
-      title: 'Name 0',
-      url: "http://t1.daumcdn.net/news/201706/21/kedtv/20170621155930292vyyx.jpg",
-    },
-    { id: '1',
-      title: 'Name 1',
-      url: "http://t1.daumcdn.net/news/201706/21/kedtv/20170621155930292vyyx.jpg",
-    },
-    { id: '2',
-      title: 'Name 2',
-      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
-    },
-    { id: '3',
-      title: 'Name 3',
-      url: "https://images.dog.ceo/breeds/chihuahua/n02085620_1569.jpg",
-     },
-    { id: '4',
-      title: 'Name 4',
-      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
-     },
-    { id: '5',
-      title: 'Name 5',
-      url: "https://images.dog.ceo/breeds/chihuahua/n02085620_1569.jpg",
-     },
-    { id: '6',
-      title: 'Name 6',
-      url: 'https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg',
-     },
-];
 
 
 export default Friend;
@@ -117,8 +133,36 @@ export default Friend;
 
 
 
+// const Item = ({ item: {pk, username, nickname, avatar_url}, onPress }) => {
+//     // const [isRemove, setIsRemove] = useState(false);
+//     const { user } = useUserState();
 
-{/* <TouchableOpacity  onPress={() => navigation.navigate("AddFriend")}>
-    <Ionicons name="add" size={35} color="black" />
-</TouchableOpacity> */}
-{/* <Button title="친구프로필" onPress={() => navigation.navigate("FriendProfile")} /> */}
+//     const removeFriend = async() => {
+//         axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: { Authorization: `jwt ${user.userToken}`}})
+//             .then(res => { console.log('친구삭제 성공 : ', res.data);})
+//             .catch(err => { console.log(err); })
+//     };
+
+//     //친구 삭제 버튼
+//     const handleRemoveFriendButtononPress = () => {
+//         Alert.alert("친구삭제", "친구를 삭제하시겠습니까?", 
+//                     [{text: "취소", onPress: ()=> { console.log("취소") }, style: 'cancel'}, 
+//                     {text:"삭제", 
+//                      onPress: removeFriend,
+//                      style: 'destructive'}
+//                     ])
+//     };
+
+//     return(
+//         <TouchableOpacity style={styles.itemContainer} onPress={() => onPress({ pk, username, nickname, avatar_url })} >
+//             <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
+//             <View style={{ flexDirection: 'column', flex: 1 }}>
+//                 <Text style={styles.itemId}>{username}</Text>
+//                 <Text style={styles.itemNickname}>{nickname}</Text>
+//             </View>
+//             <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
+//                 <Text style={{ color: '#ffffff' }}>삭제</Text>
+//             </TouchableOpacity>
+//         </TouchableOpacity>
+//     );
+// };

@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { API } from '../../config';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
 
 //우선 Nickname만 수정할 수 있도록 설정
 //ID, Password, PasswordConfirm은 disabled
 const ProfileEdit = () => {
-    const { user } = useUserState();
+    const { user, headers } = useUserState();
     const dispatch = useUserDispatch();
     const [changeNickname, setChangeNickname] = useState(user.userNickname);
     const [photoUrl, setPhotoUrl] = useState();
 
 
-    //프로필 수정 버튼 클릭 시 닉네임 수정
+    //닉네임 수정
     const handleEditButtonPress = async() => {
-        axios.put(`http://10.0.2.2:8000/accounts/user/${user.userPk}/update/`,
+        axios.put(`${API.USER_DATA_UPDATE}${user.userPk}/update/`,
                   {username: user.userId, nickname: changeNickname},
-                  { headers: { 
-                    Authorization: `jwt ${user.userToken}`}
-                  }
-                )
+                  { headers: headers }
+        )
             .then(res => {console.log('수정 후 data: ', res.data); 
                           dispatch({type: "EDIT_NICKNAME",
                                     userData : { 

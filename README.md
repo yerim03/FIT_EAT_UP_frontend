@@ -89,3 +89,7 @@ version 0.2.5
 version 0.2.6
 - 사용자 정보 출력  --> context api로 관리
 - 사용자 정보(nickname) 수정 기능 구현 --> context api로 관리
+- 친구 추가, 삭제 기능 구현
+- api 주소 관리 변경
+- 친구목록에 친구정보 불러오기
+

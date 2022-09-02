@@ -48,8 +48,6 @@ const MyProfileImage = ({ url, showButton, onChangeImage }) => {
                 quality: 1,
             });
 
-            console.log(result);
-
             //cancelled가 true이면 해당 사진으로 변경
             if(!result.cancelled) {
                 onChangeImage(result.uri);
