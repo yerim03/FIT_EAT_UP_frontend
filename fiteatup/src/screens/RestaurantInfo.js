@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useUserState } from '../context/UserContext';
 
 
 const RestaurantInfo = ({ route }) => {
     const [isLike, setIsLike] = useState(false);    //좋아요 버튼 클릭여부
     const [isVisit, setIsVisit] = useState(false);  //가본장소 버튼 클릭여부
+
+    const { user } = useUserState();
     
+    //Search.js에서 받아온 음식점 data
+    let foodData = route.params.item;
+
     //페이지 렌더링 시에 axios로 post(or get) 하여 사용자가 좋아요, 가봤어요 버튼을 눌렀는지 여부를 판단
     //response data에 눌렀는지 여부를 담아 가져온다.
     //눌렀을 경우, setIsLike, setIsVisit을 true or false로 변경
-    // useEffect(, []);
+
+    useEffect(() => {
+        console.log('여기는 상세정보:\n', foodData);
+    }, []);
 
 
     //좋아요 가봤어요 버튼
@@ -59,14 +68,16 @@ const RestaurantInfo = ({ route }) => {
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <Image style={styles.foodIamgeArea} source={{ uri: "https://images.dog.ceo/breeds/dachshund/dog-1018408_640.jpg" }}/>
                 <View style={styles.nameArea}>
-                    <Text style={{ fontSize: 24, fontWeight: 'bold' }}>스타벅스 합정점</Text>
+                    <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{foodData.place_name}</Text>
                     <View style={{ flex: 1 }} />
                     <Ionicons style={{ padding: 7 }} name="heart" size={28} color="#FF3333" />
                     <Text style={{ fontSize: 22 }}>127</Text>
                 </View>
 
                 <View style={styles.clickArea}>
-                    <GoodVisitButton buttonType='heart' clickState={isLike} title='좋아요' onPress={() => setIsLike(!isLike)}/>
+                    <GoodVisitButton buttonType='heart' clickState={isLike} title='좋아요' 
+                                     //클릭 시 user pk, username 추가해서 서버로 데이터 보냄
+                                     onPress={() => {foodData.pk=user.userPk; foodData.username=user.userId; console.log(foodData); setIsLike(!isLike)}}/>
                     <GoodVisitButton buttonType='visit' clickState={isVisit} title='가봤어요' onPress={() => setIsVisit(!isVisit)}/>
                 </View>
 

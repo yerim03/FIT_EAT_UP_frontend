@@ -7,7 +7,7 @@ import { Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 const ResultImage = ( props ) => {
     return(
         <TouchableOpacity style={{ alignItems: 'center', marginBottom: 15 }} onPress={props.onPress}>
-            <Image style={styles.image} />
+            <Image style={styles.image} soure={{uri: props.url}}/>
             <Text style={styles.foodName}>{props.foodname}</Text>
             {props.recommend && <Text style={styles.percnet}>{props.percent}</Text>}
         </TouchableOpacity>
