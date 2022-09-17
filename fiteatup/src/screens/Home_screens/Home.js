@@ -15,13 +15,7 @@ import { useUserState } from '../../context/UserContext';
 
 const Home = ({ navigation }) => {
     const [isClick, setIsClick] =useState(false);
-
-    const { user, headers } = useUserState();    //삭제할 것
     
-    //삭제할 것
-    useEffect(() => {
-        console.log('home에서', user, headers);
-    }, [])
     
     //방문장소 확인하는 OX 버튼
     const OXButton = ({ title, onPress }) => {

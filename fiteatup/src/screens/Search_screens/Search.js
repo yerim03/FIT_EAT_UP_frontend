@@ -1,72 +1,78 @@
-//다시 수정
-//검색기능 아직 미완성
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, SafeAreaView, Image, FlatList, TouchableOpacity } from 'react-native';
+import { Text, 
+         View, 
+         StyleSheet, 
+         SafeAreaView, 
+         FlatList, 
+         TouchableOpacity,
+         TouchableWithoutFeedback,
+         Keyboard } from 'react-native';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
 import ResultImage from '../../components/ResultImage';
-import { KAKAO_REST_API } from '../../cofig/config_secret';
+import { KAKAO_API_KEY } from '../../cofig/config_secret';
+import { KAKAO_API } from '../../config';
 import axios from 'axios';
 
 
 const Search = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
-    const [imageUrl, setImageUrl] = useState('');
     const[searchWord, setSearchWord] = useState('');
 
     const onPressSearchButton = () => {
-        //카카오 로컬 api
-        axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${searchWord}&size=3`,
-                        { headers: { 
-                            Authorization: `KakaoAK ${KAKAO_REST_API}` }
-                        })
-                .then((res) => { console.log('결과는: ', res.data.documents) 
-                                for(let i=0; i < res.data.documents.length; i++){
-                                    let oneData = res.data.documents[i];
-                                    setFoodData(prevData => [...prevData, oneData]);
-                                }
-                            })
-                .catch((err) => { console.log(err.message);})
+        setFoodData([]);
+        let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=6`;  //카카오 로컬 API
+        let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=6`;  //카카오 이미지 검색 API
 
-        //카카오 다음 검색 이미지 api
-        // axios.get(`https://dapi.kakao.com/v2/search/image?query=${searchWord}&size=3`,
-        //                 { headers: { 
-        //                     Authorization: `KakaoAK ${KAKAO_REST_API}`}
-        //                 })
-        //         .then((res) =>  {console.log('search image: ', res.data.documents);
-        //                         // for(let i=0; i<foodData.length; i++){
-        //                         //     foodData.forEach(element => {element.image_url= res.data.documents[0].image_url;})
-        //                         //     console.log(foodData);
-        //                         // }
-        //                     })
-        //         .catch((err) => { console.log(err.message);})
+        const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
+        const GETIMAGE = axios.get(URL2, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
+
+        Promise.all([GETDATA, GETIMAGE])
+            .then((res) => { let getdata = res[0].data.documents; 
+                             let getimage=res[1].data.documents;
+                            for(let i = 0; i < getdata.length; i++){
+                                let oneData = getdata[i];
+                                oneData.image_url = getimage[0].image_url;
+                                setFoodData(prevData => [...prevData, oneData]);
+                            }
+                            
+                        })
+            .catch(err => console.log(err))
     };
 
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
         return(
-            <TouchableOpacity>
-                <ResultImage foodname={item.place_name} onPress={() => navigation.navigate("RestaurantInfo", {item})}/>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row',  margin: 10}}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
+                    <ResultImage 
+                        foodname={item.place_name} 
+                        url={item.image_url}          
+                    />
+                </TouchableOpacity>
+            </View>
         );
     };
 
     return(
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container} >
-                <Text style={styles.title}>장소 검색</Text>
-                <Text style={styles.smalltitle}>원하는 음식점을 검색해보세요!</Text>
-                <MyInput onChangeText={text => setSearchWord(text)} placeholder="검색어를 입력하세요."/>
-                <MyButton title="검색" onPress={onPressSearchButton} />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={styles.container} >
+                    <Text style={styles.title}>장소 검색</Text>
+                    <Text style={styles.smalltitle}>원하는 음식점을 검색해보세요!</Text>
+                    <MyInput onChangeText={text => setSearchWord(text)} placeholder="검색어를 입력하세요."/>
+                    <MyButton title="검색" onPress={onPressSearchButton} />
 
-                <View style={{ flex: 1 }}>
-                    <FlatList 
-                        data={foodData}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
+                    <View style={{ flex: 1}}>
+                        <FlatList 
+                            data={foodData}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            numColumns={2}
+                        />
+                    </View>
                 </View>
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 };
 

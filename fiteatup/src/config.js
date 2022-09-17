@@ -11,4 +11,13 @@ export const API = {
     ADD_FRIEND: `${BASE_URL}/accounts/follow/`,
     REMOVE_FRIEND: `${BASE_URL}/accounts/unfollow/`,
     FRIEND_LIST: `${BASE_URL}/accounts/suggestions/`,
+    SAVE_GOODLIST: `${BASE_URL}/accounts/place/user/like/save/`,
+    GET_GOODLIST: `${BASE_URL}/accounts/place/user/like/list/`,
+    SAVE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/save/`,
+    GET_VISITLIST: `${BASE_URL}/accounts/place/user/visit/list/`,
 };
+
+export const KAKAO_API = {
+    LOCAL_API: `https://dapi.kakao.com/v2/local/search/keyword.json?`,
+    IMAGE_API: `https://dapi.kakao.com/v2/search/image?`
+}

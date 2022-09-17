@@ -34,14 +34,14 @@ const Login = ({ navigation }) => {
                 { headers: { 
                     'Authorization': `jwt ${token}`}
                 })
-            .then(res => { console.log("정보 가져오기 완료"); 
-                            //context api로 user 정보 관리
+            .then(res => { //context api로 user 정보 관리
                             dispatch({type: "LOGIN", 
-                                        userData : { 
-                                            pk: res.data.pk, 
-                                            id: res.data.username,
-                                            nickname: res.data.nickname,
-                                            token: token}})
+                                      userData : { 
+                                      pk: res.data.pk, 
+                                      id: res.data.username,
+                                      nickname: res.data.nickname,
+                                      profileImage: res.data.avatar_url,
+                                      token: token}})
                             console.log('context api 완료')})
             .catch(err => console.log(err.message))
     };

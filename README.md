@@ -69,27 +69,44 @@ version 0.2.3
 - 로그아웃 시 AsyncStorage에 저장된 토큰 삭제
 - 로그아웃 기능 구현
 - 로그인 에러메세지(id, password가 맞지 않으면 에러메시지 출력) 완료
+
+version 0.2.4
 - 회원가입 완료하면 로그인 화면으로 전환
 - 로그인, 회원가입 버튼 비활성화 : 모든 입력값을 입력했을 때만 로그인 버튼, 회원가입 버튼 활성화 되도록 설정
 - 회원가입 에러메세지 완료
 - 회원가입 id, nickname 중복확인 완료
 
-version 0.2.4
+version 0.2.5
 - 홈 UI(Home.js) 구성(추가수정 예정)
 - 음식점 상세정보 UI(RestaurantInfo.js) 구성(진행 중)
 - SafeAreaView 적용
 - 좋아요 장소 리스트(GoodList.js), 가본 장소 리스트(VisitList.js)의 FlatList 디자인 수정
 
 
-version 0.2.5
+version 0.2.6
 - 토큰 존재 여부에 따라 다른 화면이 렌더링 되도록 변경
 - expo image picker 사용하여 프로필 이미지 추가 기능 설정
 - 전반적인 디자인 수정(Home.js 는 추가수정 필요)
 
-version 0.2.6
+version 0.2.7
 - 사용자 정보 출력  --> context api로 관리
 - 사용자 정보(nickname) 수정 기능 구현 --> context api로 관리
+
+version 0.2.8
 - 친구 추가, 삭제 기능 구현
 - api 주소 관리 변경
 - 친구목록에 친구정보 불러오기
 
+version 0.3.0
+- 카카오 api 사용해서 음식점 검색 기능 완료
+- 카카오 daum 이미지 검색 api 사용해서 음식점 이미지 검색 완료
+- 검색 결과화면 수정 및 완료 -> SearchResult.js 를 사용하지 않고 Search.js에 검색 결과 출력
+
+version 0.3.1
+- 음식점 상세정보 페이지 수정
+- 음식점 상세정보 페이지에서 ‘좋아요’ or ‘가봤어요’ 버튼 클릭 시 서버에 보낼 데이터 수정 완료
+
+version 0.3.2
+- 사용자의 좋아요장소 리스트(goodlist), 가본장소 리스트(visitlist) 조회 기능 완료
+- 각 리스트에서 특정 음식점 클릭 시, 해당 음식점 상세정보 페이지로 넘어가는 것까지 완료 -> 음식점 이미지는 수정 필요
+- 사용자의 좋아요장소 리스트(goodlist), 가본장소 리스트(visitlist) 저장 기능 구현 중

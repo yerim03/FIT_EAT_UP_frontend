@@ -1,3 +1,4 @@
+//프로필 이미지 수정 기능 추가할 예정
 import React, { useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import MyInput from '../../components/MyInput';
@@ -9,16 +10,17 @@ import { API } from '../../config';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
 
 //우선 Nickname만 수정할 수 있도록 설정
-//ID, Password, PasswordConfirm은 disabled
 const ProfileEdit = () => {
     const { user, headers } = useUserState();
     const dispatch = useUserDispatch();
     const [changeNickname, setChangeNickname] = useState(user.userNickname);
-    const [photoUrl, setPhotoUrl] = useState();
+    const [photoUrl, setPhotoUrl] = useState(`${API.GET_PROFILEIMAGE}${user.userProfileImage}`);
 
+    //프로필 이미지 수정
 
-    //닉네임 수정
+    //프로필 수정 버튼 클릭 시 1. 닉네임 수정 or 2. 프로필 이미지 수정
     const handleEditButtonPress = async() => {
+        //닉네임 수정
         axios.put(`${API.USER_DATA_UPDATE}${user.userPk}/update/`,
                   {username: user.userId, nickname: changeNickname},
                   { headers: headers }
@@ -29,6 +31,7 @@ const ProfileEdit = () => {
                                         pk: res.data.pk,
                                         id: res.data.username,
                                         nickname: res.data.nickname,
+                                        profileImage: res.data.avatar_url,
                                         token: user.userToken}
                                     });
                           Alert.alert("닉네임 수정", "닉네임 수정이 완료되었습니다.");
@@ -39,6 +42,9 @@ const ProfileEdit = () => {
                     console.log('nicknameerror: ', err.response.data.nickname);
                 }
             })
+        
+        //프로필 이미지 수정
+
     };
 
 

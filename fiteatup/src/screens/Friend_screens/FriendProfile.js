@@ -28,7 +28,7 @@ const FriendProfile = ({ navigation, route }) => {
 
     return(
         <View style={styles.container}>
-            <MyProfileImage url={route.params.avatar_url}/>
+            <MyProfileImage url={`${API.GET_PROFILEIMAGE}${route.params.avatar_url}`}/>
             <View style={{ height: 10 }} />
             <Text style={styles.nickname}>username: {route.params.username}</Text>
             <Text style={styles.nickname}>nickname: {route.params.nickname}</Text>

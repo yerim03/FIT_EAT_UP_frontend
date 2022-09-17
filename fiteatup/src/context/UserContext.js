@@ -15,6 +15,7 @@ const reducer = (state, action) => {
                     userPk: action.userData.pk,
                     userId: action.userData.id,
                     userNickname: action.userData.nickname,
+                    userProfileImage: action.userData.profileImage,
                     userToken: action.userData.token,
                 },
                 headers: {
@@ -28,6 +29,7 @@ const reducer = (state, action) => {
                     userPk: action.userData.pk,
                     userId: action.userData.id,
                     userNickname: action.userData.nickname,
+                    userProfileImage: action.userData.profileImage,
                     userToken: action.userData.token,
                 }
             }
@@ -38,6 +40,7 @@ const reducer = (state, action) => {
                     userPk: action.userData.pk,
                     userId: action.userData.id,
                     userNickname: action.userData.nickname,
+                    userProfileImage: action.userData.profileImage,
                     userToken: action.userData.token,
                 }
             }

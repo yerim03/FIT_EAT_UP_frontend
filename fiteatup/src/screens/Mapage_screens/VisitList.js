@@ -1,33 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
 import FoodImage from '../../components/FoodImage';
-
-
-const Item = ({ item: {id, title}, onPress}) => {
-    return(
-        <TouchableOpacity style={styles.itemContainer} onPress={() => onPress({ id, title })} >
-            <FoodImage />
-            <Text style={styles.itemTitle}>{title}</Text>
-        </TouchableOpacity>
-    );
-};
+import axios from 'axios';
+import { API } from '../../config';
+import { useUserState } from '../../context/UserContext';
 
 
 const VisitList = ({ navigation }) => {
-    const handleItemPress = params => {
-        navigation.navigate("RestaurantInfo", params);
-    };
+    const [visitList, setVisitList] = useState([{}]);
+    const { headers } = useUserState();
 
-    const renderItem = ({ item }) => (
-        <Item item={item} onPress={handleItemPress}/>
-    );
+    //서버로부터 visitlist 가져오기
+    useEffect(()=> {
+        const getVisitList = async () => { 
+            const visitPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
+            console.log(visitPlaceList.data);
+            setVisitList(visitPlaceList.data);              
+        };
+        getVisitList();
+    }, [])
+
+    const renderItem = ({ item }) => {
+        return(
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('RestaurantInfo', {item}) } >
+                <FoodImage />
+                <Text style={styles.itemTitle}>{item.place_name}</Text>
+            </TouchableOpacity>
+        );
+    };
 
     return(
         <View style={styles.container}>
             <FlatList 
-                data={DATA} //리스트들의 source
+                data={visitList} //리스트들의 source
                 renderItem={renderItem} //data로 받은 소스들의 각 item을 렌더링해주는 콜백함수
-                keyExtractor={(item) => item.id}    //각 item의 key
             /> 
         </View>
     );
@@ -47,27 +53,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     itemTitle: {
-        fontSize: 20,
-        paddingHorizontal: 20,
+        fontSize: 17,
+        paddingHorizontal: 15,
     },
 });
-
-
-
-//임의의 데이터 생성
-const DATA = [
-    { id: '0',
-      title: 'Item 0'},
-    { id: '1',
-      title: 'Item 1'},
-    { id: '2',
-      title: 'Item 2'},
-    { id: '3',
-      title: 'Item 3' },
-    { id: '4',
-      title: 'Item 4' },
-    { id: '5',
-      title: 'Item 5' },
-];
 
 export default VisitList;

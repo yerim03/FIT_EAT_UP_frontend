@@ -10,6 +10,7 @@ import MyProfileImage from '../../components/MyProfileImage';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
+import { API } from '../../config';
 
 
 const MyPage = ({ navigation }) => {
@@ -34,7 +35,7 @@ const MyPage = ({ navigation }) => {
             <View style={styles.container}>
                 <Text style={styles.title}>내 정보</Text>
                 <View style={styles.profileArea}>
-                    <MyProfileImage />
+                    <MyProfileImage url={`${API.GET_PROFILEIMAGE}${user.userProfileImage}`} />
                     <Text style={styles.nickname}>{user.userNickname}</Text>
                 </View>
                 <View style={{ height: 30 }} />
