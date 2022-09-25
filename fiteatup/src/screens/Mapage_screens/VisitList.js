@@ -13,7 +13,7 @@ const VisitList = ({ navigation }) => {
     //서버로부터 visitlist 가져오기
     useEffect(()=> {
         const getVisitList = async () => { 
-            const visitPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
+            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );
             console.log(visitPlaceList.data);
             setVisitList(visitPlaceList.data);              
         };

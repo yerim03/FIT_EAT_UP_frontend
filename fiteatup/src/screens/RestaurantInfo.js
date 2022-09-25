@@ -18,6 +18,7 @@ const RestaurantInfo = ({ route }) => {
     //response data에 눌렀는지 여부를 담아 가져온다.
     //눌렀을 경우, setIsLike, setIsVisit을 true or false로 변경
 
+    //삭제할 것
     useEffect(() => {
         console.log('여기는 상세정보:\n', foodData);
     }, []);
@@ -52,21 +53,16 @@ const RestaurantInfo = ({ route }) => {
                     <Text style={styles.detail}>{foodData.phone}</Text>
                 </View>
                 <View style={styles.oneDataArea}>
-                    <Text style={styles.detail}>영업시간</Text>
-                    <Text style={styles.detail}>09:00 - 21:00</Text>
-                </View>
-                <View style={styles.oneDataArea}>
                     <Text style={styles.detail}>{foodData.category_name}</Text>
                 </View>
             </View>
-            
         );
     };
 
     //좋아요 버튼 클릭 동작
     const handleGoodButtononPress = () => {
         foodData.pk=user.userPk; 
-        console.log('여기는 handleGoodButtononPress\n', foodData); 
+        console.log('여기는 handleGoodButtononPress\n', foodData); //삭제할 것
         setIsLike(!isLike);
         axios.post(`${API.SAVE_GOODLIST}`, foodData, { headers: headers })
             .then(res => console.log(res))
@@ -76,7 +72,7 @@ const RestaurantInfo = ({ route }) => {
     //가봤어요 버튼 클릭 동작
     const handleVisitButtononPress = () => {
         foodData.pk=user.userPk; 
-        console.log('여기는 handleVisitButtononPress\n', foodData); 
+        console.log('여기는 handleVisitButtononPress\n', foodData); //삭제할 것
         setIsVisit(!isVisit);
         axios.post(`${API.SAVE_VISITLIST}`, foodData, { headers: headers })
             .then(res => console.log(res))
@@ -89,16 +85,15 @@ const RestaurantInfo = ({ route }) => {
                 <Image style={styles.foodIamgeArea} source={{ uri: foodData.image_url }}/>
                 <View style={styles.nameArea}>
                     <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{foodData.place_name}</Text>
-                    {/* <View style={{ flex: 1 }} />
-                    <Ionicons style={{ padding: 7 }} name="heart" size={28} color="#FF3333" />
-                    <Text style={{ fontSize: 22 }}>127</Text> */}
                 </View>
 
-                <View style={styles.clickArea}>
-                    <GoodVisitButton buttonType='heart' clickState={isLike} title='좋아요' 
-                                     onPress={handleGoodButtononPress}/>
-                    <GoodVisitButton buttonType='visit' clickState={isVisit} title='가봤어요' 
-                                    onPress={handleVisitButtononPress}/>
+                <View style={styles.goodVisitArea}>
+                    <GoodVisitButton buttonType='heart' clickState={isLike} title='좋아요' onPress={handleGoodButtononPress}/>
+                    <GoodVisitButton buttonType='visit' clickState={isVisit} title='가봤어요' onPress={handleVisitButtononPress}/>
+                </View>
+
+                <View style={styles.starArea}>
+                    <Text>star area</Text>
                 </View>
 
                 <View style={styles.locationArea}>
@@ -148,11 +143,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#404040', 
     },
-    clickArea: {
+    goodVisitArea: {
         backgroundColor: '#ffffff',
         height: 80,
         width: '100%',
         flexDirection: 'row',
+    },
+    starArea: {
+        backgroundColor: '#ffffff',
+        height: 60,
+        width: '100%',
+        marginTop: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     locationArea: {
         backgroundColor: '#ffffff',
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     },
     infoArea: {
         backgroundColor: '#ffffff',
-        height: 150,
+        height: 120,
         width: '100%',
         marginTop: 10,
         paddingVertical: 10,

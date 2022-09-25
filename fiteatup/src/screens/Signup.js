@@ -15,6 +15,7 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');   //입력 password
     const [passwordConfirm, setPasswordConfirm] = useState(''); //입력 password확인
     const [photoUrl, setPhotoUrl] = useState(); //입력 image
+    const [photoData, setPhotoData] = useState();
     const [disabled, setDisabled] = useState(true);    //회원가입 버튼 disabled 여부
 
     //오류메세지 저장
@@ -88,7 +89,20 @@ const Signup = ({ navigation }) => {
 
     //회원가입 버튼 클릭 시 동작
     const handleSignupButtonPress = () => {
-        axios.post(`${API.SIGNUP}`, { username: id, password, nickname: nickname, avatar_url: photoUrl })
+        const filename = photoData.uri.split('/').pop();
+        const match = /\.(w+)$/.exec(filename ?? '');
+        const type = match ? `image/${match[1]}` : `image`;
+        console.log(type);
+        const formdata = new FormData();
+        formdata.append('username', id);
+        formdata.append('password', password);
+        formdata.append('nickname', nickname);
+        formdata.append('avatar', {uri: photoData.uri, 
+                                    type,
+                                    name: filename});
+        console.log(formdata);
+        axios.post(`${API.SIGNUP}`, 
+            formdata, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(response => {
                 console.log('response : ', response);
                 Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",
@@ -96,23 +110,24 @@ const Signup = ({ navigation }) => {
                 );
                 onReset();
             })
-            .catch(err => {
-                if(err.response.data.username) {
-                    Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
-                    console.log("iderror : ", err.response.data.username);
-                }
-                if(err.response.data.nickname) {
-                    Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
-                    console.log("nicknameerror : ", err.response.data.nickname);
-                }
-            })
+            .catch(err => {console.log(err.response)})
+            // .catch(err => {
+            //     if(err.response.data.username) {
+            //         Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
+            //         console.log("iderror : ", err.response.data.username);
+            //     }
+            //     if(err.response.data.nickname) {
+            //         Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
+            //         console.log("nicknameerror : ", err.response.data.nickname);
+            //     }
+            // })
     };
 
 
     return(
         <KeyboardAwareScrollView extraScrollHeight={30}>
             <View style={styles.container}>
-                <MyProfileImage url={photoUrl} showButton onChangeImage={url => setPhotoUrl(url)}/>
+                <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri); setPhotoData(photo)}}/>
                 <MyInput
                     label="ID"
                     value={id}

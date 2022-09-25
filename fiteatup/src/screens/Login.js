@@ -1,6 +1,6 @@
 //로그인 화면
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, Image, View, StyleSheet, Alert } from "react-native";
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -8,7 +8,7 @@ import axios from "axios";
 import { API } from "../config";
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch } from "../context/UserContext";
-
+import logoIcon from '../../assets/icon.png';
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState(''); //입력 id
@@ -49,7 +49,7 @@ const Login = ({ navigation }) => {
     
     //로그인 버튼 클릭 시 동작 - 로그인 기능
     const handleLoginButtonPress = () => {
-        axios.post(`${API.LOGIN}`,{ username: id, password: password })
+        axios.post(`${API.LOGIN}`, { username: id, password: password })
             .then(response => {
                 console.log("로그인 성공");
                 // AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
@@ -68,7 +68,8 @@ const Login = ({ navigation }) => {
         <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
             <View style={styles.container}>
                 <View style={{ height: 80 }} />
-                <Text style={styles.title}>Login</Text>
+                {/* <Text style={styles.title}>Login</Text> */}
+                <Image style={{ backgroundColor: 'red', width: 110, height: 110, borderWidth: 1, borderColor: 'black' }} source={logoIcon}/>
                 <View style={{ height: 50 }} />
                 <MyInput
                     label="ID"

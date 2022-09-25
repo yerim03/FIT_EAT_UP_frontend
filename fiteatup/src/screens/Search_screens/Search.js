@@ -9,6 +9,7 @@ import { Text,
          Keyboard } from 'react-native';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
+import SearchBar from '../../components/SearchBar';
 import ResultImage from '../../components/ResultImage';
 import { KAKAO_API_KEY } from '../../cofig/config_secret';
 import { KAKAO_API } from '../../config';
@@ -21,7 +22,7 @@ const Search = ({ navigation }) => {
 
     const onPressSearchButton = () => {
         setFoodData([]);
-        let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=6`;  //카카오 로컬 API
+        let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8`;  //카카오 로컬 API
         let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=6`;  //카카오 이미지 검색 API
 
         const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
@@ -59,9 +60,12 @@ const Search = ({ navigation }) => {
                 <View style={styles.container} >
                     <Text style={styles.title}>장소 검색</Text>
                     <Text style={styles.smalltitle}>원하는 음식점을 검색해보세요!</Text>
-                    <MyInput onChangeText={text => setSearchWord(text)} placeholder="검색어를 입력하세요."/>
-                    <MyButton title="검색" onPress={onPressSearchButton} />
-
+                    {/* <MyInput onChangeText={text => setSearchWord(text)} placeholder="검색어를 입력하세요."/>
+                    <MyButton title="검색" onPress={onPressSearchButton} /> */}
+                    <SearchBar 
+                        value={searchWord}
+                        onChangeText={text => setSearchWord(text)}
+                        placeholder="검색어를 입력하세요." onPress={onPressSearchButton}/>
                     <View style={{ flex: 1}}>
                         <FlatList 
                             data={foodData}
