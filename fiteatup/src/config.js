@@ -13,8 +13,10 @@ export const API = {
     FRIEND_LIST: `${BASE_URL}/accounts/suggestions/`,
     SAVE_GOODLIST: `${BASE_URL}/accounts/place/user/like/save/`,
     GET_GOODLIST: `${BASE_URL}/accounts/place/user/like/list/`,
+    DELETE_GOODLIST: `${BASE_URL}/accounts/place/user/like/delete/`,
     SAVE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/save/`,
     GET_VISITLIST: `${BASE_URL}/accounts/place/user/visit/list/`,
+    DELETE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/delete/`,
 };
 
 export const KAKAO_API = {

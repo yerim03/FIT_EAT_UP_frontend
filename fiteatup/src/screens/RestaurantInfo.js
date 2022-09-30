@@ -14,18 +14,29 @@ const RestaurantInfo = ({ route }) => {
     //Search.js에서 받아온 음식점 data
     let foodData = route.params.item;
 
-    //페이지 렌더링 시에 axios로 post(or get) 하여 사용자가 좋아요, 가봤어요 버튼을 눌렀는지 여부를 판단
-    //response data에 눌렀는지 여부를 담아 가져온다.
-    //눌렀을 경우, setIsLike, setIsVisit을 true or false로 변경
-
-    //삭제할 것
-    useEffect(() => {
-        console.log('여기는 상세정보:\n', foodData);
-    }, []);
-
+    useEffect(()=> {
+        //여기서 사용자의 Likeplaces, Visitplaces를 가져와야 함
+        const getGoodPlaces = async () => { 
+            const goodPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
+            for(let i=0; i<goodPlaceList.data.length; i++){
+                if(goodPlaceList.data[i].id == foodData.id){
+                    setIsLike(true);
+                }
+            }
+        };
+        const getVisitPlaces = async () => { 
+            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );
+            for(let i=0; i<visitPlaceList.data.length; i++){
+                if(visitPlaceList.data[i].id == foodData.id){
+                    setIsVisit(true);
+                }
+            }
+        };
+        getGoodPlaces();
+        getVisitPlaces();
+    }, [])
 
     //좋아요 가봤어요 버튼
-    //onPress 시에 db 갱신하는 과정이 필요함
     const GoodVisitButton = ({ buttonType, clickState, onPress, title }) => {
         if(buttonType === 'heart'){ //heart 모양이면 좋아요 버튼
             return(
@@ -44,6 +55,47 @@ const RestaurantInfo = ({ route }) => {
         }
     };
 
+
+    //좋아요 버튼 클릭 동작
+    const handleGoodButtononPress = () => {
+        if(isLike){
+            //isLike==False(좋아요 X)
+            setIsLike(false);
+            axios.post(`${API.DELETE_GOODLIST}`, {id: foodData.id}, { headers: headers })
+                .then(res => console.log("좋아요 삭제 성공"))
+                .catch(err => console.log(err.response.data))
+        }
+        else{
+            //isLike==True(좋아요 0)
+            setIsLike(true);
+            foodData.pk=user.userPk;    //json 데이터에 pk 추가
+            axios.post(`${API.SAVE_GOODLIST}`, foodData, { headers: headers })
+                .then(res => console.log("좋아요 저장 성공"))
+                .catch(err => console.log(err.response.data))
+        }
+    };
+
+    //가봤어요 버튼 클릭 동작
+    const handleVisitButtononPress = () => {
+        if(isVisit){
+            //isVisit == False(가봤어요 X)
+            setIsVisit(false);
+            axios.post(`${API.DELETE_VISITLIST}`, {id: foodData.id}, { headers: headers })
+                .then(res => console.log("가봤어요 삭제 성공"))
+                .catch(err => console.log(err.response.data))
+        }
+        else{
+            //isLike==True(좋아요 0)
+            setIsVisit(true);
+            foodData.pk=user.userPk;    //json 데이터에 pk 추가
+            console.log('여기는 handleVisitButtononPress\n', foodData); //삭제할 것
+            axios.post(`${API.SAVE_VISITLIST}`, foodData, { headers: headers })
+                .then(res => console.log("가봤어요 저장 성공"))
+                .catch(err => console.log(err.response.data))
+        }
+    };
+
+
     //연락처, 음식점 카테고리 등 정보
     const Info = () => {
         return(
@@ -57,26 +109,6 @@ const RestaurantInfo = ({ route }) => {
                 </View>
             </View>
         );
-    };
-
-    //좋아요 버튼 클릭 동작
-    const handleGoodButtononPress = () => {
-        foodData.pk=user.userPk; 
-        console.log('여기는 handleGoodButtononPress\n', foodData); //삭제할 것
-        setIsLike(!isLike);
-        axios.post(`${API.SAVE_GOODLIST}`, foodData, { headers: headers })
-            .then(res => console.log(res))
-            .catch(err => console.log(err.response.data))
-    };
-
-    //가봤어요 버튼 클릭 동작
-    const handleVisitButtononPress = () => {
-        foodData.pk=user.userPk; 
-        console.log('여기는 handleVisitButtononPress\n', foodData); //삭제할 것
-        setIsVisit(!isVisit);
-        axios.post(`${API.SAVE_VISITLIST}`, foodData, { headers: headers })
-            .then(res => console.log(res))
-            .catch(err => console.log(err.response.data))
     };
 
     return(

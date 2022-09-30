@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         width: '100%',
         padding: 13,
-        // marginVertical: 6,
     },
     bntDisabled: {
         alignItems: 'center',
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         width: '100%',
         padding: 13,
-        // marginVertical: 6,
         opacity: 0.5,
     },
     bnttitle: {

@@ -52,6 +52,7 @@ const Login = ({ navigation }) => {
         axios.post(`${API.LOGIN}`, { username: id, password: password })
             .then(response => {
                 console.log("로그인 성공");
+                console.log(response.data);
                 // AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
                 getUserData(response.data.token);   // accounts/toekn에서 얻은 토큰으로 user정보 가져오기
                 Alert.alert('로그인 성공',  '환영합니다!');
