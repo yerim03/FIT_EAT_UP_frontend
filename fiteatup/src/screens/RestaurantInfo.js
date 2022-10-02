@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useUserState } from '../context/UserContext';
+import { Rating } from 'react-native-ratings';
 import axios from 'axios';
 import { API } from "../config";
 
 const RestaurantInfo = ({ route }) => {
     const [isLike, setIsLike] = useState(false);    //좋아요 버튼 클릭여부
     const [isVisit, setIsVisit] = useState(false);  //가본장소 버튼 클릭여부
-
+    const [modalVisible, setModalVisible] = useState(false);    //모달 창 보이는 여부
+    const [starRating, setStarRating] = useState(0);    //별점 매길 때 별점 개수
+    
     const { user, headers } = useUserState();
     
     //Search.js에서 받아온 음식점 data
     let foodData = route.params.item;
 
     useEffect(()=> {
-        //여기서 사용자의 Likeplaces, Visitplaces를 가져와야 함
+        //여기서 사용자의 Likeplaces, Visitplaces를 가져온다.
+        //starRating 데이터도 가져와서 설정해야 함
         const getGoodPlaces = async () => { 
             const goodPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
             for(let i=0; i<goodPlaceList.data.length; i++){
@@ -110,6 +114,7 @@ const RestaurantInfo = ({ route }) => {
             </View>
         );
     };
+    
 
     return(
         <View style={styles.container}>
@@ -123,9 +128,38 @@ const RestaurantInfo = ({ route }) => {
                     <GoodVisitButton buttonType='heart' clickState={isLike} title='좋아요' onPress={handleGoodButtononPress}/>
                     <GoodVisitButton buttonType='visit' clickState={isVisit} title='가봤어요' onPress={handleVisitButtononPress}/>
                 </View>
-
+                
                 <View style={styles.starArea}>
-                    <Text>star area</Text>
+                    <Modal animationType="fade" transparent={true} visible={modalVisible}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={[styles.detail, {marginBottom: 20}]}>이 음식점을 평가해주세요!</Text>
+                                <Rating 
+                                    startingValue={starRating}
+                                    imageSize={35}
+                                    onFinishRating={(rating) => {console.log("Rating is: " + rating);
+                                                                 setStarRating(rating)}}/>
+                                <TouchableOpacity 
+                                    style={{marginTop: 20, padding: 10, borderRadius: 10, backgroundColor: '#a0a0a0'}}
+                                    onPress={() => {setModalVisible(false)} //여기서 서버에 별점 매긴 거(starRating) 보내기
+                                }>   
+                                    <Text>완료</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
+
+                    <TouchableOpacity 
+                        activeOpacity={0.7} 
+                        hitSlop={{ top: 10, bottom: 10, left: 50, right: 50}}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <Rating
+                            readonly
+                            startingValue={starRating}
+                            imageSize={35}
+                        />
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.locationArea}>
@@ -140,13 +174,6 @@ const RestaurantInfo = ({ route }) => {
                     <Text style={styles.title}>상세정보</Text>
                     <Info />
                 </View>
-
-                {/* <View style={styles.infoArea}>
-                    <Text style={styles.title}>메뉴</Text>
-                    <View style={{flex: 1, backgroundColor: 'orange'}}>
-                            <Text>메뉴영역</Text>
-                    </View>
-                </View> */}
             </ScrollView>
         </View>
     );
@@ -226,6 +253,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center'
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+      },
+      modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 50,
+        alignItems: "center",
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+        width: 2,
+        height: 2
+        },
+        shadowOpacity: 0.3,    //그림자 투명도
+        shadowRadius: 4,
+        elevation: 5
+    }
 });
 
 export default RestaurantInfo;

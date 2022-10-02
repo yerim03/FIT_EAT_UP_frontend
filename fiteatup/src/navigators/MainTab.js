@@ -6,6 +6,7 @@ import FreindStack from './FriendStack';
 import MyPageStack from './MyPageStack';
 import { Ionicons } from '@expo/vector-icons';
 
+
 const Tab = createBottomTabNavigator();
 
 const TabIcon = ({ iconName, size, color }) => {
@@ -16,6 +17,7 @@ const MainTab = () => {
     return(
         <Tab.Navigator 
             initialRouteName='HomeStack'
+            //탭 아이콘 설정
             screenOptions={({ route }) => ({
                 tabBarIcon: props => {
                     let iconName = '';
@@ -41,10 +43,26 @@ const MainTab = () => {
                 tabBarActiveBackgroundColor: '#F0F0F0',
             })}
         >   
-            <Tab.Screen name="HomeStack" component={HomeStack} options={{ tabBarLabel: '홈', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
-            <Tab.Screen name="SearchStack" component={SearchStack} options={{ tabBarLabel: '검색', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
-            <Tab.Screen name="FreindStack" component={FreindStack} options={{ tabBarLabel: '친구', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
-            <Tab.Screen name="MyPageStack" component={MyPageStack} options={{ tabBarLabel: '내정보', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} />
+            <Tab.Screen 
+                name="HomeStack" 
+                component={HomeStack} 
+                options={{ tabBarLabel: '홈', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} 
+            />
+            <Tab.Screen 
+                name="SearchStack" 
+                component={SearchStack} 
+                options={{ tabBarLabel: '검색', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}}
+            />
+            <Tab.Screen 
+                name="FreindStack" 
+                component={FreindStack} 
+                options={{ tabBarLabel: '친구', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} 
+            />
+            <Tab.Screen 
+                name="MyPageStack" 
+                component={MyPageStack} 
+                options={{ tabBarLabel: '내정보', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}}
+            />
         </Tab.Navigator>
     );
 };

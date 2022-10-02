@@ -4,12 +4,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Login, Signup } from '../screens';
 import HeaderBackButton from '../components/HeaderBackButton';
+import { theme } from '../styles/theme';
+
 
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
     return(
-        <Stack.Navigator screenOptions={{ cardStyle: { backgroundColor: '#ffffff'}, }}>
+        <Stack.Navigator screenOptions={{ cardStyle: { backgroundColor: `${theme.backgroundColor}`}, }}>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
             <Stack.Screen 
                 name="Signup" 

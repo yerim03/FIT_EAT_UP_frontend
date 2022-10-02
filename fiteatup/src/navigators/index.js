@@ -8,19 +8,6 @@ import { useUserState } from '../context/UserContext';
 
 const Navigation = () => {
     const { user } = useUserState();
-    // let token;
-
-    // useEffect(() => {
-    //     const getToken = async () => { 
-    //         try{
-    //             token = await AsyncStorage.getItem('token');
-    //             console.log('token: ',token);
-    //         } catch(e){
-    //             console.log(e.message);
-    //         }
-    //     }
-    //     getToken();
-    // }, []);
 
     return(
         <NavigationContainer>

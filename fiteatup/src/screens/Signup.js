@@ -97,13 +97,12 @@ const Signup = ({ navigation }) => {
         formdata.append('username', id);
         formdata.append('password', password);
         formdata.append('nickname', nickname);
-        // formdata.append('avatar', {uri: photoData.uri, 
-        //                             type,
-        //                             name: filename});
+        formdata.append('avatar', {uri: photoData.uri, 
+                                   type: "image/jpeg",
+                                   name: "profilephoto"});
         console.log(formdata);
         axios.post(`${API.SIGNUP}`, 
-            {username: id, password, nickname: nickname})
-            // formdata, {headers: {'Content-Type': 'multipart/form-data'}})
+            formdata, {headers: {"content-type": "multipart/form-data"}})
             .then(response => {
                 console.log('response : ', response);
                 Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",

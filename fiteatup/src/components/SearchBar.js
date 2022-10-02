@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput,TouchableOpacity, StyleSheet, } from 'react-native';
+import { theme } from '../styles/theme';
+
 
 const SearchBar = ( props ) => {
     return(
@@ -39,8 +41,7 @@ const styles = StyleSheet.create({
     },
     searchBtn: {
         alignItems: 'center',
-        
-        backgroundColor: '#404040',
+        backgroundColor: `${theme.buttonBackgroundColor}`,
         borderRadius: 7,
         paddingVertical: 15,
     },

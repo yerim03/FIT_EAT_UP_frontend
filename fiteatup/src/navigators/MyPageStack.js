@@ -3,6 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MyPage, VisitList, GoodList, ProfileEdit } from '../screens';
 import HeaderBackButton from '../components/HeaderBackButton';
+import { theme } from '../styles/theme';
+
 
 const Stack = createStackNavigator();
 
@@ -10,7 +12,7 @@ const MyPageStack = () => {
     return(
         <Stack.Navigator 
             screenOptions={{ 
-                cardStyle: { backgroundColor: '#ffffff'},
+                cardStyle: { backgroundColor: `${theme.backgroundColor}`},
                 headerTitleAlign: 'center',
                 headerBackTitleVisible: false,
                 headerBackImage: HeaderBackButton,
@@ -19,25 +21,26 @@ const MyPageStack = () => {
             <Stack.Screen 
                 name="MyPage" 
                 component={MyPage} 
-                options={{ headerShown: false, }} />
+                options={{ headerShown: false, }} 
+            />
             <Stack.Screen 
                 name="VisitList" 
                 component={VisitList} 
                 options={{ headerTitle: '가본 장소 리스트',
-                            headerTitleStyle: {fontWeight: 'bold'} }}
+                           headerTitleStyle: {fontWeight: 'bold'} }}
             />
             <Stack.Screen 
                 name="GoodList"
                 component={GoodList} 
                 options={{ headerTitle: '좋아요 장소 리스트',
-                            headerTitleStyle: {fontWeight: 'bold'} }}
-                />
+                        headerTitleStyle: {fontWeight: 'bold'} }}
+            />
             <Stack.Screen 
                 name="ProfileEdit"
                  component={ProfileEdit} 
                  options={{ headerTitle: '프로필 수정',
                             headerTitleStyle: {fontWeight: 'bold'} }}
-                 />
+                />
         </Stack.Navigator>
     );
 };

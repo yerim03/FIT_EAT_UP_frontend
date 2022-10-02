@@ -1,7 +1,7 @@
-// 추천맛집결과(HomeResult.js), 검색결과(SearchResult.js) 화면에서
-// 각 음식점의 이미지를 나타내는 커스텀 컴포넌트 생성
+//[추천맛집결과(HomeResult.js), 검색결과(SearchResult.js) 화면에서 나타나는 음식점 이미지 컴포넌트]
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { theme } from '../styles/theme';
 
 
 const ResultImage = ( props ) => {
@@ -16,7 +16,7 @@ const ResultImage = ( props ) => {
 
 const styles = StyleSheet.create({
     image: {
-        backgroundColor: "#E0E0E0",
+        backgroundColor: `${theme.imageBackgroundColor}`,
         width: 140,
         height: 140,
         marginHorizontal: 10,

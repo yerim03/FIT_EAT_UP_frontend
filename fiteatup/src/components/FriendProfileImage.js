@@ -1,7 +1,8 @@
-//커스텀 컴포넌트 - 친구의 프로필 이미지
-//MyProfileImage 컴포넌트보다 크기를 작게 만든 것
+//[친구의 프로필 이미지를 나타내는 컴포넌트]
+//추가 수정 필요
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { theme } from '../styles/theme';
 
 
 const FriendProfileImage = ({ url }) => {
@@ -20,7 +21,7 @@ const FriendProfileImage = ({ url }) => {
 
 const styles = StyleSheet.create({
     image: {
-        backgroundColor: "#E0E0E0",
+        backgroundColor: `${theme.imageBackgroundColor}`,
         width: 70,
         height: 70,
         borderRadius: 35,

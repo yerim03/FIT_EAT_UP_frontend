@@ -66,7 +66,7 @@ version 0.2.2
 + ~~SafeAreaView 적용~~
 
 version 0.2.3 	
-- 로그아웃 시 AsyncStorage에 저장된 토큰 삭제
+- ~~로그아웃 시 AsyncStorage에 저장된 토큰 삭제~~
 - 로그아웃 기능 구현
 - 로그인 에러메세지(id, password가 맞지 않으면 에러메시지 출력) 완료
 
@@ -78,19 +78,20 @@ version 0.2.4
 
 version 0.2.5
 - 홈 UI(Home.js) 구성(추가수정 예정)
-- 음식점 상세정보 UI(RestaurantInfo.js) 구성(진행 중)
+- 음식점 상세정보 UI(RestaurantInfo.js) ~~(진행 중)~~ -> 완료
 - SafeAreaView 적용
 - 좋아요 장소 리스트(GoodList.js), 가본 장소 리스트(VisitList.js)의 FlatList 디자인 수정
 
 
 version 0.2.6
-- 토큰 존재 여부에 따라 다른 화면이 렌더링 되도록 변경
-- expo image picker 사용하여 프로필 이미지 추가 기능 설정
+- ~~토큰 존재 여부에 따라 다른 화면이 렌더링 되도록 변경~~ -> context api의 사용자 정보 여부에 따라 변경되도록 수정
+- expo-image-picker 사용하여 프로필 이미지 추가 기능 설정
 - 전반적인 디자인 수정(Home.js 는 추가수정 필요)
 
 version 0.2.7
 - 사용자 정보 출력  --> context api로 관리
 - 사용자 정보(nickname) 수정 기능 구현 --> context api로 관리
+- 로그아웃 시 context api에 저장된 토큰 및 사용자 데이터 삭제
 
 version 0.2.8
 - 친구 추가, 삭제 기능 구현
@@ -119,3 +120,7 @@ version 0.3.4
 - 사용자의 좋아요 장소 리스트(GoodList), 가본장소 리스트(VisitList) 저장, 삭제, 조회 완료
 - 이미지 백엔드 서버에 넘기는 부분은 구현 중
 - 좋아요, 가봤어요 장소 리스트 관련 내용 구현 완료
+
+version 0.4.0
+- styles.js, theme.js 생성(앱의 사용되는 컬러와 공통으로 사용되는 style 관리 예정) -> 진행 중
+- 모달 창을 사용하여 별점 부여 기능 추가

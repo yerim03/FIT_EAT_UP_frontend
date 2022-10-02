@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Friend, FriendProfile, AddFriend } from '../screens';
 import HeaderBackButton from '../components/HeaderBackButton';
+import { theme } from '../styles/theme';
 
 
 const Stack = createStackNavigator();
@@ -11,13 +12,17 @@ const FreindStack = () => {
     return(
         <Stack.Navigator 
             screenOptions={{ 
-                cardStyle: { backgroundColor: '#ffffff'},
+                cardStyle: { backgroundColor: `${theme.backgroundColor}`},
                 headerTitleAlign: 'center',
                 headerBackTitleVisible: false,
                 headerBackImage: HeaderBackButton,
             }} 
         >
-            <Stack.Screen name="Friend" component={Friend} options={{ headerShown: false }}/>
+            <Stack.Screen 
+                name="Friend" 
+                component={Friend} 
+                options={{ headerShown: false }}
+            />
             <Stack.Screen 
                 name="FriendProfile" 
                 component={FriendProfile} 
@@ -29,7 +34,7 @@ const FreindStack = () => {
                 component={AddFriend} 
                 options={{ headerTitle: '친구 추가',
                             headerTitleStyle: {fontWeight: 'bold'} }}
-                />
+            />
         </Stack.Navigator>
     );
 };
