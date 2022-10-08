@@ -1,6 +1,6 @@
 //screen import 관리
 
-import Splash from "./Splash";
+
 import Login from "./Login";
 import Signup from "./Signup";
 import RestaurantInfo from "./RestaurantInfo";
@@ -23,7 +23,7 @@ import GoodList from "./Mapage_screens/GoodList";
 
 
 
-export {Splash, Login, Signup, RestaurantInfo,
+export {Login, Signup, RestaurantInfo,
         Home, HomeResult,
         Search, SearchResult,
         Friend, FriendProfile, AddFriend,
