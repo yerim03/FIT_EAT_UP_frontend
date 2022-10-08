@@ -5,6 +5,7 @@ import SearchStack from './SearchStack';
 import FreindStack from './FriendStack';
 import MyPageStack from './MyPageStack';
 import { Ionicons } from '@expo/vector-icons';
+import { theme } from '../styles/theme';
 
 
 const Tab = createBottomTabNavigator();
@@ -38,9 +39,9 @@ const MainTab = () => {
                 },
                 headerShown: false,
                 //하단 탭 바 속성
-                tabBarActiveTintColor: '#404040',
-                tabBarInactiveTintColor: '#C0C0C0',
-                tabBarActiveBackgroundColor: '#F0F0F0',
+                tabBarActiveTintColor: `${theme.tabActiveTint}`,
+                // tabBarInactiveTintColor: '#C0C0C0',
+                // tabBarActiveBackgroundColor: `${theme.tabBackground}`,
             })}
         >   
             <Tab.Screen 

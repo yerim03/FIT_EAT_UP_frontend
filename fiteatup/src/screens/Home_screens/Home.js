@@ -10,7 +10,8 @@ import { Text,
 import MyButton from '../../components/MyButton';
 import FriendProfileImage from '../../components/FriendProfileImage';
 import { useUserState } from '../../context/UserContext';
-
+import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const Home = ({ navigation }) => {
@@ -50,9 +51,9 @@ const Home = ({ navigation }) => {
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
-            <Text style={styles.title}>추천맛집 검색</Text>
-            <Text style={styles.smalltitle}>친구와 공통된 맛집을 추천받아보세요!</Text>
+        <View style={globalStyles.container_2}>
+            <Text style={globalStyles.tabScreenTitle}>추천맛집 검색</Text>
+            <Text style={globalStyles.tabScreenSmallTitle}>친구와 공통된 맛집을 추천받아보세요!</Text>
             <View style={styles.recomArea}>
                 {/* <FlatList 
                     data={DATA}
@@ -70,8 +71,8 @@ const Home = ({ navigation }) => {
             </View>
             
             <View style={{ height: 30 }} />
-            <Text style={styles.title}>방문장소 확인</Text>
-            <Text style={styles.smalltitle}>방문한 장소가 맞나요? 확인해보세요!</Text>
+            <Text style={globalStyles.tabScreenTitle}>방문장소 확인</Text>
+            <Text style={globalStyles.tabScreenSmallTitle}>방문한 장소가 맞나요? 확인해보세요!</Text>
             <View style={styles.checkArea}></View>
             <View style={styles.buttonArea}>
                 <OXButton title="O" onPress={() => {console.log("사용자의 방문장소 리스트에 추가되도록 작성")}}/>
@@ -84,19 +85,6 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-    },
-    title: {
-        fontSize: 21,
-        fontWeight: 'bold',
-        color: '#404040',
-    },
-    smalltitle: {
-        fontSize: 14,
-        color: '#606060',
-    },
     recomArea: {
         flex: 0.8,
         borderWidth: 2,

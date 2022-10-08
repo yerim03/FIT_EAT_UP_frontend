@@ -8,9 +8,11 @@ import { Text,
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
 import { API } from '../../config';
+import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const MyPage = ({ navigation }) => {
@@ -32,8 +34,8 @@ const MyPage = ({ navigation }) => {
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container}>
-                <Text style={styles.title}>내 정보</Text>
+            <View style={globalStyles.container_2}>
+                <Text style={globalStyles.tabScreenTitle}>내 정보</Text>
                 <View style={styles.profileArea}>
                     <MyProfileImage url={`${API.GET_PROFILEIMAGE}${user.userProfileImage}`} />
                     <Text style={styles.nickname}>{user.userNickname}</Text>
@@ -45,7 +47,7 @@ const MyPage = ({ navigation }) => {
                     onPress={() => navigation.navigate("GoodList")}
                     activeOpacity={0.8}
                 >
-                    <Ionicons name="heart" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <Ionicons name="heart" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
                     <Text style={styles.settingTitle}>좋아요</Text>  
                 </TouchableOpacity>
 
@@ -54,7 +56,7 @@ const MyPage = ({ navigation }) => {
                     onPress={() => navigation.navigate("VisitList")}
                     activeOpacity={0.8}
                 >
-                    <Ionicons name="location" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <Ionicons name="location" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
                     <Text style={styles.settingTitle}>가봤어요</Text>
                 </TouchableOpacity>
 
@@ -63,7 +65,7 @@ const MyPage = ({ navigation }) => {
                     onPress={() => navigation.navigate("ProfileEdit")}
                     activeOpacity={0.8}
                 >
-                    <MaterialIcons name="edit" size={26} color="black" style={{ marginHorizontal: 10 }} />
+                    <MaterialIcons name="edit" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
                     <Text style={styles.settingTitle}>프로필 수정</Text>
                     </TouchableOpacity>
                 <View style={{ height: 100 }} />
@@ -75,16 +77,6 @@ const MyPage = ({ navigation }) => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // alignItems: 'center',
-        padding: 20,
-    },
-    title: {
-        fontSize: 21,
-        fontWeight: 'bold',
-        color: '#404040',
-    },
     profileArea: {
         height: 150,
         width: '100%',
@@ -100,14 +92,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '600',
         paddingLeft: 10,
+        // color: `${theme.title}`
     },
     settingArea: {
         paddingVertical: 17,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 1,
-        borderColor: '#C0C0C0',
+        borderBottomWidth: 2,
+        borderColor: `${theme.mypageLine}`,
     },
 });
 export default MyPage;

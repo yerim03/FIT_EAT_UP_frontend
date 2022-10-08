@@ -7,13 +7,13 @@ import { Text,
          TouchableOpacity,
          TouchableWithoutFeedback,
          Keyboard } from 'react-native';
-import MyInput from '../../components/MyInput';
-import MyButton from '../../components/MyButton';
 import SearchBar from '../../components/SearchBar';
 import ResultImage from '../../components/ResultImage';
 import { KAKAO_API_KEY } from '../../cofig/config_secret';
 import { KAKAO_API } from '../../config';
 import axios from 'axios';
+import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const Search = ({ navigation }) => {
@@ -35,8 +35,7 @@ const Search = ({ navigation }) => {
                                 let oneData = getdata[i];
                                 oneData.image_url = getimage[0].image_url;
                                 setFoodData(prevData => [...prevData, oneData]);
-                            }
-                            
+                            }   
                         })
             .catch(err => console.log(err))
     };
@@ -57,11 +56,9 @@ const Search = ({ navigation }) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={{ flex: 1 }}>
-                <View style={styles.container} >
-                    <Text style={styles.title}>장소 검색</Text>
-                    <Text style={styles.smalltitle}>원하는 음식점을 검색해보세요!</Text>
-                    {/* <MyInput onChangeText={text => setSearchWord(text)} placeholder="검색어를 입력하세요."/>
-                    <MyButton title="검색" onPress={onPressSearchButton} /> */}
+                <View style={globalStyles.container_2} >
+                    <Text style={globalStyles.tabScreenTitle}>장소 검색</Text>
+                    <Text style={globalStyles.tabScreenSmallTitle}>원하는 음식점을 검색해보세요!</Text>
                     <SearchBar 
                         value={searchWord}
                         onChangeText={text => setSearchWord(text)}
@@ -79,23 +76,6 @@ const Search = ({ navigation }) => {
         </TouchableWithoutFeedback>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ffffff',
-        padding: 20,
-    },
-    title: {
-        fontSize: 21,
-        fontWeight: 'bold',
-        color: '#404040',
-    },
-    smalltitle: {
-        fontSize: 14,
-        color: '#606060',
-    },
-});
 
 
 export default Search;

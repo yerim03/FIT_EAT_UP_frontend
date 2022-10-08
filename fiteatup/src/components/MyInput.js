@@ -1,21 +1,26 @@
 //커스텀 컴포넌트 - TextInput
 //TextInput 안에 속성들 수정예정
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet} from 'react-native';
-
+import { theme } from '../styles/theme';
 
 const MyInput = ( props ) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     return(
         <View style={styles.input}>
-            <Text style={styles.label}>{props.label}</Text>
+            <Text style={[styles.label, isFocused && {color: `${theme.inputFocusColor}`}]}>{props.label}</Text>
             <TextInput
-                style={ props.disabled ? styles.disabledinputbox : styles.inputbox}
+                style={props.disabled ? styles.disabledinputbox 
+                                        : [styles.inputbox, isFocused && {borderColor: `${theme.inputFocusColor}`}]}
                 value={props.value}
                 onChangeText={props.onChangeText}
                 onSubmitEditing={props.onSubmitEditing}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 secureTextEntry={props.isPassword}
                 placeholder={props.placeholder}
-                placeholderTextColor="#A0A0A0"
+                placeholderTextColor={`${theme.inputPlaceholder}`}
                 autoCapitalize="none"
                 maxLength={props.maxLength}
                 editable={!props.disabled}
@@ -27,33 +32,31 @@ const MyInput = ( props ) => {
 
 const styles = StyleSheet.create({
     input: {
-        flexDirection: 'column',
-        marginVertical: 5,
+        marginVertical: 7,
         width: '100%',
     },
     label:{
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 5,
-        marginLeft: 5,
-        color: '#404040',
+        color: `${theme.inputNotFocusColor}`,
     },
     inputbox: {
-        alignItems: 'center',
         backgroundColor: '#ffffff',
-        borderRadius: 6,
-        borderColor: '#404040',
-        borderWidth: 1.5,
-        padding: 13,
+        borderColor: `${theme.inputNotFocusColor}`,
+        borderBottomWidth: 2,
+        width: '100%',
+        paddingHorizontal: 12,
+        paddingVertical: 14,
     },
     disabledinputbox: {
         alignItems: 'center',
-        backgroundColor: '#F0F0F0',
-        borderRadius: 6,
-        borderColor: '#404040',
-        borderWidth: 1.5,
-        padding: 13,
-        color: 'black'
+        backgroundColor: `${theme.inputDisabled}`,
+        width: '100%',
+        paddingHorizontal: 12,
+        paddingVertical: 15,
+        color: `${theme.labelTitleColor}`, 
+        borderRadius: 20,
+        fontWeight: '600'
     },
 });
 export default MyInput;

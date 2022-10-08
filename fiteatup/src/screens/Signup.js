@@ -1,13 +1,14 @@
 //회원가입 화면
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
 import { API } from '../config';
-
+import { theme } from '../styles/theme';
+import { globalStyles } from '../styles/styles';
 
 const Signup = ({ navigation }) => {
     const [id, setId] = useState('');   //입력 id
@@ -22,7 +23,6 @@ const Signup = ({ navigation }) => {
     const [idErrorMsg, setIdErrorMsg] = useState('');   //id 오류 메세지
     const [passwordErrorMsg, setPasswordErrorMsg] = useState('');    //password 오류 메세지
     const [passwordConfrimMsg, setPasswordConfrimMsg] = useState(''); //passwordConfrim 오류 메세지
-    const [nickNameErrorMsg, setnickNameErrorMsg] = useState(''); //nickname 오류 메세지
 
     //유효성 검사
     const [isPassword, setIsPassword] = useState(false);    //password 유효성
@@ -87,6 +87,10 @@ const Signup = ({ navigation }) => {
         setDisabled(!(id && password && passwordConfirm && nickname))
     }, [id, password, passwordConfirm, nickname]);
 
+
+    //수정필요
+    //
+    //
     //회원가입 버튼 클릭 시 동작
     const handleSignupButtonPress = () => {
         // const filename = photoData.uri.split('/').pop();
@@ -101,8 +105,11 @@ const Signup = ({ navigation }) => {
                                    type: "image/jpeg",
                                    name: "profilephoto"});
         console.log(formdata);
+
         axios.post(`${API.SIGNUP}`, 
-            formdata, {headers: {"content-type": "multipart/form-data"}})
+                    formdata, 
+                    {headers: {"content-type": "multipart/form-data"}}
+                  )
             .then(response => {
                 console.log('response : ', response);
                 Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",
@@ -110,7 +117,6 @@ const Signup = ({ navigation }) => {
                 );
                 onReset();
             })
-            // .catch(err => {console.log(err.response)})
             .catch(err => {
                 if(err.response.data.username) {
                     Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
@@ -122,77 +128,84 @@ const Signup = ({ navigation }) => {
                 }
             })
     };
+    //
+    //
+    // 수정 필요
 
 
     return(
-        <KeyboardAwareScrollView extraScrollHeight={30}>
-            <View style={styles.container}>
-                <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri); setPhotoData(photo)}}/>
-                <MyInput
-                    label="ID"
-                    value={id}
-                    onChangeText={onChangeId}
-                    onSubmitEditing={() => {}}
-                    placeholder="아이디(영문 또는 숫자 6글자 이상)"
-                />
-                <Text style={styles.errortext}>{idErrorMsg}</Text>
-                <MyInput
-                    label="Password"
-                    value={password}
-                    onChangeText={onChangePassword}
-                    onSubmitEditing={() => {}}
-                    placeholder="비밀번호(영문 또는 숫자 또는 특수문자 8자 이상)"
-                />
-                <Text style={isPassword ? styles.correcttext : styles.errortext}>{passwordErrorMsg}</Text>
-                <MyInput
-                    label="PasswordConfirm"  
-                    value={passwordConfirm}
-                    onChangeText={onChangePasswordConfirm}
-                    onSubmitEditing={() => {}}
-                    placeholder="비밀번호 확인"
-                />
-                <Text style={isPasswordConfirm ?  styles.correcttext : styles.errortext}>{passwordConfrimMsg}</Text>
-                <MyInput
-                    label="Nickname"
-                    value={nickname}
-                    onChangeText={text => setNickName(text)}
-                    onSubmitEditing={() => {}}
-                    placeholder="사용할 이름을 입력하세요"
-                />
-                <Text style={styles.errortext}>{nickNameErrorMsg}</Text>
-                <View style={{ height: 45 }} />
-                <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
-            </View>
-        </KeyboardAwareScrollView>
+        <SafeAreaView style={{ flex: 1 }}>
+            <KeyboardAwareScrollView extraScrollHeight={40}>
+                <View style={globalStyles.container}>
+                    <Text style={styles.title}>회원가입</Text>
+                    <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri); setPhotoData(photo)}}/>
+                    <MyInput
+                        label="아이디"
+                        value={id}
+                        onChangeText={onChangeId}
+                        onSubmitEditing={() => {}}
+                        placeholder="아이디(영문 또는 숫자 6글자 이상)"
+                    />
+                    <Text style={styles.errorText}>{idErrorMsg}</Text>
+                    <View style={{ height: 15 }}/>
+                    <MyInput
+                        label="비밀번호"
+                        value={password}
+                        onChangeText={onChangePassword}
+                        onSubmitEditing={() => {}}
+                        placeholder="비밀번호(영문, 숫자, 특수문자 포함 8자 이상)"
+                    />
+                    <Text style={isPassword ? styles.correctText : styles.errorText}>{passwordErrorMsg}</Text>
+                    <View style={{ height: 15 }}/>
+                    <MyInput
+                        label="비밀번호 확인"  
+                        value={passwordConfirm}
+                        onChangeText={onChangePasswordConfirm}
+                        onSubmitEditing={() => {}}
+                        placeholder="비밀번호를 다시 한번 입력해주세요."
+                    />
+                    <Text style={isPasswordConfirm ?  styles.correctText : styles.errorText}>{passwordConfrimMsg}</Text>
+                    <View style={{ height: 15 }}/>
+                    <MyInput
+                        label="닉네임"
+                        value={nickname}
+                        onChangeText={text => setNickName(text)}
+                        onSubmitEditing={() => {}}
+                        placeholder="사용할 이름을 입력하세요"
+                    />
+                    <View style={{ height: 50 }} />
+                    <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
+                </View>
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
-        paddingHorizontal: 20,
-        paddingTop: 10,
-        paddingBottom: 80,
+    title: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        alignSelf: 'flex-start',
+        color: `${theme.title}`,
+        marginBottom: 40,
     },
-    errortext: {
-        color: "red",
+    errorText: {
+        color: `${theme.errorMessage}`,
         fontWeight: '500',
-        fontSize: 12,
+        fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 5,
         marginBottom: 7,
     },
-    correcttext: {
-        color: "#606060",
+    correctText: {
+        color: `${theme.correctMesage}`,
         fontWeight: '500',
-        fontSize: 12,
+        fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 5,
         marginBottom: 7,
     },
+
 });
 
 export default Signup;

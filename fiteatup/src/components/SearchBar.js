@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput,TouchableOpacity, StyleSheet, } from 'react-native';
+import { View, TextInput,TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../styles/theme';
 
 
@@ -12,12 +13,12 @@ const SearchBar = ( props ) => {
                     value={props.value}
                     onChangeText={props.onChangeText}
                     placeholder={props.placeholder}
+                    placeholderTextColor={`${theme.inputPlaceholder}`}
                 />
             </View>
             <View style={{ flex: 1 }}>
                 <TouchableOpacity style={styles.searchBtn} onPress={props.onPress} activeOpacity={0.7}>
-                    <Text style={{color: 'white'}} >검색</Text>
-                    {/* <Image source={{}} /> */}
+                    <Ionicons name="md-search" size={30} color={`${theme.backgroundColor}`} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -26,7 +27,7 @@ const SearchBar = ( props ) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#ffffff',
+        backgroundColor: `${theme.backgroundColor}`,
         width: '100%',
         paddingVertical: 10,
         flexDirection: 'row',
@@ -34,16 +35,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     searhInput: {
-        backgroundColor: '#f0f0f0f0',
-        borderRadius: 7,
-        padding: 12,
-        margin: 3,
+        backgroundColor: `${theme.searchBarInput}`,
+        borderRadius: 15,
+        padding: 14,
+        marginRight: 3,
+        marginVertical: 3,
     },
     searchBtn: {
         alignItems: 'center',
-        backgroundColor: `${theme.buttonBackgroundColor}`,
-        borderRadius: 7,
-        paddingVertical: 15,
+        backgroundColor: `${theme.searchBarButton}`,
+        borderRadius: 15,
+        paddingVertical: 10,
     },
 });
 

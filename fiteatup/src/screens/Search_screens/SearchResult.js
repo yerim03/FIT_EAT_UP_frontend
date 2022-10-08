@@ -1,3 +1,4 @@
+//삭제
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import ResultImage from '../../components/ResultImage';

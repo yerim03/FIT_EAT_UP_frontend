@@ -7,6 +7,8 @@ import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserState } from '../../context/UserContext';
+import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const Friend = ({ navigation }) => {
@@ -18,16 +20,10 @@ const Friend = ({ navigation }) => {
     useEffect(() => {
         const getFriendList = async () => { 
             const friends = await axios.get(`${API.FRIEND_LIST}`, { headers: headers } );
-            console.log(friends.data);
             setFriendList(friends.data);              
         };
         getFriendList();
     }, [isFocused]);
-
-
-    // const handleItemPress = params => {
-    //     navigation.navigate("FriendProfile", params);
-    // };
     
     //flatlist의 renderItem
     const renderItem = ({ item: {pk, username, nickname, avatar_url} }) => {
@@ -37,8 +33,10 @@ const Friend = ({ navigation }) => {
                         {text:"삭제", 
                          onPress: ()=> { 
                             axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: headers })
-                                .then(res => { console.log('친구삭제 성공 : ', res.data)})
-                                .then(()=> navigation.replace('Friend'))
+                                .then(res => { console.log('친구삭제 성공 : ', res.data); 
+                                               navigation.replace('Friend')}
+                                    )
+                                .catch(err => {console.log('친구 삭제 실패\n', err)})
                             }, 
                          style: 'destructive'}
                         ])
@@ -52,7 +50,7 @@ const Friend = ({ navigation }) => {
                     <Text style={styles.itemNickname}>{nickname}</Text>
                 </View>
                 <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
-                    <Text style={{ color: '#ffffff' }}>삭제</Text>
+                    <Text style={styles.deleteTitle}>삭제</Text>
                 </TouchableOpacity>
             </TouchableOpacity>
         );
@@ -61,15 +59,15 @@ const Friend = ({ navigation }) => {
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container}>
+            <View style={globalStyles.container_2}>
                 <View style={styles.titleArea}>
-                    <Text style={styles.title}>친구 목록</Text>
+                    <Text style={[{flex: 1}, globalStyles.tabScreenTitle]}>친구 목록</Text>
                     <TouchableOpacity 
                         activeOpacity={0.8} 
                         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10}} 
                         onPress={() => { navigation.navigate("AddFriend") }}
                     >
-                        <Ionicons name="person-add" size={30} color="#404040" style={{ marginRight: 10 }}/>
+                        <Ionicons name="person-add" size={30} color={`${theme.iconColor}`} style={{ marginRight: 10 }}/>
                     </TouchableOpacity>
                 </View>
 
@@ -90,20 +88,10 @@ const Friend = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-    },
     titleArea: {
         flex: 0.13,
         width: '100%',
         flexDirection: 'row',
-    },
-    title: {
-        flex: 1,
-        fontSize: 21,
-        fontWeight: 'bold',
-        color: '#404040',
     },
     itemContainer: {
         flexDirection: 'row',
@@ -111,7 +99,7 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     itemId: {
-        fontSize: 18,
+        fontSize: 19,
         paddingHorizontal: 25,
     },
     itemNickname: {
@@ -120,11 +108,15 @@ const styles = StyleSheet.create({
         color: '#606060'
     },
     deleteButton: {
-        backgroundColor: '#404040',
-        paddingVertical: 8,
+        backgroundColor: `${theme.buttonBackgroundColor}`,
+        paddingVertical: 9,
         paddingHorizontal: 13,
         borderRadius: 5,
     },
+    deleteTitle: {
+        fontSize: 15,
+        color: `${theme.buttonTitleColor}`
+    }
 });
 
 

@@ -52,11 +52,11 @@ const ProfileEdit = () => {
         <KeyboardAwareScrollView extraScrollHeight={20}>
             <View style={styles.container}>
                 <MyProfileImage url={photoUrl} showButton onChangeImage={url => setPhotoUrl(url)} />
-                <MyInput value={user.userId} label="ID" disabled  />
+                <MyInput value={user.userId} label="아이디" disabled  />
                 <View style={{ height: 10 }} />
                 <MyInput
                     value={changeNickname}
-                    label="Nickname"
+                    label="닉네임"
                     onChangeText={text => setChangeNickname(text)}
                     onSubmitEditing={() => {}}
                 />

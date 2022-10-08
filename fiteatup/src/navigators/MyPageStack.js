@@ -14,6 +14,7 @@ const MyPageStack = () => {
             screenOptions={{ 
                 cardStyle: { backgroundColor: `${theme.backgroundColor}`},
                 headerTitleAlign: 'center',
+                headerTintColor: `${theme.title}`,
                 headerBackTitleVisible: false,
                 headerBackImage: HeaderBackButton,
             }} 

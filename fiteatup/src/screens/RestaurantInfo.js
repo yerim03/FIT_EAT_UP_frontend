@@ -115,6 +115,16 @@ const RestaurantInfo = ({ route }) => {
         );
     };
     
+    const handleRatingFinishonPress = () => {
+        let data = {
+            user: user.userPk,
+            place: foodData.id,
+            rating: starRating
+        }
+        axios.post(`${API.SAVE_STAR_RATING}`, data, { headers: headers })
+            .then(res => {console.log('rating 저장성공 \n', res.data);})
+            .catch(err => {console.log(err.response.data)})
+    };
 
     return(
         <View style={styles.container}>
@@ -141,7 +151,8 @@ const RestaurantInfo = ({ route }) => {
                                                                  setStarRating(rating)}}/>
                                 <TouchableOpacity 
                                     style={{marginTop: 20, padding: 10, borderRadius: 10, backgroundColor: '#a0a0a0'}}
-                                    onPress={() => {setModalVisible(false)} //여기서 서버에 별점 매긴 거(starRating) 보내기
+                                    onPress={() => {setModalVisible(false);
+                                                    handleRatingFinishonPress();} //여기서 서버에 별점 매긴 거(starRating) 보내기
                                 }>   
                                     <Text>완료</Text>
                                 </TouchableOpacity>
@@ -152,7 +163,7 @@ const RestaurantInfo = ({ route }) => {
                     <TouchableOpacity 
                         activeOpacity={0.7} 
                         hitSlop={{ top: 10, bottom: 10, left: 50, right: 50}}
-                        onPress={() => setModalVisible(true)}
+                        onPress={() => {if(isLike || isVisit) setModalVisible(true)}}
                     >
                         <Rating
                             readonly

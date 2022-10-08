@@ -17,6 +17,8 @@ export const API = {
     SAVE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/save/`,
     GET_VISITLIST: `${BASE_URL}/accounts/place/user/visit/list/`,
     DELETE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/delete/`,
+    SAVE_STAR_RATING: `${BASE_URL}/accounts/place/user/rating/`,
+    GET_STAR_RATINGLIST: `${BASE_URL}/accounts/place/user/rating/list/`,
 };
 
 export const KAKAO_API = {

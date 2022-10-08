@@ -3,13 +3,14 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { theme } from '../styles/theme';
 
+
 const MyButton = ( props ) => {
     return(
         <TouchableOpacity
             style={props.disabled ? [styles.bnt, {opacity:0.5}] : styles.bnt}
             onPress={props.onPress}
             disabled={props.disabled}
-            activeOpacity={0.7}
+            activeOpacity={0.8}
         >
             <Text style={styles.bnttitle}>{props.title}</Text>
         </TouchableOpacity>
@@ -21,13 +22,21 @@ const styles = StyleSheet.create({
     bnt: {
         alignItems: 'center',
         backgroundColor: `${theme.buttonBackgroundColor}`,
-        borderRadius: 6,
+        borderRadius: 25,
         width: '100%',
-        padding: 13,
+        padding: 14,
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+        width: 2,
+        height: 2
+        },
+        shadowOpacity: 0.3,    //그림자 투명도
+        shadowRadius: 4,
+        elevation: 5
     },
     bnttitle: {
-        fontSize: 16,
-        color: `${theme.title}`,
+        fontSize: 19,
+        color: `${theme.buttonTitleColor}`,
     },
 });
 

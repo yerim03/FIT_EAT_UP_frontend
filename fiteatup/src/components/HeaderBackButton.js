@@ -2,11 +2,11 @@
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import { theme } from '../styles/theme';
 
 const HeaderBackButton = () => {
     return(
-    <Ionicons name="chevron-back" size={30} color="#404040" style={styles.backbtn} />
+    <Ionicons name="chevron-back" size={30} color={`${theme.title}`} style={styles.backbtn} />
     );
 };
 
