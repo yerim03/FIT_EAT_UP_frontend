@@ -27,23 +27,29 @@ const Friend = ({ navigation }) => {
     
     //flatlist의 renderItem
     const renderItem = ({ item: {pk, username, nickname, avatar_url} }) => {
+        //친구 삭제 버튼 함수
         const handleRemoveFriendButtononPress = () => {
             Alert.alert("친구삭제", "친구를 삭제하시겠습니까?", 
-                        [{text: "취소", onPress: ()=> { console.log("취소") }, style: 'cancel'}, 
-                        {text:"삭제", 
-                         onPress: ()=> { 
-                            axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: headers })
-                                .then(res => { console.log('친구삭제 성공 : ', res.data); 
-                                               navigation.replace('Friend')}
-                                    )
-                                .catch(err => {console.log('친구 삭제 실패\n', err)})
-                            }, 
-                         style: 'destructive'}
-                        ])
+                        [
+                            {text: "취소", onPress: ()=> { console.log("취소") }, style: 'cancel'}, 
+                            {text:"삭제", 
+                            onPress: ()=> { 
+                                axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: headers })
+                                    .then(res => { console.log('친구삭제 성공 : ', res.data); 
+                                                navigation.replace('Friend')}
+                                        )
+                                    .catch(err => {console.log('친구 삭제 실패\n', err)})
+                                }, 
+                            style: 'destructive'}
+                        ]
+            )
         };
         
         return(
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} >
+            <TouchableOpacity 
+                style={styles.itemContainer} 
+                onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} 
+            >
                 <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
                 <View style={{ flexDirection: 'column', flex: 1 }}>
                     <Text style={styles.itemId}>{username}</Text>
@@ -54,7 +60,6 @@ const Friend = ({ navigation }) => {
                 </TouchableOpacity>
             </TouchableOpacity>
         );
-        // <Item item={item} onPress={handleItemPress} />
     };
 
     return(
@@ -72,7 +77,7 @@ const Friend = ({ navigation }) => {
                 </View>
 
                 <View style={{ alignSelf: 'flex-end' }}>
-                    <Text style={{ fontSize: 15, color: '#404040', }}>친구 수 : {friendList.length}</Text>
+                    <Text style={{ fontSize: 15, color: `${theme.title_1}`}}>친구 수 : {friendList.length}</Text>
                 </View>
                 
                 <View style={{ flex: 1 }}>
@@ -100,6 +105,8 @@ const styles = StyleSheet.create({
     },
     itemId: {
         fontSize: 19,
+        fontWeight: '500',
+        color: `${theme.title_1}`,
         paddingHorizontal: 25,
     },
     itemNickname: {
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
         backgroundColor: `${theme.buttonBackgroundColor}`,
         paddingVertical: 9,
         paddingHorizontal: 13,
-        borderRadius: 5,
+        borderRadius: 15,
     },
     deleteTitle: {
         fontSize: 15,

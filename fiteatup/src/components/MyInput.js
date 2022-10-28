@@ -9,7 +9,13 @@ const MyInput = ( props ) => {
 
     return(
         <View style={styles.input}>
-            <Text style={[styles.label, isFocused && {color: `${theme.inputFocusColor}`}]}>{props.label}</Text>
+            <Text style={[styles.label, 
+                          isFocused && {color: `${theme.inputFocusColor}`}, 
+                          props.disabled && {color: `${theme.inputFocusColor}`}
+                        ]}
+            >
+                {props.label}
+            </Text>
             <TextInput
                 style={props.disabled ? styles.disabledinputbox 
                                         : [styles.inputbox, isFocused && {borderColor: `${theme.inputFocusColor}`}]}
@@ -36,27 +42,30 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     label:{
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: 'bold',
         color: `${theme.inputNotFocusColor}`,
     },
     inputbox: {
-        backgroundColor: '#ffffff',
         borderColor: `${theme.inputNotFocusColor}`,
         borderBottomWidth: 2,
         width: '100%',
-        paddingHorizontal: 12,
-        paddingVertical: 14,
+        paddingHorizontal: 6,
+        paddingTop: 10,
+        paddingBottom: 14,
+        fontSize: 16
     },
+    //이거는 MyProfile 수정에서 사용하는 disabled
     disabledinputbox: {
-        alignItems: 'center',
         backgroundColor: `${theme.inputDisabled}`,
         width: '100%',
-        paddingHorizontal: 12,
-        paddingVertical: 15,
-        color: `${theme.labelTitleColor}`, 
-        borderRadius: 20,
-        fontWeight: '600'
+        borderRadius: 15,
+        paddingHorizontal: 15,
+        paddingVertical: 12,
+        marginVertical: 6,
+        color: `${theme.title}`,    
+        fontWeight: '600',
+        fontSize: 16,
     },
 });
 export default MyInput;

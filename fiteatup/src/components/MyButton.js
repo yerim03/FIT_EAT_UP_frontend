@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: `${theme.buttonBackgroundColor}`,
         borderRadius: 25,
         width: '100%',
-        padding: 14,
+        padding: 15,
         shadowColor: "#000",    //그림자 색
         shadowOffset: { //그림자 위치
         width: 2,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     bnttitle: {
-        fontSize: 19,
+        fontSize: 17,
         color: `${theme.buttonTitleColor}`,
     },
 });

@@ -1,9 +1,12 @@
+//가본 장소 리스트 화면
+////서버에서 사진불러와서 출력하면 완성
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
 import FoodImage from '../../components/FoodImage';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserState } from '../../context/UserContext';
+import { theme } from '../../styles/theme';
 
 
 const VisitList = ({ navigation }) => {
@@ -15,14 +18,17 @@ const VisitList = ({ navigation }) => {
         const getVisitList = async () => { 
             const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );
             console.log(visitPlaceList.data);
-            setVisitList(visitPlaceList.data);              
+            setVisitList(visitPlaceList.data);  //삭제할 것         
         };
         getVisitList();
     }, [])
 
     const renderItem = ({ item }) => {
         return(
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('RestaurantInfo', {item}) } >
+            <TouchableOpacity 
+                style={styles.itemContainer} 
+                onPress={() => navigation.navigate('RestaurantInfo', {item}) } 
+            >
                 <FoodImage />
                 <Text style={styles.itemTitle}>{item.place_name}</Text>
             </TouchableOpacity>
@@ -47,14 +53,16 @@ const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 0.8,
-        borderColor: '#C0C0C0',
+        borderBottomWidth: 0.5,
+        borderColor: `${theme.flatlistLineColor}`,
         paddingVertical: 15,
         paddingHorizontal: 10,
     },
     itemTitle: {
         fontSize: 17,
+        fontWeight: 'bold',
         paddingHorizontal: 15,
+        color: `${theme.title_1}`
     },
 });
 

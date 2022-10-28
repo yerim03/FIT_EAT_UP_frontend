@@ -1,9 +1,9 @@
 //커스텀 컴포넌트 - 프로필이미지를 나타내는 컴포넌트
-//카메라 버튼 클릭 시 사진첩에 접근해서 이미지를 추가할 수 있다.
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Alert, Platform, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+
 
 const MyProfileImage = ({ url, showButton, onChangeImage }) => {
 

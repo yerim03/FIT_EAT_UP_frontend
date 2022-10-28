@@ -7,7 +7,7 @@ import { theme } from '../styles/theme';
 const SearchBar = ( props ) => {
     return(
         <View style={styles.container}>
-            <View style={{ flex: 6.5}}>
+            <View style={{ flex: 5.5 }}>
                 <TextInput 
                     style={styles.searhInput}
                     value={props.value}
@@ -36,15 +36,18 @@ const styles = StyleSheet.create({
     },
     searhInput: {
         backgroundColor: `${theme.searchBarInput}`,
-        borderRadius: 15,
-        padding: 14,
-        marginRight: 3,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 17,
         marginVertical: 3,
+        fontSize: 16,
     },
     searchBtn: {
         alignItems: 'center',
         backgroundColor: `${theme.searchBarButton}`,
-        borderRadius: 15,
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
         paddingVertical: 10,
     },
 });

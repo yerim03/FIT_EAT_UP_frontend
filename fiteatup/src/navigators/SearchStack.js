@@ -23,12 +23,6 @@ const SearchStack = () => {
                 component={Search} 
                 options={{ headerShown: false }} 
             />   
-            <Stack.Screen 
-                name="SearchResult" 
-                component={SearchResult}
-                options={{ headerTitle: '검색 결과',
-                            headerTitleStyle: {fontWeight: 'bold'} }}
-            />    
         </Stack.Navigator>
     );
 };

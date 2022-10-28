@@ -17,15 +17,14 @@ const ResultImage = ( props ) => {
 const styles = StyleSheet.create({
     image: {
         backgroundColor: `${theme.imageBackgroundColor}`,
-        width: 140,
-        height: 140,
-        marginHorizontal: 10,
-        marginTop: 10,
-        marginBottom: 5,
+        width: 130,
+        height: 130,
+        marginVertical: 10,
     },
     foodName: {
         width: 150,
-        fontSize: 17,
+        fontSize: 15,
+        fontWeight: '500',
         textAlign: 'center',
     },
     percent: {

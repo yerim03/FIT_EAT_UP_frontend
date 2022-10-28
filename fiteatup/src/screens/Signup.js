@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import MyInput from "../components/MyInput";
 import MyButton from "../components/MyButton";
+import AgeDropDown from '../components/AgeDropDown';
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
 import { API } from '../config';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
+
 
 const Signup = ({ navigation }) => {
     const [id, setId] = useState('');   //입력 id
@@ -17,6 +19,7 @@ const Signup = ({ navigation }) => {
     const [passwordConfirm, setPasswordConfirm] = useState(''); //입력 password확인
     const [photoUrl, setPhotoUrl] = useState(); //입력 image
     const [photoData, setPhotoData] = useState();
+
     const [disabled, setDisabled] = useState(true);    //회원가입 버튼 disabled 여부
 
     //오류메세지 저장
@@ -136,8 +139,7 @@ const Signup = ({ navigation }) => {
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView extraScrollHeight={40}>
-                <View style={globalStyles.container}>
-                    <Text style={styles.title}>회원가입</Text>
+                <View style={[globalStyles.container, {paddingVertical: 0}]}>
                     <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri); setPhotoData(photo)}}/>
                     <MyInput
                         label="아이디"
@@ -147,7 +149,6 @@ const Signup = ({ navigation }) => {
                         placeholder="아이디(영문 또는 숫자 6글자 이상)"
                     />
                     <Text style={styles.errorText}>{idErrorMsg}</Text>
-                    <View style={{ height: 15 }}/>
                     <MyInput
                         label="비밀번호"
                         value={password}
@@ -156,7 +157,6 @@ const Signup = ({ navigation }) => {
                         placeholder="비밀번호(영문, 숫자, 특수문자 포함 8자 이상)"
                     />
                     <Text style={isPassword ? styles.correctText : styles.errorText}>{passwordErrorMsg}</Text>
-                    <View style={{ height: 15 }}/>
                     <MyInput
                         label="비밀번호 확인"  
                         value={passwordConfirm}
@@ -165,7 +165,6 @@ const Signup = ({ navigation }) => {
                         placeholder="비밀번호를 다시 한번 입력해주세요."
                     />
                     <Text style={isPasswordConfirm ?  styles.correctText : styles.errorText}>{passwordConfrimMsg}</Text>
-                    <View style={{ height: 15 }}/>
                     <MyInput
                         label="닉네임"
                         value={nickname}
@@ -173,6 +172,10 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="사용할 이름을 입력하세요"
                     />
+                    <View style={{ marginVertical: 10 }} />
+                    <View style={{alignSelf: 'flex-start'}}>
+                        <AgeDropDown />
+                    </View>
                     <View style={{ height: 50 }} />
                     <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
                 </View>
@@ -182,20 +185,13 @@ const Signup = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 40,
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: `${theme.title}`,
-        marginBottom: 40,
-    },
     errorText: {
         color: `${theme.errorMessage}`,
         fontWeight: '500',
         fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 5,
-        marginBottom: 7,
+        marginBottom: 10,
     },
     correctText: {
         color: `${theme.correctMesage}`,
@@ -205,7 +201,6 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginBottom: 7,
     },
-
 });
 
 export default Signup;

@@ -4,18 +4,18 @@ import { Image, StyleSheet} from 'react-native';
 import { theme } from '../styles/theme';
 
 
-const FoodImage = () => {
+const FoodImage = ({url}) => {
     return(
-        <Image style={styles.foodImage} />
+        <Image style={styles.foodImage} source={{ uri: url }} />
     );
 };
 
 const styles=StyleSheet.create({
     foodImage: {
         backgroundColor: `${theme.imageBackgroundColor}`,
-        width: 100,
-        height: 100,
-        borderRadius: 15,
+        width: 90,
+        height: 90,
+        borderRadius: 20,
         marginHorizontal: 10,
     },
 });

@@ -1,3 +1,4 @@
+//음식점 상세정보 화면
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -5,6 +6,8 @@ import { useUserState } from '../context/UserContext';
 import { Rating } from 'react-native-ratings';
 import axios from 'axios';
 import { API } from "../config";
+import { theme } from '../styles/theme';
+
 
 const RestaurantInfo = ({ route }) => {
     const [isLike, setIsLike] = useState(false);    //좋아요 버튼 클릭여부
@@ -18,26 +21,37 @@ const RestaurantInfo = ({ route }) => {
     let foodData = route.params.item;
 
     useEffect(()=> {
-        //여기서 사용자의 Likeplaces, Visitplaces를 가져온다.
         //starRating 데이터도 가져와서 설정해야 함
-        const getGoodPlaces = async () => { 
-            const goodPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
-            for(let i=0; i<goodPlaceList.data.length; i++){
-                if(goodPlaceList.data[i].id == foodData.id){
+        //Likeplaces 가져오기
+        const getLikePlaces = async () => { 
+            const likePlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
+            for(let i=0; i<likePlaceList.data.length; i++){
+                if(likePlaceList.data[i].id == foodData.id){
                     setIsLike(true);
                 }
             }
         };
+        //Visitplaces 가져오기
         const getVisitPlaces = async () => { 
-            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );
+            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers });
             for(let i=0; i<visitPlaceList.data.length; i++){
                 if(visitPlaceList.data[i].id == foodData.id){
                     setIsVisit(true);
                 }
             }
         };
-        getGoodPlaces();
+        //starRating 가져오기
+        const getStarRating = async() => {
+            const starRatingList = await axios.get(`${API.GET_STAR_RATINGLIST}`, { headers: headers });
+            for(let i=0; i<starRatingList.data.length; i++){
+                if(starRatingList.data[i].user==user.userPk && starRatingList.data[i].place==foodData.id){
+                    setStarRating(starRatingList.data[i].rating);
+                }
+            }
+        }
+        getLikePlaces();
         getVisitPlaces();
+        getStarRating();
     }, [])
 
     //좋아요 가봤어요 버튼
@@ -45,15 +59,15 @@ const RestaurantInfo = ({ route }) => {
         if(buttonType === 'heart'){ //heart 모양이면 좋아요 버튼
             return(
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={onPress}>
-                    <Ionicons name={clickState ? "heart" : "heart-outline"} size={35} color={clickState ? "#FF3333" : "#000000"}/>
-                    <Text style={styles.detail}>{title}</Text>
+                    <Ionicons name={clickState ? "heart" : "heart-outline"} size={35} color={clickState ? `${theme.iconColor}` : "#000000"}/>
+                    <Text style={styles.data}>{title}</Text>
                 </TouchableOpacity>
             );
         } else if( buttonType === 'visit'){ //visit 모양이면 가봤어요 버튼
             return(
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={onPress}> 
-                    <Ionicons name={clickState ? "location" : "location-outline"} size={35} color={clickState ? "#FF3333" : "#000000"}/>
-                    <Text style={styles.detail}>{title}</Text>
+                    <Ionicons name={clickState ? "location" : "location-outline"} size={35} color={clickState ? `${theme.iconColor}` : "#000000"}/>
+                    <Text style={styles.data}>{title}</Text>
                 </TouchableOpacity>
             );
         }
@@ -105,16 +119,17 @@ const RestaurantInfo = ({ route }) => {
         return(
             <View>
                 <View style={styles.oneDataArea}>
-                    <Text style={styles.detail}>연락처</Text>
-                    <Text style={styles.detail}>{foodData.phone}</Text>
+                    <Text style={styles.data}>연락처</Text>
+                    <Text style={styles.data}>{foodData.phone}</Text>
                 </View>
                 <View style={styles.oneDataArea}>
-                    <Text style={styles.detail}>{foodData.category_name}</Text>
+                    <Text style={styles.data}>{foodData.category_name}</Text>
                 </View>
             </View>
         );
     };
     
+    //별점데이터를 백엔드 서버에 보내는 함수
     const handleRatingFinishonPress = () => {
         let data = {
             user: user.userPk,
@@ -129,9 +144,9 @@ const RestaurantInfo = ({ route }) => {
     return(
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                <Image style={styles.foodIamgeArea} source={{ uri: foodData.image_url }}/>
+                <Image style={styles.foodImageArea} source={{ uri: foodData.image_url }}/>
                 <View style={styles.nameArea}>
-                    <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{foodData.place_name}</Text>
+                    <Text style={styles.title}>{foodData.place_name}</Text>
                 </View>
 
                 <View style={styles.goodVisitArea}>
@@ -143,26 +158,32 @@ const RestaurantInfo = ({ route }) => {
                     <Modal animationType="fade" transparent={true} visible={modalVisible}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Text style={[styles.detail, {marginBottom: 20}]}>이 음식점을 평가해주세요!</Text>
+                                <Text style={[styles.data, {marginBottom: 20}]}>이 음식점을 평가해주세요!</Text>
                                 <Rating 
                                     startingValue={starRating}
                                     imageSize={35}
                                     onFinishRating={(rating) => {console.log("Rating is: " + rating);
                                                                  setStarRating(rating)}}/>
-                                <TouchableOpacity 
-                                    style={{marginTop: 20, padding: 10, borderRadius: 10, backgroundColor: '#a0a0a0'}}
-                                    onPress={() => {setModalVisible(false);
-                                                    handleRatingFinishonPress();} //여기서 서버에 별점 매긴 거(starRating) 보내기
-                                }>   
-                                    <Text>완료</Text>
+                                <View style={{ flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+                                    <Text style={{fontSize: 15}}>취소</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity 
+                                    style={styles.modalButton}
+                                    onPress={() => {setModalVisible(false);
+                                                    handleRatingFinishonPress();}
+                                }>   
+                                    <Text style={{fontSize: 15}}>완료</Text>
+                                </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </Modal>
 
+                    <Text style={styles.data}>나의 별점은?</Text>
                     <TouchableOpacity 
                         activeOpacity={0.7} 
-                        hitSlop={{ top: 10, bottom: 10, left: 50, right: 50}}
+                        hitSlop={{ top: 10, bottom: 10, left: 30, right: 30}}
                         onPress={() => {if(isLike || isVisit) setModalVisible(true)}}
                     >
                         <Rating
@@ -174,15 +195,15 @@ const RestaurantInfo = ({ route }) => {
                 </View>
 
                 <View style={styles.locationArea}>
-                    <Text style={styles.title}>{foodData.road_address_name}</Text>
-                    <Text style={styles.detail}>{foodData.address_name}</Text>
-                    <View style={{flex: 1, backgroundColor: 'orange'}}>
+                    <Text style={styles.dataTitle}>{foodData.road_address_name}</Text>
+                    <Text style={styles.data}>{foodData.address_name}</Text>
+                    {/* <View style={{flex: 1, backgroundColor: 'orange'}}>
                         <Text>지도영역</Text>
-                    </View>
+                    </View> */}
                 </View>
 
                 <View style={styles.infoArea}>
-                    <Text style={styles.title}>상세정보</Text>
+                    <Text style={styles.dataTitle}>상세정보</Text>
                     <Info />
                 </View>
             </ScrollView>
@@ -198,45 +219,45 @@ const styles = StyleSheet.create({
     scrollView: {
         alignItems: 'center',
     },
-    foodIamgeArea: {
-        backgroundColor: '#ffffff',
+    foodImageArea: {
+        backgroundColor: `${theme.backgroundColor}`,
         height: 170,
         width: '100%',
     },
     nameArea: {
-        backgroundColor: '#ffffff',
+        backgroundColor: `${theme.backgroundColor}`,
         height: 60,
         width: '100%',
-        flexDirection: 'row',
         paddingHorizontal: 15,
-        alignItems: 'center',
+        justifyContent: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: '#404040', 
+        borderBottomColor: `${theme.flatlistLineColor}`, 
     },
     goodVisitArea: {
-        backgroundColor: '#ffffff',
+        backgroundColor: `${theme.backgroundColor}`,
         height: 80,
         width: '100%',
         flexDirection: 'row',
     },
     starArea: {
-        backgroundColor: '#ffffff',
+        backgroundColor: `${theme.backgroundColor}`,
         height: 60,
         width: '100%',
+        flexDirection: 'row',
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
     },
     locationArea: {
-        backgroundColor: '#ffffff',
-        height: 300,
+        backgroundColor: `${theme.backgroundColor}`,
+        height: 120,
         width: '100%',
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
     },
     infoArea: {
-        backgroundColor: '#ffffff',
+        backgroundColor: `${theme.backgroundColor}`,
         height: 120,
         width: '100%',
         marginTop: 10,
@@ -249,14 +270,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
     },
     title: {
-        fontSize: 17,
-        fontWeight: '700',
-        paddingVertical: 3,
+        fontSize: 24, 
+        fontWeight: 'bold',
     },
-    detail: {
+    dataTitle: {
+        fontSize: 17,
+        fontWeight: 'bold',
+        marginVertical: 5,
+    },
+    data: {
         fontSize: 16,
         color: '#404040',
-        fontWeight: '500',
+        fontWeight: '600',
         paddingVertical: 5,
     },
     button: {
@@ -264,17 +289,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center'
     },
+
     centeredView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
         marginTop: 22
       },
-      modalView: {
+    modalView: {
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 50,
+        paddingVertical: 35,
+        paddingHorizontal: 25,
         alignItems: "center",
         shadowColor: "#000",    //그림자 색
         shadowOffset: { //그림자 위치
@@ -284,6 +311,14 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,    //그림자 투명도
         shadowRadius: 4,
         elevation: 5
+    },
+    modalButton: {
+        marginTop: 30, 
+        marginHorizontal: 12,
+        paddingVertical: 10, 
+        paddingHorizontal: 36,
+        borderRadius: 10, 
+        backgroundColor: '#a0a0a0'
     }
 });
 

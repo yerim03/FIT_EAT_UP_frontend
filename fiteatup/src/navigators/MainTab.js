@@ -40,29 +40,36 @@ const MainTab = () => {
                 headerShown: false,
                 //하단 탭 바 속성
                 tabBarActiveTintColor: `${theme.tabActiveTint}`,
-                // tabBarInactiveTintColor: '#C0C0C0',
-                // tabBarActiveBackgroundColor: `${theme.tabBackground}`,
+                tabBarInactiveTintColor: `${theme.tabInActiveTint}`,
             })}
         >   
             <Tab.Screen 
                 name="HomeStack" 
                 component={HomeStack} 
-                options={{ tabBarLabel: '홈', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} 
+                options={{ tabBarLabel: '홈', 
+                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                        }} 
             />
             <Tab.Screen 
                 name="SearchStack" 
                 component={SearchStack} 
-                options={{ tabBarLabel: '검색', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}}
+                options={{ tabBarLabel: '검색', 
+                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                }}
             />
             <Tab.Screen 
                 name="FreindStack" 
                 component={FreindStack} 
-                options={{ tabBarLabel: '친구', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}} 
+                options={{ tabBarLabel: '친구', 
+                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                }} 
             />
             <Tab.Screen 
                 name="MyPageStack" 
                 component={MyPageStack} 
-                options={{ tabBarLabel: '내정보', tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }}}
+                options={{ tabBarLabel: '내정보', 
+                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                }}
             />
         </Tab.Navigator>
     );

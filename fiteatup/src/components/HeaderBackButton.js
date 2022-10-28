@@ -6,7 +6,7 @@ import { theme } from '../styles/theme';
 
 const HeaderBackButton = () => {
     return(
-    <Ionicons name="chevron-back" size={30} color={`${theme.title}`} style={styles.backbtn} />
+    <Ionicons name="chevron-back" size={30} color={`${theme.backButtonColor}`} style={styles.backbtn} />
     );
 };
 

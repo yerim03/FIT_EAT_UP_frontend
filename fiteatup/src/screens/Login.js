@@ -1,6 +1,6 @@
 //로그인 화면
 import React, { useState, useEffect } from 'react';
-import { Text, Image, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import MyInput from '../components/MyInput';
 import MyButton from '../components/MyButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -8,7 +8,6 @@ import axios from 'axios';
 import { API } from '../config';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch } from '../context/UserContext';
-// import logoIcon from '../../assets/icon.png';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
 
@@ -35,18 +34,21 @@ const Login = ({ navigation }) => {
     const getUserData = async (token) => {;
         await axios.get(`${API.USER_DATA}`, 
                 { headers: { 
-                    'Authorization': `jwt ${token}`}
-                })
+                    'Authorization': `jwt ${token}`
+                }}
+        )
             .then(res => { //context api로 user 정보 관리
                             dispatch({type: "LOGIN", 
                                       userData : { 
-                                      pk: res.data.pk, 
-                                      id: res.data.username,
-                                      nickname: res.data.nickname,
-                                      profileImage: res.data.avatar_url,
-                                      token: token}})
-                            console.log('context api 완료')})
-            .catch(err => console.log(err.message))
+                                        pk: res.data.pk, 
+                                        id: res.data.username,
+                                        nickname: res.data.nickname,
+                                        profileImage: res.data.avatar_url,
+                                        token: token}
+                                    })
+                            console.log('context api 완료')
+            })
+            .catch(err => {console.log(err.message)})
     };
 
     
@@ -56,7 +58,7 @@ const Login = ({ navigation }) => {
             .then(response => {
                 console.log("로그인 성공\n", response.data);
                 // AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
-                getUserData(response.data.token);   // accounts/token에서 얻은 토큰으로 user정보 가져오기
+                getUserData(response.data.token);   // user정보 context api에 저장
                 Alert.alert('로그인 성공', '환영합니다!');
                 onReset();
             })
@@ -70,9 +72,10 @@ const Login = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
                 <View style={globalStyles.container}>
-                    <Image style={{ backgroundColor: 'red', width: 90, height: 90, margin: 30}} />
-                    {/* <View style={{ height: 20}} /> */}
+                    {/* <Image style={{ backgroundColor: 'red', width: 90, height: 90, margin: 30}} /> */}
+                    <View style={{ height: 80 }} />
                     <Text style={styles.title}>FIT EAT UP</Text>
+                    <Text style={styles.smallTitle}>친구들과의 공통 맛집 추천 서비스</Text>
                     <MyInput
                         label="아이디"
                         value={id}
@@ -101,12 +104,18 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 40,
+        fontSize: 45,
         fontWeight: 'bold',
         alignSelf: 'flex-start',
         color: `${theme.title}`,
-        marginBottom: 50,
     },
+    smallTitle: {
+        fontSize: 16,
+        fontWeight: '600',
+        alignSelf: 'flex-start',
+        color: `${theme.smallTitle}`,
+        marginBottom: 40,
+    }
 });
 
 export default Login;

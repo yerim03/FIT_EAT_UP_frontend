@@ -128,5 +128,13 @@ version 0.4.0
 - 별점 데이터 백엔드 서버에 저장 완료
 
 version 0.4.1
-- 디자인 및 색 수정 진행 중
+- 디자인 및 색 수정 진행
 - Splash.js 삭제
+
+version 0.4.2
+- 별점 모달창에 취소 버튼 생성
+- RestaurantInfo에서 백엔드에 저장된 별점 데이터 가져오기 구현 완료
+- ResultResult.js 삭제
+
+version 0.4.3
+- 연령 드롭다운 생성(AgeDropDown.js)

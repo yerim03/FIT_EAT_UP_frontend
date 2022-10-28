@@ -12,14 +12,15 @@ import ResultImage from '../../components/ResultImage';
 import { KAKAO_API_KEY } from '../../cofig/config_secret';
 import { KAKAO_API } from '../../config';
 import axios from 'axios';
-import { theme } from '../../styles/theme';
 import { globalStyles } from '../../styles/styles';
+import { theme } from '../../styles/theme';
 
 
 const Search = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
     const[searchWord, setSearchWord] = useState('');
 
+    //장소 검색 
     const onPressSearchButton = () => {
         setFoodData([]);
         let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8`;  //카카오 로컬 API
@@ -42,7 +43,7 @@ const Search = ({ navigation }) => {
 
     const renderItem = ({ item }) => {
         return(
-            <View style={{ flexDirection: 'row',  margin: 10}}>
+            <View style={styles.itemArea}>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
                     <ResultImage 
                         foodname={item.place_name} 
@@ -69,6 +70,7 @@ const Search = ({ navigation }) => {
                             renderItem={renderItem}
                             keyExtractor={(item) => item.id}
                             numColumns={2}
+                            showsVerticalScrollIndicator ={false}
                         />
                     </View>
                 </View>
@@ -77,5 +79,11 @@ const Search = ({ navigation }) => {
     );
 };
 
-
+const styles = StyleSheet.create({
+    itemArea: {
+        flexDirection: 'row', 
+        marginHorizontal: 8,
+        margin: 5,
+    },
+})
 export default Search;

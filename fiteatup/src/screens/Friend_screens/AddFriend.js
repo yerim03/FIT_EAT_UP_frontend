@@ -5,6 +5,9 @@ import MyButton from '../../components/MyButton';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserState } from '../../context/UserContext';
+import { globalStyles } from '../../styles/styles';
+import { theme } from '../../styles/theme';
+
 
 const AddFriend = ({ navigation }) => {
     const [friendId, setFriendId] = useState('');
@@ -25,12 +28,12 @@ const AddFriend = ({ navigation }) => {
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.container}>
+            <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
                 <Text style={styles.title}>친구의 ID를 검색해서 친구를 추가해보세요!</Text>
                 <MyInput
                         value={friendId}
                         onChangeText={text => setFriendId(text)}
-                        placeholder="친구의 ID를 입력하세요"
+                        placeholder="친구의 ID를 입력하세요."
                 />
                     <View style={{height: 50}} />
                 <MyButton title="친구 추가" onPress={ handleAddFriendButtononPress } />
@@ -40,13 +43,9 @@ const AddFriend = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        padding: 20,
-    },
     title: {
-        fontSize: 16,
+        fontSize: 17,
+        color: `${theme.title}`
     },
 });
 

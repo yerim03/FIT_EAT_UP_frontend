@@ -1,3 +1,4 @@
+//마이페이지 화면
 import React from 'react';
 import { Text, 
         View, 
@@ -84,23 +85,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     nickname: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',  
         marginHorizontal: 20,
+        color: `${theme.title_1}`,
     },
     settingTitle: {
         fontSize: 18,
         fontWeight: '600',
         paddingLeft: 10,
-        // color: `${theme.title}`
+        color: `${theme.title_1}`
     },
     settingArea: {
         paddingVertical: 17,
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 2,
-        borderColor: `${theme.mypageLine}`,
+        borderBottomWidth: 1,
+        borderColor: `${theme.flatlistLineColor}`,
     },
 });
 export default MyPage;

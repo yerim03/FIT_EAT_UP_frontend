@@ -1,13 +1,17 @@
+//프로필 수정 화면
 //프로필 이미지 수정 기능 추가할 예정
 import React, { useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
+import AgeDropDown from '../../components/AgeDropDown';
 import MyProfileImage from '../../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
+import { theme } from '../../styles/theme';
+
 
 //우선 Nickname만 수정할 수 있도록 설정
 const ProfileEdit = () => {
@@ -60,6 +64,9 @@ const ProfileEdit = () => {
                     onChangeText={text => setChangeNickname(text)}
                     onSubmitEditing={() => {}}
                 />
+                {/* <View style={{ marginVertical: 10, alignSelf: 'flex-start' }}>
+                    <AgeDropDown />
+                </View> */}
                 <View style={{ height: 80 }}/>
                 <MyButton title="프로필 수정" onPress={handleEditButtonPress}/>
             </View>

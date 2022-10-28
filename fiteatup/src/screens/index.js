@@ -10,7 +10,6 @@ import Home from "./Home_screens/Home";
 import HomeResult from "./Home_screens/HomeResult";
 
 import Search from "./Search_screens/Search";
-import SearchResult from "./Search_screens/SearchResult";
 
 import Friend from "./Friend_screens/Friend";
 import FriendProfile from "./Friend_screens/FriendProfile";
@@ -25,6 +24,6 @@ import GoodList from "./Mapage_screens/GoodList";
 
 export {Login, Signup, RestaurantInfo,
         Home, HomeResult,
-        Search, SearchResult,
+        Search,
         Friend, FriendProfile, AddFriend,
         MyPage, ProfileEdit, VisitList, GoodList};
