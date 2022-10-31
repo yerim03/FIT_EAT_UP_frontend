@@ -25,14 +25,16 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         width: '100%',
         padding: 15,
+        //ios 그림자 설정
         shadowColor: "#000",    //그림자 색
         shadowOffset: { //그림자 위치
-        width: 2,
-        height: 2
+            width: 6,
+            height: 6
         },
-        shadowOpacity: 0.3,    //그림자 투명도
-        shadowRadius: 4,
-        elevation: 5
+        shadowOpacity: 0.2,    //그림자 투명도
+        shadowRadius: 6,
+        //android 그림자 설정
+        elevation: 8
     },
     bnttitle: {
         fontSize: 17,

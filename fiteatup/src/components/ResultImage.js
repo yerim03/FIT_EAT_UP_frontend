@@ -1,6 +1,6 @@
-//[추천맛집결과(HomeResult.js), 검색결과(SearchResult.js) 화면에서 나타나는 음식점 이미지 컴포넌트]
+//[추천맛집결과(HomeResult.js), 검색결과(Search.js) 화면에서 나타나는 음식점 이미지 컴포넌트]
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { theme } from '../styles/theme';
 
 
@@ -17,20 +17,28 @@ const ResultImage = ( props ) => {
 const styles = StyleSheet.create({
     image: {
         backgroundColor: `${theme.imageBackgroundColor}`,
-        width: 130,
-        height: 130,
-        marginVertical: 10,
+        width: 140,
+        height: 140,
+        marginBottom: 4,
+        borderRadius: 20,
+        borderWidth: 0.5,
+        borderColor: `${theme.restInfoLineColor}`
     },
     foodName: {
         width: 150,
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: '500',
         textAlign: 'center',
     },
     percent: {
-        fontSize: 18,
-        fontWeight: '700',
-        paddingVertical: 3,
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: `${theme.title}`,
+        paddingVertical: 4,
+        width: '80%',
+        borderRadius: 10,
+        backgroundColor: `${theme.percentBackgroundColor}`
     }
 });
 

@@ -6,55 +6,6 @@ export default App;
 
 
 
-
-
-
-
-
-
-
-
-
-
-// // import React, { useState } from 'react';
-// // import { Text, View } from 'react-native';
-// // import axios from 'axios';
-// // import MyInput from './src/components/MyInput';
-// // import MyButton from './src/components/MyButton';
-// // import { WebView } from 'react-native-webview';
-
-// // const App = () => {    
-// //     const [search, setSearch] = useState('');
-// //     const [result, setResult ] =useState({});
-// //     const [name, setName] = useState('');
-// //     const [url, setUrl] = useState('');
-
-// //     const onPressButton = () => {
-// //         axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${search}&size=2`,
-// //             { headers: { 
-// //                 Authorization: 'KakaoAK 9863ff67c85145b5b83608df6fdad5f3'}})
-// //             .then((res) => { console.log(res.data.documents);
-// //                             // setName(res.data.documents[0].place_name);
-// //                             // setUrl(res.data.documents[0].place_url);
-// //                             // setResult(res.data.documents);
-// //                             }
-// //                 )
-// //             .catch(err => {console.log(err.message)})
-
-// //         // console.log('hello');
-// //     };
-
-// //     return(
-// //         <View>
-// //             <MyInput onChangeText={text => setSearch(text)}/>
-// //             <MyButton title="검색"  onPress={onPressButton} />
-// //             <Text>음식점은 {name}</Text>
-// //             {/* <WebView source={{ uri: url }} style={{ marginTop: 10 }} /> */}
-// //         </View>
-// //     );
-// // };
-
-
 // //WebView 사용하기
 /* global kakao */
 // import React from 'react';

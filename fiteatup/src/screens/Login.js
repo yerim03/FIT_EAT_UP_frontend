@@ -1,6 +1,6 @@
 //로그인 화면
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { Text, Image, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import MyInput from '../components/MyInput';
 import MyButton from '../components/MyButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -10,7 +10,7 @@ import { API } from '../config';
 import { useUserDispatch } from '../context/UserContext';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
-
+import Logo from '../../assets/icon.png';
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState(''); //입력 id
@@ -64,7 +64,7 @@ const Login = ({ navigation }) => {
             })
             .catch(err => {
                 Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.");
-                console.log("Login Error : ", err);
+                console.log("Login Error : ", err.data);
             })
     }; 
 
@@ -72,8 +72,9 @@ const Login = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
                 <View style={globalStyles.container}>
-                    {/* <Image style={{ backgroundColor: 'red', width: 90, height: 90, margin: 30}} /> */}
-                    <View style={{ height: 80 }} />
+                    <Image style={{ backgroundColor: 'red', width: 90, height: 90, margin: 30}} 
+                            source={Logo}/>
+                    {/* <View style={{ height: 80 }} /> */}
                     <Text style={styles.title}>FIT EAT UP</Text>
                     <Text style={styles.smallTitle}>친구들과의 공통 맛집 추천 서비스</Text>
                     <MyInput

@@ -134,7 +134,10 @@ version 0.4.1
 version 0.4.2
 - 별점 모달창에 취소 버튼 생성
 - RestaurantInfo에서 백엔드에 저장된 별점 데이터 가져오기 구현 완료
-- ResultResult.js 삭제
+- Result.js 삭제
 
 version 0.4.3
-- 연령 드롭다운 생성(AgeDropDown.js)
+- 나이 드롭다운 생성(AgeDropDown.js)
+- 사용자 현재 위치 정보 얻기(expo-location)
+- 현재 위치를 기반으로 장소 검색하도록 기능 추가
+- HomeResult.js, Search.js 등 수정

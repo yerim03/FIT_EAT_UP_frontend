@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer, } from 'react';
 
 const initialState = {
     user: null, //사용자 정보
+    location: null, //위치 정보
     headers: {},    //헤더에 들어갈 사용자의 token
 };
 
@@ -32,7 +33,7 @@ const reducer = (state, action) => {
                     userProfileImage: action.userData.profileImage,
                     userToken: action.userData.token,
                 }
-            }
+            };
         case "EDIT_PROFILEIMAGE":   //프로필사진 수정
             return {
                 ...state,
@@ -43,11 +44,19 @@ const reducer = (state, action) => {
                     userProfileImage: action.userData.profileImage,
                     userToken: action.userData.token,
                 }
-            }
+            };
         case "LOGOUT":  //로그아웃
             return {
                 ...state,
                 user: null,
+            };
+        case "LOCATION":    //사용자 위치 정보
+            return {
+                ...state,
+                location: {
+                    latitude: action.userLocation.latitude,
+                    longitude: action.userLocation.longitude,
+                }
             };
         default:
             return state;

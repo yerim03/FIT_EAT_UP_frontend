@@ -144,7 +144,7 @@ const RestaurantInfo = ({ route }) => {
     return(
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                <Image style={styles.foodImageArea} source={{ uri: foodData.image_url }}/>
+                <Image style={styles.foodImageArea} />
                 <View style={styles.nameArea}>
                     <Text style={styles.title}>{foodData.place_name}</Text>
                 </View>
@@ -163,18 +163,19 @@ const RestaurantInfo = ({ route }) => {
                                     startingValue={starRating}
                                     imageSize={35}
                                     onFinishRating={(rating) => {console.log("Rating is: " + rating);
-                                                                 setStarRating(rating)}}/>
+                                                                 setStarRating(rating)}}
+                                />
                                 <View style={{ flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
-                                    <Text style={{fontSize: 15}}>취소</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity 
-                                    style={styles.modalButton}
-                                    onPress={() => {setModalVisible(false);
-                                                    handleRatingFinishonPress();}
-                                }>   
-                                    <Text style={{fontSize: 15}}>완료</Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+                                        <Text style={{fontSize: 14}}>취소</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity 
+                                        style={styles.modalButton}
+                                        onPress={() => {setModalVisible(false);
+                                                        handleRatingFinishonPress();}
+                                    }>   
+                                        <Text style={{fontSize: 14}}>완료</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
@@ -213,38 +214,35 @@ const RestaurantInfo = ({ route }) => {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#F0F0F0',
+        backgroundColor: `${theme.restInfoBackgroundColor}`,
         flex: 1,
     },
     scrollView: {
         alignItems: 'center',
     },
     foodImageArea: {
-        backgroundColor: `${theme.backgroundColor}`,
+        backgroundColor: `${theme.restInfoBackgroundColor}`,
         height: 170,
         width: '100%',
     },
     nameArea: {
         backgroundColor: `${theme.backgroundColor}`,
-        height: 60,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center',
+        padding: 15,
         borderBottomWidth: 1,
-        borderBottomColor: `${theme.flatlistLineColor}`, 
+        borderBottomColor: `${theme.restInfoLineColor}`, 
     },
     goodVisitArea: {
         backgroundColor: `${theme.backgroundColor}`,
-        height: 80,
+        paddingVertical: 5,
         width: '100%',
         flexDirection: 'row',
     },
     starArea: {
         backgroundColor: `${theme.backgroundColor}`,
-        height: 60,
         width: '100%',
         flexDirection: 'row',
-        marginTop: 10,
+        justifyContent: 'space-around',
         paddingVertical: 10,
         paddingHorizontal: 20,
     },

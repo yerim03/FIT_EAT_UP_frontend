@@ -7,7 +7,6 @@ import { theme } from '../styles/theme';
 const SearchBar = ( props ) => {
     return(
         <View style={styles.container}>
-            <View style={{ flex: 5.5 }}>
                 <TextInput 
                     style={styles.searhInput}
                     value={props.value}
@@ -15,40 +14,58 @@ const SearchBar = ( props ) => {
                     placeholder={props.placeholder}
                     placeholderTextColor={`${theme.inputPlaceholder}`}
                 />
-            </View>
-            <View style={{ flex: 1 }}>
                 <TouchableOpacity style={styles.searchBtn} onPress={props.onPress} activeOpacity={0.7}>
-                    <Ionicons name="md-search" size={30} color={`${theme.backgroundColor}`} />
+                    <Ionicons name="md-search" size={25} color={`${theme.backgroundColor}`} />
                 </TouchableOpacity>
-            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: `${theme.backgroundColor}`,
         width: '100%',
-        paddingVertical: 10,
+        marginVertical: 10,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     searhInput: {
+        flex: 0.85,
+        height: '100%',
         backgroundColor: `${theme.searchBarInput}`,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 20,
-        paddingVertical: 12,
+        paddingVertical: 15,
         paddingHorizontal: 17,
-        marginVertical: 3,
         fontSize: 16,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        //ios 그림자 설정
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+            width: 0,
+            height: 0
+        },
+        shadowOpacity: 0.3,    //그림자 투명도
+        shadowRadius: 4,
+        //android 그림자 설정
+        elevation: 10
+        
     },
     searchBtn: {
+        flex: 0.15,
+        height: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: `${theme.searchBarButton}`,
-        borderTopRightRadius: 20,
-        borderBottomRightRadius: 20,
-        paddingVertical: 10,
+        borderTopRightRadius: 15,
+        borderBottomRightRadius: 15,
+        //ios 그림자 설정
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+            width: 0,
+            height: 0
+        },
+        shadowOpacity: 0.3,    //그림자 투명도
+        shadowRadius: 4,
+        //android 그림자 설정
+        elevation: 10
     },
 });
 

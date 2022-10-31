@@ -18,7 +18,7 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');   //입력 password
     const [passwordConfirm, setPasswordConfirm] = useState(''); //입력 password확인
     const [photoUrl, setPhotoUrl] = useState(); //입력 image
-    const [photoData, setPhotoData] = useState();
+    // const [photoData, setPhotoData] = useState();
 
     const [disabled, setDisabled] = useState(true);    //회원가입 버튼 disabled 여부
 
@@ -100,19 +100,23 @@ const Signup = ({ navigation }) => {
         // const match = /\.(w+)$/.exec(filename ?? '');
         // const type = match ? `image/${match[1]}` : `image`;
         // console.log(type);
+        let imageFile = {
+            uri: photoUrl,
+            type: 'image/jpeg',
+            name: "profileImage.jpg"
+        };
         const formdata = new FormData();
         formdata.append('username', id);
         formdata.append('password', password);
         formdata.append('nickname', nickname);
-        formdata.append('avatar', {uri: photoData.uri, 
-                                   type: "image/jpeg",
-                                   name: "profilephoto"});
+        formdata.append('avatar', imageFile);
         console.log(formdata);
 
-        axios.post(`${API.SIGNUP}`, 
-                    formdata, 
-                    {headers: {"content-type": "multipart/form-data"}}
-                  )
+        axios.post(`${API.SIGNUP}`, formdata, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }}
+        )
             .then(response => {
                 console.log('response : ', response);
                 Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",
@@ -139,8 +143,8 @@ const Signup = ({ navigation }) => {
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView extraScrollHeight={40}>
-                <View style={[globalStyles.container, {paddingVertical: 0}]}>
-                    <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri); setPhotoData(photo)}}/>
+                <View style={globalStyles.container}>
+                    <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri);}}/>
                     <MyInput
                         label="아이디"
                         value={id}
@@ -172,10 +176,10 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="사용할 이름을 입력하세요"
                     />
-                    <View style={{ marginVertical: 10 }} />
+                    {/* <View style={{ marginVertical: 10 }} />
                     <View style={{alignSelf: 'flex-start'}}>
                         <AgeDropDown />
-                    </View>
+                    </View> */}
                     <View style={{ height: 50 }} />
                     <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
                 </View>

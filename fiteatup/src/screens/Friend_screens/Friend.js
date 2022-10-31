@@ -116,9 +116,19 @@ const styles = StyleSheet.create({
     },
     deleteButton: {
         backgroundColor: `${theme.buttonBackgroundColor}`,
-        paddingVertical: 9,
-        paddingHorizontal: 13,
-        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 14,
+        borderRadius: 12,
+        //ios 그림자 설정
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+            width: 5,
+            height: 5
+        },
+        shadowOpacity: 0.2,    //그림자 투명도
+        shadowRadius: 5,
+        //android 그림자 설정
+        elevation: 5
     },
     deleteTitle: {
         fontSize: 15,

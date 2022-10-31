@@ -29,6 +29,7 @@ export const theme = {
 
     buttonBackgroundColor: colors.base_purple,
     buttonTitleColor: colors.white,
+    buttonLineColor: colors.purple_1,
 
     // labelTitleColor: colors.purple_5,   //삭제할 것
 
@@ -43,10 +44,15 @@ export const theme = {
     dropdownColor: colors.purple_5,
 
     searchBarInput: colors.purple_0,
-    searchBarButton: colors.purple_3,
+    searchBarButton: colors.base_purple,
 
     iconColor: colors.base_purple,
     flatlistLineColor: colors.purple_1,
 
     imageBackgroundColor: colors.grey_0,
+
+    restInfoBackgroundColor: colors.grey_0,
+    restInfoLineColor: colors.grey_1,
+
+    percentBackgroundColor: colors.purple_0
 }
