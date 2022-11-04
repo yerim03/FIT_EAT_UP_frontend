@@ -17,11 +17,12 @@ const AddFriend = ({ navigation }) => {
     //버튼 클릭 시 친구 추가 기능
     const handleAddFriendButtononPress = () => {
         axios.post(`${API.ADD_FRIEND}`, { username: friendId },{ headers: headers })
-            // .then(res => { console.log('친구추가 성공 : ', res.data)})
-            .then(res => { Alert.alert('친구 추가 완료', '친구가 추가되었습니다.', 
-                              [{text: "확인", onPress: ()=> { navigation.replace('Friend')} }]) 
+            .then(res => { console.log('친구추가 완료'); 
+                           Alert.alert('친구 추가 완료', '친구가 추가되었습니다.', 
+                                        [{text: "확인", onPress: ()=> { navigation.replace('Friend')} }]
+                           ) 
                         
-                })
+            })
             .catch(err => { Alert.alert('친구 추가 실패', '해당 id를 가진 친구가 존재하지 않습니다.\n id를 다시 확인해주세요.')
                             console.log(err.response.data); })
     };

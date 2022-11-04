@@ -4,7 +4,7 @@ import { Image, StyleSheet} from 'react-native';
 import { theme } from '../styles/theme';
 
 
-const FoodImage = ({url}) => {
+const FoodImage = ({ url }) => {
     return(
         <Image style={styles.foodImage} source={{ uri: url }} />
     );

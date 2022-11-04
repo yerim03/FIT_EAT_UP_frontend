@@ -12,10 +12,11 @@ const colors = {
     purple_6: '#3B2C8A',
     grey_0: '#E0E0E0',
     grey_1: '#A0A0A0'
-    //9E8FFA
 }
 
 export const theme = {
+    cameraButtonImageColor: colors.grey_1,
+
     tabInActiveTint: colors.grey_1,
     tabActiveTint: colors.purple_5,
 
@@ -23,6 +24,7 @@ export const theme = {
 
     title: colors.purple_5,
     title_1: colors.purple_6,
+    title_2: colors.purple_4,
     smallTitle: colors.base_purple,
 
     backgroundColor: colors.white,
@@ -30,8 +32,6 @@ export const theme = {
     buttonBackgroundColor: colors.base_purple,
     buttonTitleColor: colors.white,
     buttonLineColor: colors.purple_1,
-
-    // labelTitleColor: colors.purple_5,   //삭제할 것
 
     inputFocusColor: colors.purple_5,   //input focus on
     inputNotFocusColor: colors.purple_1,    //input focus out

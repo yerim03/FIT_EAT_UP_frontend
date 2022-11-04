@@ -22,6 +22,7 @@ const MyInput = ( props ) => {
                 value={props.value}
                 onChangeText={props.onChangeText}
                 onSubmitEditing={props.onSubmitEditing}
+                returnKeyType={props.returnKeyType}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 secureTextEntry={props.isPassword}
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         paddingBottom: 14,
         fontSize: 16
     },
-    //이거는 MyProfile 수정에서 사용하는 disabled
+    //이거는 MyProfile 수정에서 사용하는 input disabled
     disabledinputbox: {
         backgroundColor: `${theme.inputDisabled}`,
         width: '100%',

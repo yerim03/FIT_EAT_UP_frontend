@@ -1,22 +1,23 @@
 //연령대를 표시할 수 있는 드롭다운
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingViewComponent} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { theme } from '../styles/theme';
 
+
 const AgeDropDown = () => {
     const [ageOpen, setAgeOpen] = useState(false);
-    const [ageValue, setAgeValue] = useState();
+    const [ageValue, setAgeValue] = useState();     //value값 관리
     const [age, setAge] = useState([
-        {label: '10대', value: '10'},
-        {label: '20대', value: '20'},
-        {label: '30대', value: '30'},
-        {label: '40대', value: '40'},
-        {label: '50대', value: '50'},
-        {label: '60대', value: '60'},
-        {label: '70대', value: '70'},
-        {label: '80대', value: '80'},
-        {label: '90대', value: '90'}
+        { label: '10대', value: '10' },
+        { label: '20대', value: '20' },
+        { label: '30대', value: '30' },
+        { label: '40대', value: '40' },
+        { label: '50대', value: '50' },
+        { label: '60대', value: '60' },
+        { label: '70대', value: '70' },
+        { label: '80대', value: '80' },
+        { label: '90대', value: '90' }
     ]);
 
     return(
@@ -33,9 +34,6 @@ const AgeDropDown = () => {
                 setItems={setAge}
                 placeholder="연령대를 선택하세요."
                 listMode="SCROLLVIEW"
-                // scrollViewProps={{
-                //     nestedScrollEnabled: true,
-                // }}
             />
         </View>
     );

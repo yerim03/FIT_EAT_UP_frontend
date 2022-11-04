@@ -3,28 +3,9 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Alert, Platform, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-
+import { theme } from '../styles/theme';
 
 const MyProfileImage = ({ url, showButton, onChangeImage }) => {
-
-    //ios 사진첩 접근 권한 요청
-    // useEffect(()=> {
-    //     (async () => {
-    //         try{
-    //             if(Platform.OS === 'ios'){
-    //                 const { status } = await Permissions.askAsync(
-    //                     Permissions.MEDIA_LIBRARY
-    //                 );
-    //                 if( status !== 'granted') {
-    //                     Alert.alert('Photo Permission', 'Turn on Permissions');
-    //                 }
-    //             }
-    //         } catch(e) {
-    //             Alert.alert('Photo Permissions Error', e.message);
-    //         }
-    //     })
-    // }, []);
-
     //우측 하단에 카메라 버튼
     const PhotoButton = ({ onPress }) => {
         return(
@@ -32,7 +13,7 @@ const MyProfileImage = ({ url, showButton, onChangeImage }) => {
                                 activeOpacity={0.7} 
                                 hitSlop={{ top: 60, left: 60 }}
                                 onPress={onPress}>
-                <MaterialIcons name="photo-camera" size={20} color="#ffffff" />
+                <MaterialIcons name="photo-camera" size={20} color={theme.buttonTitleColor} />
             </TouchableOpacity>
         );
     }
@@ -79,22 +60,21 @@ const MyProfileImage = ({ url, showButton, onChangeImage }) => {
 
 const styles = StyleSheet.create({
     image: {
-        backgroundColor: '#E0E0E0',
+        backgroundColor: `${theme.imageBackgroundColor}`,
         width: 90,
         height: 90,
         borderRadius: 45,
-        margin: 12,
-        
+        margin: 12, 
     },
     buttonContainer:{
-        backgroundColor: '#A6A6A6',
+        backgroundColor: `${theme.cameraButtonImageColor}`,
         position: 'absolute',
         bottom: 12,
         right: 12,
         width: 30,
         height: 30,
         borderWidth: 2,
-        borderColor: '#ffffff',
+        borderColor: `${theme.backgroundColor}`,
         borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',

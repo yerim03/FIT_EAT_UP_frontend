@@ -20,7 +20,7 @@ const MyPage = ({ navigation }) => {
     const { user } =useUserState();
     const dispatch = useUserDispatch();
 
-    //로그아웃 버튼 클릭 시 실행함수
+    //로그아웃 기능
     const handleLogoutButtononPress = () => {
         try{
             // await AsyncStorage.clear(); //로그아웃 시 토큰 삭제

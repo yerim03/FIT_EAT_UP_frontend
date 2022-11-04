@@ -13,7 +13,6 @@ import { KAKAO_API_KEY } from '../../cofig/config_secret';
 import { KAKAO_API } from '../../config';
 import axios from 'axios';
 import { globalStyles } from '../../styles/styles';
-import { theme } from '../../styles/theme';
 import { useUserState } from '../../context/UserContext';
 
 
@@ -26,7 +25,7 @@ const Search = ({ navigation }) => {
     const onPressSearchButton = () => {
         setFoodData([]);
         let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&y=${location.latitude}&x=${location.longitude}&size=8`;  //카카오 로컬 API
-        let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=6`;  //카카오 이미지 검색 API
+        let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=10`;  //카카오 이미지 검색 API
 
         const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
         const GETIMAGE = axios.get(URL2, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
@@ -36,9 +35,10 @@ const Search = ({ navigation }) => {
                              let getimage=res[1].data.documents;
                             for(let i = 0; i < getdata.length; i++){
                                 let oneData = getdata[i];
-                                oneData.image_url = getimage[0].image_url;
+                                oneData.image = getimage[3].image_url;
                                 setFoodData(prevData => [...prevData, oneData]);
-                            }  
+                            }
+                            console.log(foodData)
                         })
             .catch(err => console.log(err))
     };
@@ -46,10 +46,13 @@ const Search = ({ navigation }) => {
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneItemArea}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
+                <TouchableOpacity 
+                    activeOpacity={0.8} 
+                    onPress={() => navigation.navigate("RestaurantInfo", {item, isSearch: true})}
+                >
                     <ResultImage 
                         foodname={item.place_name} 
-                        url={item.image_url}          
+                        url={item.image}          
                     />
                 </TouchableOpacity>
             </View>

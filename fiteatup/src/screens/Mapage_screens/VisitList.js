@@ -1,5 +1,4 @@
 //가본 장소 리스트 화면
-////서버에서 사진불러와서 출력하면 완성
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
 import FoodImage from '../../components/FoodImage';
@@ -16,9 +15,8 @@ const VisitList = ({ navigation }) => {
     //서버로부터 visitlist 가져오기
     useEffect(()=> {
         const getVisitList = async () => { 
-            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );
-            console.log(visitPlaceList.data);
-            setVisitList(visitPlaceList.data);  //삭제할 것         
+            const visitPlaceList = await axios.get(`${API.GET_VISITLIST}`, { headers: headers } );  
+            setVisitList(visitPlaceList.data);    
         };
         getVisitList();
     }, [])
@@ -27,9 +25,9 @@ const VisitList = ({ navigation }) => {
         return(
             <TouchableOpacity 
                 style={styles.itemContainer} 
-                onPress={() => navigation.navigate('RestaurantInfo', {item}) } 
+                onPress={() => navigation.navigate('RestaurantInfo', {item, isSearch: false}) } 
             >
-                <FoodImage />
+                <FoodImage url={`${item.image}`} />
                 <Text style={styles.itemTitle}>{item.place_name}</Text>
             </TouchableOpacity>
         );
@@ -38,8 +36,8 @@ const VisitList = ({ navigation }) => {
     return(
         <View style={styles.container}>
             <FlatList 
-                data={visitList} //리스트들의 source
-                renderItem={renderItem} //data로 받은 소스들의 각 item을 렌더링해주는 콜백함수
+                data={visitList}
+                renderItem={renderItem}
             /> 
         </View>
     );

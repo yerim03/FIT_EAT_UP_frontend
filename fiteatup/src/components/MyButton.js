@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 15,
         //ios 그림자 설정
-        shadowColor: "#000",    //그림자 색
-        shadowOffset: { //그림자 위치
+        shadowColor: "#000",
+        shadowOffset: {
             width: 6,
-            height: 6
+            height: 6,
         },
-        shadowOpacity: 0.2,    //그림자 투명도
+        shadowOpacity: 0.2,
         shadowRadius: 6,
         //android 그림자 설정
         elevation: 8

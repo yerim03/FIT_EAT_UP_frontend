@@ -1,20 +1,24 @@
 //친구 목록
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList, Modal } from 'react-native';
 import FriendProfileImage from '../../components/FriendProfileImage';
-import { Ionicons } from '@expo/vector-icons';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserState } from '../../context/UserContext';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../../styles/theme';
 import { globalStyles } from '../../styles/styles';
 
 
 const Friend = ({ navigation }) => {
     const [friendList, setFriendList] = useState([{}]); //친구 리스트
+    const [friend, setFriend] = useState();
     const isFocused = useIsFocused();
     const { headers } = useUserState();
+
+
+    const [modalVisible, setModalVisible] = useState(false);    //모달 창 보이는 여부
 
     //친구리스트 가져오기
     useEffect(() => {
@@ -35,19 +39,35 @@ const Friend = ({ navigation }) => {
                             {text:"삭제", 
                             onPress: ()=> { 
                                 axios.post(`${API.REMOVE_FRIEND}`, { username: username }, { headers: headers })
-                                    .then(res => { console.log('친구삭제 성공 : ', res.data); 
+                                    .then(res => { console.log('친구삭제 성공'); 
                                                 navigation.replace('Friend')}
-                                        )
-                                    .catch(err => {console.log('친구 삭제 실패\n', err)})
-                                }, 
+                                    )
+                                    .catch(err => {console.log('친구 삭제 실패', err)})
+                            }, 
                             style: 'destructive'}
                         ]
             )
         };
         
         return(
+            <View>
+            {/* <Modal animationType="fade" transparent={true} visible={modalVisible}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
+                    <Text>{username}</Text>
+                    <Text>{nickname}</Text>
+                    <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+                        <Text style={{fontSize: 14}}>닫기</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            </Modal> */}
+
+
             <TouchableOpacity 
                 style={styles.itemContainer} 
+                // onPressOut={() => {setModalVisible(true);}}
                 onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} 
             >
                 <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
@@ -55,10 +75,14 @@ const Friend = ({ navigation }) => {
                     <Text style={styles.itemId}>{username}</Text>
                     <Text style={styles.itemNickname}>{nickname}</Text>
                 </View>
+
+
+
                 <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
                     <Text style={styles.deleteTitle}>삭제</Text>
                 </TouchableOpacity>
             </TouchableOpacity>
+            </View>
         );
     };
 
@@ -84,7 +108,6 @@ const Friend = ({ navigation }) => {
                     <FlatList 
                         data={friendList}
                         renderItem={renderItem}
-                        // keyExtractor={(item) => { console.log('heelo : ', item.pk);  }}
                     />
                 </View>
             </View>
@@ -112,7 +135,7 @@ const styles = StyleSheet.create({
     itemNickname: {
         fontSize: 15,
         paddingHorizontal: 25,
-        color: '#606060'
+        color: `${theme.title_2}`,
     },
     deleteButton: {
         backgroundColor: `${theme.buttonBackgroundColor}`,
@@ -133,7 +156,41 @@ const styles = StyleSheet.create({
     deleteTitle: {
         fontSize: 15,
         color: `${theme.buttonTitleColor}`
+    },
+
+
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+      },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        paddingVertical: 35,
+        paddingHorizontal: 25,
+        alignItems: "center",
+        shadowColor: "#000",    //그림자 색
+        shadowOffset: { //그림자 위치
+        width: 2,
+        height: 2
+        },
+        shadowOpacity: 0.3,    //그림자 투명도
+        shadowRadius: 4,
+        elevation: 5
+    },
+    modalButton: {
+        marginTop: 30, 
+        marginHorizontal: 12,
+        paddingVertical: 10, 
+        paddingHorizontal: 36,
+        borderRadius: 10, 
+        backgroundColor: '#a0a0a0'
     }
+    
 });
 
 

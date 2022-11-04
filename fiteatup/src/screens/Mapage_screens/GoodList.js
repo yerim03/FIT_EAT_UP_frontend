@@ -1,12 +1,10 @@
 //좋아요 장소 리스트 화면
-//서버에서 사진불러와서 출력하면 완성
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
 import FoodImage from '../../components/FoodImage';
 import axios from 'axios';
 import { API } from '../../config';
 import { useUserState } from '../../context/UserContext';
-import { globalStyles } from '../../styles/styles';
 import { theme } from '../../styles/theme';
 
 
@@ -18,8 +16,8 @@ const GoodList = ({ navigation }) => {
     useEffect(()=> {
         const getGoodList = async () => { 
             const goodPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
-            console.log(goodPlaceList.data);
-            setGoodList(goodPlaceList.data);    //삭제할 것            
+            setGoodList(goodPlaceList.data);  
+            console.log(goodPlaceList.data)        
         };
         getGoodList();
     }, [])
@@ -28,9 +26,9 @@ const GoodList = ({ navigation }) => {
         return(
             <TouchableOpacity 
                 style={styles.itemContainer} 
-                onPress={() => navigation.navigate('RestaurantInfo', {item}) } 
+                onPress={() => navigation.navigate('RestaurantInfo', {item, isSearch: false}) } 
             >
-                <FoodImage />
+                <FoodImage url={`${item.image}`} />
                 <Text style={styles.itemTitle}>{item.place_name}</Text>
             </TouchableOpacity>
         );
@@ -39,8 +37,8 @@ const GoodList = ({ navigation }) => {
     return(
         <View style={styles.container}>
             <FlatList 
-                data={goodList} //리스트들의 source
-                renderItem={renderItem} //data로 받은 소스들의 각 item을 렌더링해주는 콜백함수
+                data={goodList}
+                renderItem={renderItem}
             /> 
         </View>
     );

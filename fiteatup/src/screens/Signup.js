@@ -1,12 +1,12 @@
 //회원가입 화면
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, SafeAreaView } from 'react-native';
-import MyInput from "../components/MyInput";
+import MyInput from '../components/MyInput';
 import MyButton from "../components/MyButton";
 import AgeDropDown from '../components/AgeDropDown';
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import axios from "axios";
+import axios from 'axios';
 import { API } from '../config';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
@@ -18,7 +18,6 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');   //입력 password
     const [passwordConfirm, setPasswordConfirm] = useState(''); //입력 password확인
     const [photoUrl, setPhotoUrl] = useState(); //입력 image
-    // const [photoData, setPhotoData] = useState();
 
     const [disabled, setDisabled] = useState(true);    //회원가입 버튼 disabled 여부
 
@@ -85,59 +84,54 @@ const Signup = ({ navigation }) => {
 
 
     //회원가입 완료 버튼 disabled
-    // id, password, passwordConfirm, nickname 4개가 모두 입력되어야만 버튼이 활성화되도록 함
+    // id, password, passwordConfirm, nickname 4개가 모두 입력되어야만 버튼 활성화
     useEffect(() => {
         setDisabled(!(id && password && passwordConfirm && nickname))
     }, [id, password, passwordConfirm, nickname]);
 
 
-    //수정필요
-    //
-    //
-    //회원가입 버튼 클릭 시 동작
+    //회원가입 기능
     const handleSignupButtonPress = () => {
-        // const filename = photoData.uri.split('/').pop();
-        // const match = /\.(w+)$/.exec(filename ?? '');
-        // const type = match ? `image/${match[1]}` : `image`;
-        // console.log(type);
         let imageFile = {
             uri: photoUrl,
             type: 'image/jpeg',
-            name: "profileImage.jpg"
+            name: `${id}ProfileImage.jpg`
         };
+        //formdata 생성
         const formdata = new FormData();
         formdata.append('username', id);
         formdata.append('password', password);
         formdata.append('nickname', nickname);
-        formdata.append('avatar', imageFile);
-        console.log(formdata);
+        if(photoUrl){
+            formdata.append('avatar', imageFile);
+        }
 
         axios.post(`${API.SIGNUP}`, formdata, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }}
+                    headers: { 'Content-Type': 'multipart/form-data', },
+                    transformRequest: formdata => formdata,
+                }
         )
-            .then(response => {
-                console.log('response : ', response);
+            .then(res => {
+                console.log('회원가입 성공');
                 Alert.alert("회원가입 성공", "회원가입이 완료되었습니다!",
-                        [{ text: "OK ", onPress: () => navigation.navigate("Login")}]
+                        [{ text: "OK", onPress: () => navigation.navigate("Login")}]
                 );
                 onReset();
             })
             .catch(err => {
                 if(err.response.data.username) {
                     Alert.alert("이미 사용중인 id입니다.", "다른 id를 입력해주세요.");
-                    console.log("iderror : ", err.response.data.username);
+                    console.log("Id Check Error : ", err.response.data.username);
                 }
                 if(err.response.data.nickname) {
                     Alert.alert("이미 사용중인 닉네임입니다.", "다른 닉네임을 입력해주세요.");
-                    console.log("nicknameerror : ", err.response.data.nickname);
+                    console.log("Nickname Check Error : ", err.response.data.nickname);
+                }
+                else {
+                    console.log("Signup Error", err)
                 }
             })
     };
-    //
-    //
-    // 수정 필요
 
 
     return(
@@ -149,14 +143,16 @@ const Signup = ({ navigation }) => {
                         label="아이디"
                         value={id}
                         onChangeText={onChangeId}
+                        returnKeyType="next"
                         onSubmitEditing={() => {}}
-                        placeholder="아이디(영문 또는 숫자 6글자 이상)"
+                        placeholder="아이디(영문, 숫자 또는 6글자 이상)"
                     />
                     <Text style={styles.errorText}>{idErrorMsg}</Text>
                     <MyInput
                         label="비밀번호"
                         value={password}
                         onChangeText={onChangePassword}
+                        returnKeyType="next"
                         onSubmitEditing={() => {}}
                         placeholder="비밀번호(영문, 숫자, 특수문자 포함 8자 이상)"
                     />
@@ -165,6 +161,7 @@ const Signup = ({ navigation }) => {
                         label="비밀번호 확인"  
                         value={passwordConfirm}
                         onChangeText={onChangePasswordConfirm}
+                        returnKeyType="next"
                         onSubmitEditing={() => {}}
                         placeholder="비밀번호를 다시 한번 입력해주세요."
                     />
@@ -176,12 +173,11 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="사용할 이름을 입력하세요"
                     />
-                    {/* <View style={{ marginVertical: 10 }} />
-                    <View style={{alignSelf: 'flex-start'}}>
+                    {/* <View style={{ marginVertical: 10, alignSelf: 'flex-start'}}>
                         <AgeDropDown />
                     </View> */}
                     <View style={{ height: 50 }} />
-                    <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled}/>
+                    <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled} />
                 </View>
             </KeyboardAwareScrollView>
         </SafeAreaView>

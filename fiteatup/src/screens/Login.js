@@ -10,7 +10,7 @@ import { API } from '../config';
 import { useUserDispatch } from '../context/UserContext';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
-import Logo from '../../assets/icon.png';
+import Logo from '../../assets/icon2.png';
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState(''); //입력 id
@@ -31,6 +31,7 @@ const Login = ({ navigation }) => {
         setDisabled(!(id && password));
     }, [id, password]);
 
+    //로그인 성공 후 받은 토큰으로 user 정보 get
     const getUserData = async (token) => {;
         await axios.get(`${API.USER_DATA}`, 
                 { headers: { 
@@ -44,43 +45,46 @@ const Login = ({ navigation }) => {
                                         id: res.data.username,
                                         nickname: res.data.nickname,
                                         profileImage: res.data.avatar_url,
+                                        // 여기에 가능하다면 나이도 추가
                                         token: token}
                                     })
                             console.log('context api 완료')
             })
-            .catch(err => {console.log(err.message)})
+            .catch(err => {console.log(err)})
     };
 
     
-    //로그인 버튼 클릭 시 동작 - 로그인 기능
+    //로그인 기능
     const handleLoginButtonPress = () => {
         axios.post(`${API.LOGIN}`, { username: id, password: password })
-            .then(response => {
-                console.log("로그인 성공\n", response.data);
+            .then(res => {
+                console.log('로그인 성공');
                 // AsyncStorage.setItem('token', JSON.stringify(response.data.token), () => { console.log("토큰저장완료") });
-                getUserData(response.data.token);   // user정보 context api에 저장
-                Alert.alert('로그인 성공', '환영합니다!');
+                getUserData(res.data.token);
+                Alert.alert('로그인 성공', '환영합니다!!');
                 onReset();
             })
             .catch(err => {
-                Alert.alert("Login Fail", "ID 또는 Password를 잘못 입력했습니다.");
-                console.log("Login Error : ", err.data);
+                Alert.alert("로그인 실패", "ID 또는 Password를 잘못 입력했습니다.");
+                console.log("Login Error : ", err.response.data);
             })
     }; 
+
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
                 <View style={globalStyles.container}>
-                    <Image style={{ backgroundColor: 'red', width: 90, height: 90, margin: 30}} 
-                            source={Logo}/>
-                    {/* <View style={{ height: 80 }} /> */}
+                    {/* <Image style={{ backgroundColor: 'red', width: 100, height: 100, margin: 30}} 
+                            source={Logo}/> */}
+                    <View style={{ height: 90 }} />
                     <Text style={styles.title}>FIT EAT UP</Text>
-                    <Text style={styles.smallTitle}>친구들과의 공통 맛집 추천 서비스</Text>
+                    <Text style={styles.smallTitle}>친구와의 공통 맛집 추천 서비스</Text>
                     <MyInput
                         label="아이디"
                         value={id}
                         onChangeText={text => setId(text)}
+                        returnKeyType="next"
                         onSubmitEditing={() => {}}
                         placeholder="아이디를 입력해주세요."
                     />
@@ -105,13 +109,14 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     title: {
+        // fontFamily: 'nanumGothicBold',
         fontSize: 45,
-        fontWeight: 'bold',
+        fontWeight: '600',
         alignSelf: 'flex-start',
         color: `${theme.title}`,
     },
     smallTitle: {
-        fontSize: 16,
+        fontSize: 17,
         fontWeight: '600',
         alignSelf: 'flex-start',
         color: `${theme.smallTitle}`,

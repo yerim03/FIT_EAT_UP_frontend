@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         color: `${theme.title_1}`,
     },
     nickname: {
-        fontSize: 16,
+        fontSize: 17,
     },
 });
 

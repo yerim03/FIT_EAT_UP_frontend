@@ -7,6 +7,7 @@ import { Rating } from 'react-native-ratings';
 import axios from 'axios';
 import { API } from "../config";
 import { theme } from '../styles/theme';
+import { modalStyles } from '../styles/styles';
 
 
 const RestaurantInfo = ({ route }) => {
@@ -17,11 +18,10 @@ const RestaurantInfo = ({ route }) => {
     
     const { user, headers } = useUserState();
     
-    //Search.js에서 받아온 음식점 data
-    let foodData = route.params.item;
-
+    let foodData = route.params.item;    //Search.js에서 받아온 음식점 data
+    let isSearch = route.params.isSearch;   //Search.js인지 GoodList.js(VisitList.js)인지를 구분하는 변수
+    
     useEffect(()=> {
-        //starRating 데이터도 가져와서 설정해야 함
         //Likeplaces 가져오기
         const getLikePlaces = async () => { 
             const likePlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
@@ -54,6 +54,28 @@ const RestaurantInfo = ({ route }) => {
         getStarRating();
     }, [])
 
+    const makeFormdata = () => {
+        const formdata = new FormData();
+        formdata.append('address_name', foodData.address_name);
+        formdata.append('category_group_code', foodData.category_group_code);
+        formdata.append('category_group_name', foodData.category_group_name);
+        formdata.append('category_name', foodData.category_name);
+        formdata.append('distance', foodData.distance);
+        formdata.append('id', foodData.id);
+        formdata.append('phone', foodData.phone);
+        formdata.append('place_name', foodData.place_name);
+        formdata.append('place_url', foodData.place_url);
+        formdata.append('road_address_name', foodData.road_address_name);
+        formdata.append('x', foodData.x);
+        formdata.append('y', foodData.y);
+        formdata.append('image', {
+            uri: foodData.image,
+            type: 'image/jpeg',
+            name: `${foodData.place_name}Image.jpg`
+        });
+        return formdata;
+    };
+
     //좋아요 가봤어요 버튼
     const GoodVisitButton = ({ buttonType, clickState, onPress, title }) => {
         if(buttonType === 'heart'){ //heart 모양이면 좋아요 버튼
@@ -84,10 +106,16 @@ const RestaurantInfo = ({ route }) => {
                 .catch(err => console.log(err.response.data))
         }
         else{
+            let foodFormdata =makeFormdata();
             //isLike==True(좋아요 0)
             setIsLike(true);
-            foodData.pk=user.userPk;    //json 데이터에 pk 추가
-            axios.post(`${API.SAVE_GOODLIST}`, foodData, { headers: headers })
+            foodFormdata.append('pk', user.userPk);    //json 데이터에 pk 추가
+            axios.post(`${API.SAVE_GOODLIST}`, foodFormdata, { 
+                        headers: { 'Authorization': `jwt ${user.userToken}`,
+                                   'Content-Type': 'multipart/form-data' 
+                        },
+                        transformRequest: foodFormdata => foodFormdata,
+            })
                 .then(res => console.log("좋아요 저장 성공"))
                 .catch(err => console.log(err.response.data))
         }
@@ -103,11 +131,16 @@ const RestaurantInfo = ({ route }) => {
                 .catch(err => console.log(err.response.data))
         }
         else{
+            let foodFormdata =makeFormdata();
             //isLike==True(좋아요 0)
             setIsVisit(true);
-            foodData.pk=user.userPk;    //json 데이터에 pk 추가
-            console.log('여기는 handleVisitButtononPress\n', foodData); //삭제할 것
-            axios.post(`${API.SAVE_VISITLIST}`, foodData, { headers: headers })
+            foodFormdata.append('pk', user.userPk);    //json 데이터에 pk 추가
+            axios.post(`${API.SAVE_VISITLIST}`, foodFormdata, { 
+                headers: { 'Authorization': `jwt ${user.userToken}`,
+                           'Content-Type': 'multipart/form-data' 
+                },
+                transformRequest: foodFormdata => foodFormdata,
+            })
                 .then(res => console.log("가봤어요 저장 성공"))
                 .catch(err => console.log(err.response.data))
         }
@@ -144,7 +177,11 @@ const RestaurantInfo = ({ route }) => {
     return(
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                <Image style={styles.foodImageArea} />
+                <Image style={styles.foodImageArea} 
+                       source={ isSearch ? 
+                                {uri: foodData.image} : 
+                                {uri: `${foodData.image}`}}
+                />
                 <View style={styles.nameArea}>
                     <Text style={styles.title}>{foodData.place_name}</Text>
                 </View>
@@ -156,8 +193,8 @@ const RestaurantInfo = ({ route }) => {
                 
                 <View style={styles.starArea}>
                     <Modal animationType="fade" transparent={true} visible={modalVisible}>
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
+                        <View style={modalStyles.centeredView}>
+                            <View style={modalStyles.modalView}>
                                 <Text style={[styles.data, {marginBottom: 20}]}>이 음식점을 평가해주세요!</Text>
                                 <Rating 
                                     startingValue={starRating}
@@ -166,15 +203,11 @@ const RestaurantInfo = ({ route }) => {
                                                                  setStarRating(rating)}}
                                 />
                                 <View style={{ flexDirection: 'row'}}>
-                                    <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
-                                        <Text style={{fontSize: 14}}>취소</Text>
+                                    <TouchableOpacity style={modalStyles.modalButton} onPress={() => setModalVisible(false)}>
+                                        <Text style={modalStyles.modalButtonTitle}>취소</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity 
-                                        style={styles.modalButton}
-                                        onPress={() => {setModalVisible(false);
-                                                        handleRatingFinishonPress();}
-                                    }>   
-                                        <Text style={{fontSize: 14}}>완료</Text>
+                                    <TouchableOpacity style={modalStyles.modalButton} onPress={() => { setModalVisible(false); handleRatingFinishonPress(); }}>   
+                                        <Text style={modalStyles.modalButtonTitle}>완료</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -222,7 +255,7 @@ const styles = StyleSheet.create({
     },
     foodImageArea: {
         backgroundColor: `${theme.restInfoBackgroundColor}`,
-        height: 170,
+        height: 200,
         width: '100%',
     },
     nameArea: {
@@ -287,37 +320,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center'
     },
-
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-      },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        paddingVertical: 35,
-        paddingHorizontal: 25,
-        alignItems: "center",
-        shadowColor: "#000",    //그림자 색
-        shadowOffset: { //그림자 위치
-        width: 2,
-        height: 2
-        },
-        shadowOpacity: 0.3,    //그림자 투명도
-        shadowRadius: 4,
-        elevation: 5
-    },
-    modalButton: {
-        marginTop: 30, 
-        marginHorizontal: 12,
-        paddingVertical: 10, 
-        paddingHorizontal: 36,
-        borderRadius: 10, 
-        backgroundColor: '#a0a0a0'
-    }
 });
 
 export default RestaurantInfo;

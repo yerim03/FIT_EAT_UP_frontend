@@ -1,7 +1,6 @@
 //[친구의 프로필 이미지를 나타내는 컴포넌트]
-//추가 수정 필요
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { theme } from '../styles/theme';
 
 
@@ -14,7 +13,7 @@ const FriendProfileImage = ({ url }) => {
     //     );
     // } else{
         return(
-            <Image style={styles.image} source={{ uri: url}}/>
+            <Image style={styles.image} source={{ uri: url }}/>
         );
     // }
 };
