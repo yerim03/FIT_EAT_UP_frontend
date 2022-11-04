@@ -5,8 +5,7 @@ import MainStack from './MainStack';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch, useUserState } from '../context/UserContext';
 import * as Location from 'expo-location';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+
 
 const Navigation = () => {
     const { user } = useUserState();

@@ -1,15 +1,21 @@
 //친구와의 공통 추천 맛집 결과화면
 // 총 10개의 추천 맛집 결과가 출력된다
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import ResultImage from '../../components/ResultImage';
 import { globalStyles } from '../../styles/styles';
 import { theme } from '../../styles/theme';
 
 
-const HomeResult = ({ navigation }) => {
+const HomeResult = ({ navigation, route }) => {
     let name = 'bluesky'
 
+    let friends = route.params; //선택한 친구들 pk
+
+    useEffect(() => {
+        //여기서 추천 결과를 가져올 예정
+        console.log(friends);
+    }, [])
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneResultArea}>
@@ -66,6 +72,7 @@ const styles = StyleSheet.create({
 
 export default HomeResult;
 
+//삭제할 것
 const DATA = [
     {
         id: "1",

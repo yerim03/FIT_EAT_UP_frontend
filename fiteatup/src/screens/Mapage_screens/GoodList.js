@@ -16,8 +16,7 @@ const GoodList = ({ navigation }) => {
     useEffect(()=> {
         const getGoodList = async () => { 
             const goodPlaceList = await axios.get(`${API.GET_GOODLIST}`, { headers: headers } );
-            setGoodList(goodPlaceList.data);  
-            console.log(goodPlaceList.data)        
+            setGoodList(goodPlaceList.data);       
         };
         getGoodList();
     }, [])

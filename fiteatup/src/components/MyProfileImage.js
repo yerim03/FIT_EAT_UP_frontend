@@ -41,8 +41,7 @@ const MyProfileImage = ({ url, showButton, onChangeImage }) => {
 
             //cancelled가 true이면(사진을 선택했을 경우에만) 해당 사진으로 변경
             if(!result.cancelled) {
-                onChangeImage(result);
-                console.log(result);
+                onChangeImage(result.uri);
             }
         } catch (e) {
             Alert.alert('Photo Error', e.message);

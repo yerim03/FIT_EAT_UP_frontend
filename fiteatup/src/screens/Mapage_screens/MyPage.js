@@ -106,24 +106,3 @@ const styles = StyleSheet.create({
     },
 });
 export default MyPage;
-
-
-
-
-
-
-
-    // //사용자 정보 가져오기
-    // const getUserData = async () => {;
-    //     await AsyncStorage.getItem('token', (err, result) => 
-    //         { mytoken = JSON.parse(result);
-    //           console.log("마이페이지에 토큰", mytoken) });
-    //     console.log("async 밖: ", mytoken);
-    //     await axios.get("http://10.0.2.2:8000/accounts/user/", 
-    //             { headers: { 
-    //                 Authorization: `jwt ${mytoken}`}
-    //             })
-    //         .then(response => {console.log(response.data);
-    //                         setUser(response.data); })
-    //         .catch(err => console.log(err.message))
-    // };

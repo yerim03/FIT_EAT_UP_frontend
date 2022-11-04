@@ -6,10 +6,9 @@ const colors = {
     purple_1: '#D3CFFF',
     purple_2: '#B3AAFA',
     base_purple: '#9B8CFA',
-    purple_3 : '#8978F6',
-    purple_4: '#6A59CF',
-    purple_5: '#4431A3',
-    purple_6: '#3B2C8A',
+    purple_3: '#6A59CF',
+    purple_4: '#4431A3',
+    purple_5: '#3B2C8A',
     grey_0: '#E0E0E0',
     grey_1: '#A0A0A0'
 }
@@ -18,13 +17,13 @@ export const theme = {
     cameraButtonImageColor: colors.grey_1,
 
     tabInActiveTint: colors.grey_1,
-    tabActiveTint: colors.purple_5,
+    tabActiveTint: colors.purple_4,
 
-    backButtonColor: colors.purple_5,
+    backButtonColor: colors.purple_4,
 
-    title: colors.purple_5,
-    title_1: colors.purple_6,
-    title_2: colors.purple_4,
+    title: colors.purple_4,
+    title_1: colors.purple_5,
+    title_2: colors.purple_3,
     smallTitle: colors.base_purple,
 
     backgroundColor: colors.white,
@@ -33,15 +32,15 @@ export const theme = {
     buttonTitleColor: colors.white,
     buttonLineColor: colors.purple_1,
 
-    inputFocusColor: colors.purple_5,   //input focus on
+    inputFocusColor: colors.purple_4,   //input focus on
     inputNotFocusColor: colors.purple_1,    //input focus out
     inputDisabled: colors.purple_0, //input disabled
     inputPlaceholder: colors.grey_1,
 
     errorMessage: colors.red,
-    correctMesage: colors.purple_5,
+    correctMesage: colors.purple_4,
 
-    dropdownColor: colors.purple_5,
+    dropdownColor: colors.purple_4,
 
     searchBarInput: colors.purple_0,
     searchBarButton: colors.base_purple,
@@ -54,5 +53,9 @@ export const theme = {
     restInfoBackgroundColor: colors.grey_0,
     restInfoLineColor: colors.grey_1,
 
-    percentBackgroundColor: colors.purple_0
+    percentBackgroundColor: colors.purple_0,
+
+    notSelectTitleColor: colors.purple_5,
+    selectCheckColor: colors.base_purple,
+    selectTitleColor: colors.base_purple,
 }

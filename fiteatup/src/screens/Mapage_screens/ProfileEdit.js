@@ -17,16 +17,28 @@ const ProfileEdit = () => {
     const { user, headers } = useUserState();
     const dispatch = useUserDispatch();
     const [changeNickname, setChangeNickname] = useState(user.userNickname);
-    const [photoUrl, setPhotoUrl] = useState(`${API.GET_PROFILEIMAGE}${user.userProfileImage}`);
+    const [changePhotoUrl, setChangePhotoUrl] = useState(`${API.GET_PROFILEIMAGE}${user.userProfileImage}`);
 
 
-    //프로필 수정 버튼 클릭 시 1. 닉네임 수정 or 2. 프로필 이미지 수정
+    //프로필 수정 기능
     const handleEditButtonPress = async() => {
-        //닉네임 수정
-        axios.put(`${API.USER_DATA_UPDATE}${user.userPk}/update/`,
-                  {username: user.userId, nickname: changeNickname},
-                  { headers: headers }
-        )
+        let imageFile = {
+            uri: changePhotoUrl,
+            type: 'image/jpeg',
+            name: `${user.userId}ProfileImage.jpg`
+        };
+        //formdata 생성
+        const formdata = new FormData();
+        formdata.append('username', user.userId);
+        formdata.append('nickname', changeNickname);
+        formdata.append('avatar', imageFile);
+
+        axios.put(`${API.USER_DATA_UPDATE}${user.userPk}/update/`, formdata, { 
+                    headers: { 'Authorization': `jwt ${user.userToken}`,
+                            'Content-Type': 'multipart/form-data' 
+                    },
+                    transformRequest: foodFormdata => foodFormdata,
+        })
             .then(res => {console.log('수정 후 data: ', res.data); 
                           dispatch({type: "EDIT_NICKNAME",
                                     userData : { 
@@ -50,7 +62,7 @@ const ProfileEdit = () => {
     return(
         <KeyboardAwareScrollView extraScrollHeight={20}>
             <View style={styles.container}>
-                <MyProfileImage url={photoUrl} showButton onChangeImage={url => setPhotoUrl(url)} />
+                <MyProfileImage url={changePhotoUrl} showButton onChangeImage={url => setChangePhotoUrl(url)} />
                 <MyInput value={user.userId} label="아이디" disabled  />
                 <View style={{ height: 10 }} />
                 <MyInput
@@ -59,9 +71,9 @@ const ProfileEdit = () => {
                     onChangeText={text => setChangeNickname(text)}
                     onSubmitEditing={() => {}}
                 />
-                <View style={{ marginVertical: 10, alignSelf: 'flex-start' }}>
+                {/* <View style={{ marginVertical: 10, alignSelf: 'flex-start' }}>
                     <AgeDropDown />
-                </View>
+                </View> */}
                 <View style={{ height: 80 }}/>
                 <MyButton title="프로필 수정" onPress={handleEditButtonPress}/>
             </View>

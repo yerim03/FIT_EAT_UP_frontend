@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native';
+import React from 'react';
+import { Text, Image, StyleSheet,TouchableOpacity } from 'react-native';
 import FriendProfileImage from './FriendProfileImage';
+import CHECK from '../../assets/check.png'
 import { theme } from '../styles/theme';
+
 
 const FriendProfile = ({ item, url, onPressOut }) => {
     return(
-        <TouchableOpacity style={styles.container} onPressOut={onPressOut}>
-            <FriendProfileImage url={url}/>
+        <TouchableOpacity style={styles.container} onPressOut={onPressOut} activeOpacity={0.8}>
+            {item.selected ? <Image style={{ width: 70, height:70, borderRadius: 35, margin: 5, }} source={CHECK}/> :
+                            <FriendProfileImage url={url}/>
+            }
             <Text style={item.selected? styles.itemNickNameSelected : styles.itemNickName}>{item.nickname}</Text>
+
         </TouchableOpacity>
     );
 };
-
-export default FriendProfile;
 
 const styles = StyleSheet.create({
     container: {
@@ -24,11 +27,13 @@ const styles = StyleSheet.create({
     itemNickName: {
         fontSize: 14,
         fontWeight: '500',
-        color: `${theme.title_1}`,
+        color: `${theme.notSelectTitleColor}`,
     },
     itemNickNameSelected: {
         fontSize: 14,
         fontWeight: '500',
-        color: 'red'
+        color: `${theme.selectTitleColor}`,
     }
 });
+
+export default FriendProfile;
