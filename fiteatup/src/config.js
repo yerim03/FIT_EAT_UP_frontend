@@ -20,6 +20,9 @@ export const API = {
     SAVE_STAR_RATING: `${BASE_URL}/accounts/place/user/rating/`,
     GET_STAR_RATINGLIST: `${BASE_URL}/accounts/place/user/rating/list/`,
     GET_RESTAURANT_IMAGE: `${BASE_URL}`,
+    RECOMMEND_RESULTS: `${BASE_URL}/recommands/recommand/`,
+    GET_FRIEND_GOODLIST: `${BASE_URL}/accounts/place/friend/like/list/`,
+    GET_FRIEND_VISITLIST: `${BASE_URL}/accounts/place/friend/visit/list/`,
 };
 
 export const KAKAO_API = {

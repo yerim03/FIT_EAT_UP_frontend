@@ -8,10 +8,15 @@ import { theme } from '../styles/theme';
 const FriendProfile = ({ item, url, onPressOut }) => {
     return(
         <TouchableOpacity style={styles.container} onPressOut={onPressOut} activeOpacity={0.8}>
-            {item.selected ? <Image style={{ width: 70, height:70, borderRadius: 35, margin: 5, }} source={CHECK}/> :
-                            <FriendProfileImage url={url}/>
+            {item.selected ? 
+                <Image style={{ width: 70, height:70, borderRadius: 35, margin: 5, }} source={CHECK}/> :
+                <FriendProfileImage url={url}/>
             }
-            <Text style={item.selected? styles.itemNickNameSelected : styles.itemNickName}>{item.nickname}</Text>
+            <Text style={item.selected? 
+                            styles.itemNickNameSelected : 
+                            styles.itemNickName}>
+                {item.nickname}
+            </Text>
 
         </TouchableOpacity>
     );

@@ -47,10 +47,10 @@ const Home = ({ navigation }) => {
     const makeSelectFriends = ( item ) => {
         if(item.selected) {
             //삭제
-            setSelectedFriends(selectedFriends.filter(data => data !== item.pk))
+            setSelectedFriends(selectedFriends.filter(data => data !== item.pk));
         } else {
             //추가
-            setSelectedFriends([...selectedFriends, item.pk])
+            setSelectedFriends([...selectedFriends, { pk: item.pk, nickname: item.nickname }]);
         }
     };
 

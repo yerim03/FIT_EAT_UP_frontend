@@ -13,8 +13,6 @@ import { globalStyles } from '../../styles/styles';
 
 const Friend = ({ navigation }) => {
     const [friendList, setFriendList] = useState([{}]); //친구 리스트
-    const [modalVisible, setModalVisible] = useState(false);    //모달 창 보이는 여부
-    const [friend, setFriend] = useState();
     const isFocused = useIsFocused();
     const { headers } = useUserState();
 
@@ -27,23 +25,6 @@ const Friend = ({ navigation }) => {
         };
         getFriendList();
     }, [isFocused]);
-    
-    const MyModal = ({ onShow }) => {
-        return(
-        <Modal animationType="fade" transparent={true} visible={modalVisible}>
-            <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                    {/* <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
-                    <Text>{username}</Text>
-                    <Text>{nickname}</Text> */}
-                    <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
-                        <Text style={{fontSize: 14}}>닫기</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </Modal>
-        );
-    };
 
     //flatlist의 renderItem
     const renderItem = ({ item: {pk, username, nickname, avatar_url} }) => {
@@ -69,14 +50,13 @@ const Friend = ({ navigation }) => {
             <View>
                 <TouchableOpacity 
                     style={styles.itemContainer} 
-                    // onPress={() => {setModalVisible(true);}}
                     activeOpacity={0.8}
                     onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} 
                 >
                     <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
                     <View style={{ flexDirection: 'column', flex: 1 }}>
-                        <Text style={styles.itemId}>{username}</Text>
                         <Text style={styles.itemNickname}>{nickname}</Text>
+                        <Text style={styles.itemId}>{username}</Text>
                     </View>
 
                     <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
@@ -109,6 +89,7 @@ const Friend = ({ navigation }) => {
                     <FlatList 
                         data={friendList}
                         renderItem={renderItem}
+                        showsVerticalScrollIndicator ={false}
                     />
                 </View>
             </View>
@@ -128,15 +109,15 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     itemId: {
+        fontSize: 15,
+        paddingHorizontal: 25,
+        color: `${theme.title_2}`,
+    },
+    itemNickname: {
         fontSize: 19,
         fontWeight: '500',
         color: `${theme.title_1}`,
         paddingHorizontal: 25,
-    },
-    itemNickname: {
-        fontSize: 15,
-        paddingHorizontal: 25,
-        color: `${theme.title_2}`,
     },
     deleteButton: {
         backgroundColor: `${theme.buttonBackgroundColor}`,
@@ -158,41 +139,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: `${theme.buttonTitleColor}`
     },
-
-
-
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-      },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        paddingVertical: 35,
-        paddingHorizontal: 25,
-        alignItems: "center",
-        shadowColor: "#000",    //그림자 색
-        shadowOffset: { //그림자 위치
-        width: 2,
-        height: 2
-        },
-        shadowOpacity: 0.3,    //그림자 투명도
-        shadowRadius: 4,
-        elevation: 5
-    },
-    modalButton: {
-        marginTop: 30, 
-        marginHorizontal: 12,
-        paddingVertical: 10, 
-        paddingHorizontal: 36,
-        borderRadius: 10, 
-        backgroundColor: '#a0a0a0'
-    }
-    
 });
-
 
 export default Friend;

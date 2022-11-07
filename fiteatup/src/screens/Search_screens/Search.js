@@ -35,10 +35,9 @@ const Search = ({ navigation }) => {
                              let getimage=res[1].data.documents;
                             for(let i = 0; i < getdata.length; i++){
                                 let oneData = getdata[i];
-                                oneData.image = getimage[3].image_url;
+                                oneData.image = getimage[2].image_url;
                                 setFoodData(prevData => [...prevData, oneData]);
                             }
-                            console.log(foodData)
                         })
             .catch(err => console.log(err))
     };

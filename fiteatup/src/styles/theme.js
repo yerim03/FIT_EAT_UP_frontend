@@ -9,24 +9,25 @@ const colors = {
     purple_3: '#6A59CF',
     purple_4: '#4431A3',
     purple_5: '#3B2C8A',
-    grey_0: '#E0E0E0',
-    grey_1: '#A0A0A0'
+    grey_0: '#E9E9E9',
+    grey_1: '#E0E0E0',
+    grey_2: '#A0A0A0'
 }
 
 export const theme = {
-    cameraButtonImageColor: colors.grey_1,
-
-    tabInActiveTint: colors.grey_1,
-    tabActiveTint: colors.purple_4,
-
-    backButtonColor: colors.purple_4,
+    backgroundColor: colors.white,
 
     title: colors.purple_4,
     title_1: colors.purple_5,
     title_2: colors.purple_3,
     smallTitle: colors.base_purple,
 
-    backgroundColor: colors.white,
+    cameraButtonImageColor: colors.grey_2,
+
+    tabInActiveTint: colors.grey_2,
+    tabActiveTint: colors.purple_4,
+
+    backButtonColor: colors.purple_4,
 
     buttonBackgroundColor: colors.base_purple,
     buttonTitleColor: colors.white,
@@ -35,7 +36,7 @@ export const theme = {
     inputFocusColor: colors.purple_4,   //input focus on
     inputNotFocusColor: colors.purple_1,    //input focus out
     inputDisabled: colors.purple_0, //input disabled
-    inputPlaceholder: colors.grey_1,
+    inputPlaceholder: colors.grey_2,
 
     errorMessage: colors.red,
     correctMesage: colors.purple_4,
@@ -48,10 +49,10 @@ export const theme = {
     iconColor: colors.base_purple,
     flatlistLineColor: colors.purple_1,
 
-    imageBackgroundColor: colors.grey_0,
+    imageBackgroundColor: colors.grey_1,
 
     restInfoBackgroundColor: colors.grey_0,
-    restInfoLineColor: colors.grey_1,
+    restInfoLineColor: colors.grey_2,
 
     percentBackgroundColor: colors.purple_0,
 

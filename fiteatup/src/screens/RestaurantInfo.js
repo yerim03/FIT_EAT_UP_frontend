@@ -278,6 +278,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         paddingVertical: 10,
         paddingHorizontal: 20,
+        borderBottomWidth: 0.5,
+        borderBottomColor: `${theme.restInfoLineColor}`, 
     },
     locationArea: {
         backgroundColor: `${theme.backgroundColor}`,
@@ -286,6 +288,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
+        borderBottomWidth: 0.5,
+        borderBottomColor: `${theme.restInfoLineColor}`, 
     },
     infoArea: {
         backgroundColor: `${theme.backgroundColor}`,

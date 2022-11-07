@@ -1,21 +1,44 @@
 //친구와의 공통 추천 맛집 결과화면
-// 총 10개의 추천 맛집 결과가 출력된다
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import ResultImage from '../../components/ResultImage';
-import { globalStyles } from '../../styles/styles';
+import { useUserState } from '../../context/UserContext';
+import axios from 'axios';
+import { API } from '../../config';
 import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const HomeResult = ({ navigation, route }) => {
-    let name = 'bluesky'
+    const [recommendResults, setRecommandResults] = useState([{}]); //추천 결과 data
+    const { user, headers } = useUserState();
+    let friends = route.params; //Home.js에서 가져온 선택한 친구들 pk
+    let data = {};  //선택한 친구들 data
+    let nicknames = '';
 
-    let friends = route.params; //선택한 친구들 pk
+    //서버에 보낼 data
+    data.model_name = 'model_5';
+    data.num = friends.length + 1;
+    data.user_id1 = user.userPk;
+    for(let i=0; i<friends.length; i++){
+        data['user_id' + (i+2)] = friends[i]['pk'];
+        if(i === friends.length-1){
+            nicknames += friends[i]['nickname'];
+        } else {
+            nicknames += friends[i]['nickname'] + ', ';
+        }
+    }
 
     useEffect(() => {
         //여기서 추천 결과를 가져올 예정
-        console.log(friends);
+        console.log(data);
+        const getResults = async() => {
+            const results = await axios.post(`${API.RECOMMEND_RESULTS}`, data, {headers: headers})
+            setRecommandResults(results.data);
+        }
+        getResults();
     }, [])
+
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneResultArea}>
@@ -34,7 +57,7 @@ const HomeResult = ({ navigation, route }) => {
 
     return(
         <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
-            <Text style={styles.title}>{name} 님과의 공통 추천 맛집 결과입니다!</Text>
+            <Text style={styles.title}>{nicknames} 님과의 공통 추천 맛집 결과입니다!</Text>
             <View style={styles.resultArea}>
                 <FlatList 
                     data={DATA}

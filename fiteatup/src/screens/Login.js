@@ -109,17 +109,16 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     title: {
-        // fontFamily: 'nanumGothicBold',
         fontSize: 45,
         fontWeight: '600',
         alignSelf: 'flex-start',
-        color: `${theme.title}`,
+        color: theme.title,
     },
     smallTitle: {
         fontSize: 17,
         fontWeight: '600',
         alignSelf: 'flex-start',
-        color: `${theme.smallTitle}`,
+        color: theme.smallTitle,
         marginBottom: 40,
     }
 });
