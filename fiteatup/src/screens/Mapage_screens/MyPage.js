@@ -1,11 +1,11 @@
 //마이페이지 화면
 import React from 'react';
-import { Text, 
-        View, 
-        StyleSheet, 
-        TouchableOpacity,
-        SafeAreaView, 
-        Alert } from 'react-native';
+import { View, 
+         StyleSheet, 
+         TouchableOpacity,
+         SafeAreaView, 
+         Alert } from 'react-native';
+import CustomText from '../../components/CustomText';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
@@ -36,10 +36,10 @@ const MyPage = ({ navigation }) => {
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <View style={globalStyles.container_2}>
-                <Text style={globalStyles.tabScreenTitle}>내 정보</Text>
+                <CustomText style={globalStyles.tabScreenTitle} fontType="Bold">내 정보</CustomText>
                 <View style={styles.profileArea}>
                     <MyProfileImage url={`${API.GET_PROFILEIMAGE}${user.userProfileImage}`} />
-                    <Text style={styles.nickname}>{user.userNickname}</Text>
+                    <CustomText style={styles.nickname} fontType="Medium">{user.userNickname}</CustomText>
                 </View>
                 <View style={{ height: 30 }} />
                 
@@ -49,7 +49,7 @@ const MyPage = ({ navigation }) => {
                     activeOpacity={0.8}
                 >
                     <Ionicons name="heart" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
-                    <Text style={styles.settingTitle}>좋아요</Text>  
+                    <CustomText style={styles.settingTitle} fontType="Medium">좋아요</CustomText>  
                 </TouchableOpacity>
 
                 <TouchableOpacity 
@@ -58,7 +58,7 @@ const MyPage = ({ navigation }) => {
                     activeOpacity={0.8}
                 >
                     <Ionicons name="location" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
-                    <Text style={styles.settingTitle}>가봤어요</Text>
+                    <CustomText style={styles.settingTitle} fontType="Medium">가봤어요</CustomText>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
@@ -67,7 +67,7 @@ const MyPage = ({ navigation }) => {
                     activeOpacity={0.8}
                 >
                     <MaterialIcons name="edit" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
-                    <Text style={styles.settingTitle}>프로필 수정</Text>
+                    <CustomText style={styles.settingTitle} fontType="Medium">프로필 수정</CustomText>
                     </TouchableOpacity>
                 <View style={{ height: 100 }} />
                 <MyButton title="로그아웃" onPress={ handleLogoutButtononPress } />
@@ -85,14 +85,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     nickname: {
-        fontSize: 22,
-        fontWeight: 'bold',  
+        fontSize: 22,  
         marginHorizontal: 20,
         color: `${theme.title_1}`,
     },
     settingTitle: {
         fontSize: 18,
-        fontWeight: '600',
         paddingLeft: 10,
         color: `${theme.title_1}`
     },

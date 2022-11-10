@@ -1,6 +1,7 @@
 //음식점 상세정보 화면
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import CustomText from '../components/CustomText';
 import { Ionicons } from '@expo/vector-icons';
 import { useUserState } from '../context/UserContext';
 import { Rating } from 'react-native-ratings';
@@ -82,14 +83,14 @@ const RestaurantInfo = ({ route }) => {
             return(
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={onPress}>
                     <Ionicons name={clickState ? "heart" : "heart-outline"} size={35} color={clickState ? `${theme.iconColor}` : "#000000"}/>
-                    <Text style={styles.data}>{title}</Text>
+                    <CustomText style={styles.data}  fontType="Light">{title}</CustomText>
                 </TouchableOpacity>
             );
         } else if( buttonType === 'visit'){ //visit 모양이면 가봤어요 버튼
             return(
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={onPress}> 
                     <Ionicons name={clickState ? "location" : "location-outline"} size={35} color={clickState ? `${theme.iconColor}` : "#000000"}/>
-                    <Text style={styles.data}>{title}</Text>
+                    <CustomText style={styles.data} fontType="Light">{title}</CustomText>
                 </TouchableOpacity>
             );
         }
@@ -152,11 +153,11 @@ const RestaurantInfo = ({ route }) => {
         return(
             <View>
                 <View style={styles.oneDataArea}>
-                    <Text style={styles.data}>연락처</Text>
-                    <Text style={styles.data}>{foodData.phone}</Text>
+                    <CustomText style={styles.data} fontType="Light">연락처</CustomText>
+                    <CustomText style={styles.data} fontType="Light">{foodData.phone}</CustomText>
                 </View>
                 <View style={styles.oneDataArea}>
-                    <Text style={styles.data}>{foodData.category_name}</Text>
+                    <CustomText style={styles.data} fontType="Light">{foodData.category_name}</CustomText>
                 </View>
             </View>
         );
@@ -183,7 +184,7 @@ const RestaurantInfo = ({ route }) => {
                                 {uri: foodData.image}}
                 />
                 <View style={styles.nameArea}>
-                    <Text style={styles.title}>{foodData.place_name}</Text>
+                    <CustomText style={styles.title} fontType="Medium">{foodData.place_name}</CustomText>
                 </View>
 
                 <View style={styles.goodVisitArea}>
@@ -195,7 +196,7 @@ const RestaurantInfo = ({ route }) => {
                     <Modal animationType="fade" transparent={true} visible={modalVisible}>
                         <View style={modalStyles.centeredView}>
                             <View style={modalStyles.modalView}>
-                                <Text style={[styles.data, {marginBottom: 20}]}>이 음식점을 평가해주세요!</Text>
+                                <CustomText style={[styles.data, {marginBottom: 20}]}>이 음식점을 평가해주세요!</CustomText>
                                 <Rating 
                                     startingValue={starRating}
                                     imageSize={35}
@@ -204,17 +205,17 @@ const RestaurantInfo = ({ route }) => {
                                 />
                                 <View style={{ flexDirection: 'row'}}>
                                     <TouchableOpacity style={modalStyles.modalButton} onPress={() => setModalVisible(false)}>
-                                        <Text style={modalStyles.modalButtonTitle}>취소</Text>
+                                        <CustomText style={modalStyles.modalButtonTitle}>취소</CustomText>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={modalStyles.modalButton} onPress={() => { setModalVisible(false); handleRatingFinishonPress(); }}>   
-                                        <Text style={modalStyles.modalButtonTitle}>완료</Text>
+                                        <CustomText style={modalStyles.modalButtonTitle}>완료</CustomText>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                     </Modal>
 
-                    <Text style={styles.data}>나의 별점은?</Text>
+                    <CustomText style={styles.data} fontType="Light">나의 별점은?</CustomText>
                     <TouchableOpacity 
                         activeOpacity={0.7} 
                         hitSlop={{ top: 10, bottom: 10, left: 30, right: 30}}
@@ -229,15 +230,15 @@ const RestaurantInfo = ({ route }) => {
                 </View>
 
                 <View style={styles.locationArea}>
-                    <Text style={styles.dataTitle}>{foodData.road_address_name}</Text>
-                    <Text style={styles.data}>{foodData.address_name}</Text>
+                    <CustomText style={styles.dataTitle} fontType="Medium">{foodData.road_address_name}</CustomText>
+                    <CustomText style={styles.data} fontType="Light">{foodData.address_name}</CustomText>
                     {/* <View style={{flex: 1, backgroundColor: 'orange'}}>
                         <Text>지도영역</Text>
                     </View> */}
                 </View>
 
                 <View style={styles.infoArea}>
-                    <Text style={styles.dataTitle}>상세정보</Text>
+                    <CustomText style={styles.dataTitle} fontType="Medium">상세정보</CustomText>
                     <Info />
                 </View>
             </ScrollView>
@@ -306,17 +307,14 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24, 
-        fontWeight: 'bold',
     },
     dataTitle: {
         fontSize: 17,
-        fontWeight: 'bold',
         marginVertical: 5,
     },
     data: {
         fontSize: 16,
-        color: '#404040',
-        fontWeight: '600',
+        color: `${theme.restInfoDataTextColor}`,
         paddingVertical: 5,
     },
     button: {

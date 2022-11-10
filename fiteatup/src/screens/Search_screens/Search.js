@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Text, 
-         View, 
+import { View, 
          StyleSheet, 
          SafeAreaView, 
          FlatList, 
          TouchableOpacity,
          TouchableWithoutFeedback,
          Keyboard } from 'react-native';
+import CustomText from '../../components/CustomText';
 import SearchBar from '../../components/SearchBar';
 import ResultImage from '../../components/ResultImage';
 import { KAKAO_API_KEY } from '../../cofig/config_secret';
@@ -58,12 +58,13 @@ const Search = ({ navigation }) => {
         );
     };
 
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={globalStyles.container_2} >
-                    <Text style={globalStyles.tabScreenTitle}>장소 검색</Text>
-                    <Text style={globalStyles.tabScreenSmallTitle}>원하는 음식점을 검색해보세요!</Text>
+                    <CustomText style={globalStyles.tabScreenTitle} fontType="Bold">장소 검색</CustomText>
+                    <CustomText style={globalStyles.tabScreenSmallTitle} fontType="Medium">원하는 음식점을 검색해보세요!</CustomText>
                     <View style={styles.serachBarArea}>
                         <SearchBar 
                             value={searchWord}

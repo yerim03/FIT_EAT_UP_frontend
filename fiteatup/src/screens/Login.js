@@ -1,6 +1,7 @@
 //로그인 화면
 import React, { useState, useEffect } from 'react';
-import { Text, Image, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import CustomText from '../components/CustomText';
 import MyInput from '../components/MyInput';
 import MyButton from '../components/MyButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -10,7 +11,7 @@ import { API } from '../config';
 import { useUserDispatch } from '../context/UserContext';
 import { theme } from '../styles/theme';
 import { globalStyles } from '../styles/styles';
-import Logo from '../../assets/icon2.png';
+
 
 const Login = ({ navigation }) => {
     const [id, setId] = useState(''); //입력 id
@@ -75,11 +76,9 @@ const Login = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }} extraScrollHeight={20}>
                 <View style={globalStyles.container}>
-                    {/* <Image style={{ backgroundColor: 'red', width: 100, height: 100, margin: 30}} 
-                            source={Logo}/> */}
                     <View style={{ height: 90 }} />
-                    <Text style={styles.title}>FIT EAT UP</Text>
-                    <Text style={styles.smallTitle}>친구와의 공통 맛집 추천 서비스</Text>
+                    <CustomText style={styles.title} fontType="Bold">FIT EAT UP</CustomText>
+                    <CustomText style={styles.smallTitle} fontType="Medium">친구와의 공통 맛집 추천 서비스</CustomText>
                     <MyInput
                         label="아이디"
                         value={id}
@@ -98,7 +97,7 @@ const Login = ({ navigation }) => {
                         isPassword  //비밀번호 입력시 입력되는 값이 보이지 않도록 설정
                     />
                     <View style={{ height: 50 }} />
-                    <MyButton title="로그인" onPress={ handleLoginButtonPress } disabled={disabled}/>
+                    <MyButton title="로그인" onPress={handleLoginButtonPress} disabled={disabled}/>
                     <View style={{ height: 20 }} />
                     <MyButton title="회원가입" onPress={()=> navigation.navigate("Signup")}/>
                 </View>
@@ -110,13 +109,11 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
     title: {
         fontSize: 45,
-        fontWeight: '600',
         alignSelf: 'flex-start',
         color: theme.title,
     },
     smallTitle: {
         fontSize: 17,
-        fontWeight: '600',
         alignSelf: 'flex-start',
         color: theme.smallTitle,
         marginBottom: 40,

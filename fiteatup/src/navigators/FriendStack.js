@@ -14,6 +14,10 @@ const FreindStack = () => {
             screenOptions={{ 
                 cardStyle: { backgroundColor: `${theme.backgroundColor}`},
                 headerTitleAlign: 'center',
+                headerTitleStyle: {
+                    fontFamily: 'netmarbleMedium',
+                    fontSize: 19
+                },
                 headerTintColor: `${theme.title}`,
                 headerBackTitleVisible: false,
                 headerBackImage: HeaderBackButton,
@@ -27,14 +31,12 @@ const FreindStack = () => {
             <Stack.Screen 
                 name="FriendProfile" 
                 component={FriendProfile} 
-                options={{ headerTitle: '프로필', 
-                            headerTitleStyle: {fontWeight: 'bold'} }}
+                options={{ headerTitle: '친구 프로필' }}
             />
             <Stack.Screen 
                 name="AddFriend" 
                 component={AddFriend} 
-                options={{ headerTitle: '친구 추가',
-                            headerTitleStyle: {fontWeight: 'bold'} }}
+                options={{ headerTitle: '친구 추가' }}
             />
         </Stack.Navigator>
     );

@@ -1,6 +1,7 @@
 //좋아요 장소 리스트 화면
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
+import { View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
+import CustomText from '../../components/CustomText';
 import FoodImage from '../../components/FoodImage';
 import axios from 'axios';
 import { API } from '../../config';
@@ -28,7 +29,7 @@ const GoodList = ({ navigation }) => {
                 onPress={() => navigation.navigate('RestaurantInfo', {item, isHome: false}) } 
             >
                 <FoodImage url={`${item.image}`} />
-                <Text style={styles.itemTitle}>{item.place_name}</Text>
+                <CustomText style={styles.itemTitle} fontType="Medium">{item.place_name}</CustomText>
             </TouchableOpacity>
         );
     };
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
     },
     itemTitle: {
         fontSize: 17,
-        fontWeight: 'bold',
         paddingHorizontal: 15,
         color: `${theme.title_1}`
     },

@@ -1,6 +1,7 @@
 //회원가입 화면
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import CustomText from '../components/CustomText';
 import MyInput from '../components/MyInput';
 import MyButton from "../components/MyButton";
 import AgeDropDown from '../components/AgeDropDown';
@@ -147,7 +148,7 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="아이디(영문, 숫자 또는 6글자 이상)"
                     />
-                    <Text style={styles.errorText}>{idErrorMsg}</Text>
+                    <CustomText style={styles.errorText} fontType="Light">{idErrorMsg}</CustomText>
                     <MyInput
                         label="비밀번호"
                         value={password}
@@ -156,7 +157,7 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="비밀번호(영문, 숫자, 특수문자 포함 8자 이상)"
                     />
-                    <Text style={isPassword ? styles.correctText : styles.errorText}>{passwordErrorMsg}</Text>
+                    <CustomText style={isPassword ? styles.correctText : styles.errorText} fontType="Light">{passwordErrorMsg}</CustomText>
                     <MyInput
                         label="비밀번호 확인"  
                         value={passwordConfirm}
@@ -165,19 +166,19 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="비밀번호를 다시 한번 입력해주세요."
                     />
-                    <Text style={isPasswordConfirm ?  styles.correctText : styles.errorText}>{passwordConfrimMsg}</Text>
+                    <CustomText style={isPasswordConfirm ?  styles.correctText : styles.errorText} fontType="Light">{passwordConfrimMsg}</CustomText>
                     <MyInput
                         label="닉네임"
                         value={nickname}
                         onChangeText={text => setNickName(text)}
                         onSubmitEditing={() => {}}
-                        placeholder="사용할 이름을 입력하세요"
+                        placeholder="사용할 이름을 입력하세요."
                     />
                     {/* <View style={{ marginVertical: 10, alignSelf: 'flex-start'}}>
                         <AgeDropDown />
                     </View> */}
                     <View style={{ height: 50 }} />
-                    <MyButton title="회원가입완료" onPress={ handleSignupButtonPress } disabled={disabled} />
+                    <MyButton title="회원가입 완료" onPress={ handleSignupButtonPress } disabled={disabled} />
                 </View>
             </KeyboardAwareScrollView>
         </SafeAreaView>
@@ -187,7 +188,6 @@ const Signup = ({ navigation }) => {
 const styles = StyleSheet.create({
     errorText: {
         color: `${theme.errorMessage}`,
-        fontWeight: '500',
         fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 5,
@@ -195,11 +195,10 @@ const styles = StyleSheet.create({
     },
     correctText: {
         color: `${theme.correctMesage}`,
-        fontWeight: '500',
         fontSize: 13,
         alignSelf: 'flex-start',
         marginLeft: 5,
-        marginBottom: 7,
+        marginBottom: 10,
     },
 });
 

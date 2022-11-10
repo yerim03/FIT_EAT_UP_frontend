@@ -163,3 +163,7 @@ version 0.6.1
 version 0.7.0
 - 친구와 추천 맛집 검색 결과 출력 완료(HomeResult.js)
 - HomeResult.js에 Loading Indicator 추가
+
+version 0.7.1
+- 폰트 변경
+- 1명 미만의 친구 선택히 추천이 불가하도록 설정

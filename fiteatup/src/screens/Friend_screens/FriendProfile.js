@@ -1,6 +1,7 @@
 //친구 프로필 화면
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
+import CustomText from '../../components/CustomText';
 import MyProfileImage from '../../components/MyProfileImage';
 import FoodImage from '../../components/FoodImage';
 import { Ionicons } from '@expo/vector-icons'; 
@@ -39,7 +40,7 @@ const FriendProfile = ({ route }) => {
         return(
             <View style={styles.renderItem}>
                 <FoodImage url={image}/>
-                <Text style={{ paddingVertical: 3 }}>{place_name}</Text>
+                <CustomText style={{ paddingVertical: 3 }} fontType="Light">{place_name}</CustomText>
             </View>
         );
     };
@@ -48,7 +49,7 @@ const FriendProfile = ({ route }) => {
         return(
             <View style={{ paddingHorizontal: 10, paddingTop: 20, flexDirection: 'row', alignItems: 'center'}}>
                 <Ionicons name={name} size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 5 }} />
-                <Text style={{fontSize: 18, fontWeight: '700', color: `${theme.title_1}`}}>{title}</Text>
+                <CustomText style={{fontSize: 18, color: `${theme.title_1}`}} fontType="Medium">{title}</CustomText>
             </View>
         );
     }
@@ -59,8 +60,8 @@ const FriendProfile = ({ route }) => {
             <View style={styles.profileArea}>
                 <MyProfileImage url={`${API.GET_PROFILEIMAGE}${route.params.avatar_url}`}/>
                 <View style={styles.textArea}>
-                    <Text style={styles.nickname}>{route.params.nickname}</Text>
-                    <Text style={styles.id}>{route.params.username}</Text>
+                    <CustomText style={styles.nickname} fontType="Medium">{route.params.nickname}</CustomText>
+                    <CustomText style={styles.id} fontType="Light">{route.params.username}</CustomText>
                 </View>
             </View>
             <View style={styles.listArea}>
@@ -113,7 +114,6 @@ const styles = StyleSheet.create({
     },
     nickname: {
         fontSize: 22,
-        fontWeight: '500',
         paddingVertical: 3,
         color: `${theme.title_1}`,
     },

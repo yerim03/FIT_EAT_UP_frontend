@@ -12,13 +12,11 @@ import { API } from '../../config';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
 
 
-
 const ProfileEdit = () => {
     const { user, headers } = useUserState();
     const dispatch = useUserDispatch();
     const [changeNickname, setChangeNickname] = useState(user.userNickname);
     const [changePhotoUrl, setChangePhotoUrl] = useState(`${API.GET_PROFILEIMAGE}${user.userProfileImage}`);
-
 
     //프로필 수정 기능
     const handleEditButtonPress = async() => {

@@ -1,6 +1,7 @@
 //친구와의 공통 추천 맛집 결과화면
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import CustomText from '../../components/CustomText';
 import ResultImage from '../../components/ResultImage';
 import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
@@ -65,7 +66,7 @@ const HomeResult = ({ navigation, route }) => {
 
     return(
         <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
-            <Text style={styles.title}>{nicknames} 님과의 공통 추천 맛집 결과입니다!</Text>
+            <CustomText style={styles.title} fontType="Medium">{nicknames} 님과의 공통 추천 맛집 결과입니다!</CustomText>
             <View style={styles.resultArea}>
                 {isLoading ?
                     <ActivityIndicator size="large" color={theme.activityIndicator} animating={true} />
@@ -87,13 +88,12 @@ const styles = StyleSheet.create({
     title: {
         flex: 0.1,
         fontSize: 18,
-        fontWeight: 'bold',
         color: `${theme.title_1}`,
     },
     resultArea: {
         flex: 1,
         width: '100%',
-        // backgroundColor: 'red',
+
         alignItems: 'center',
         justifyContent: 'center',
     },

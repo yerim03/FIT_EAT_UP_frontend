@@ -14,6 +14,10 @@ const HomeStack = () => {
             screenOptions={{
                 cardStyle: { backgroundColor: `${theme.backgroundColor}`},
                 headerTitleAlign: 'center',
+                headerTitleStyle: {
+                    fontFamily: 'netmarbleMedium',
+                    fontSize: 19
+                },
                 headerTintColor: `${theme.title}`,
                 headerBackTitleVisible: false, 
                 headerBackImage: HeaderBackButton,
@@ -27,8 +31,7 @@ const HomeStack = () => {
             <Stack.Screen 
                 name="HomeResult" 
                 component={HomeResult}
-                options={{ headerTitle: '추천 결과',
-                            headerTitleStyle: {fontWeight: 'bold'} }}
+                options={{ headerTitle: '추천 결과' }}
             />
         </Stack.Navigator>
     );

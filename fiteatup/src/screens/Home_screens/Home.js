@@ -1,13 +1,14 @@
 //홈 화면
 import React, { useEffect, useState } from 'react';
-import { Text, 
-        Image,
+import { Image,
         View,
         StyleSheet, 
         TouchableOpacity,
         SafeAreaView,
-        FlatList } from 'react-native';
+        FlatList, 
+        Alert} from 'react-native';
 import HomeFriendProfile from '../../components/HomeFriendProfile';
+import CustomText from '../../components/CustomText';
 import { useIsFocused } from '@react-navigation/native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { useUserState } from '../../context/UserContext';
@@ -71,12 +72,19 @@ const Home = ({ navigation }) => {
         );
     };
 
+    const handleRecommendButtononPress = () => {
+        if(selectedFriends.length === 0) {
+            Alert.alert("맛집 추천 실패", '1명 이상의 친구를 선택해주세요!');
+        } else {
+            navigation.navigate("HomeResult", selectedFriends);
+        }
+    };
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <View style={globalStyles.container_2}>
-                <Text style={globalStyles.tabScreenTitle}>추천맛집 검색</Text>
-                <Text style={globalStyles.tabScreenSmallTitle}>친구와 공통된 맛집을 추천받아보세요!</Text>
+                <CustomText style={globalStyles.tabScreenTitle} fontType="Bold">추천맛집 검색</CustomText>
+                <CustomText style={globalStyles.tabScreenSmallTitle} fontType="Medium">친구와 공통된 맛집을 추천받아보세요!</CustomText>
                 <View style={styles.recomArea}>
                     <FlatList 
                         data={friendsList}
@@ -85,21 +93,20 @@ const Home = ({ navigation }) => {
                         numColumns={3}
                         style={{ margin: 10 }}
                     />
-                    <TouchableOpacity style={styles.recomButton} onPress={() => navigation.navigate("HomeResult", selectedFriends)}>
-                    
-                        <Text style={{color: `${theme.buttonTitleColor}`, fontSize: 17 }}>맛집 추천</Text>
+                    <TouchableOpacity style={styles.recomButton} onPress={handleRecommendButtononPress}>
+                        <CustomText style={{color: `${theme.buttonTitleColor}`, fontSize: 17 }} fontType="Light">맛집 추천</CustomText>
                         <AntDesign name="like1" size={25} color={theme.buttonTitleColor} style={{paddingHorizontal: 6}}/>
                     </TouchableOpacity>
                 </View>
                 
                 <View style={{ height: 30 }} />
-                <Text style={globalStyles.tabScreenTitle}>나이대별 추천 장소</Text>
-                <Text style={globalStyles.tabScreenSmallTitle}>{user.userNickname} 님과 같은 나이대의 사용자들이{'\n'}좋아한 장소에요!</Text>
+                <CustomText style={globalStyles.tabScreenTitle} fontType="Bold">나이대별 추천 장소</CustomText>
+                <CustomText style={globalStyles.tabScreenSmallTitle} fontType="Medium">{user.userNickname} 님과 같은 나이대의 사용자들이{'\n'}좋아한 장소에요!</CustomText>
                 <View style={styles.checkArea}>
                     {/* 연령별 추천 장소 이미지 넣을 것 */}
                     <Image style={styles.checkPlaceImage} source={{uri : 'https://k.kakaocdn.net/dn/2yveN/btrA1BDPuuu/3oG4ZNI7uZCAIoKdZr9LR1/img.jpg'}}/>
                     <View style={styles.checkPlaceName}>
-                        <Text style={styles.checkPlaceNameTitle}>팬더스윗</Text>
+                        <CustomText style={styles.checkPlaceNameTitle} fontType="Light">팬더스윗</CustomText>
                         {/* 연령 별 추천 장소이름 넣을 것 */}
                     </View>
                     <View style={styles.buttonArea}>
@@ -146,7 +153,6 @@ const styles = StyleSheet.create({
     checkPlaceNameTitle: {
         color: `${theme.title_1}`,
         fontSize: 16,
-        fontWeight: '600'
     },
     recomButton: {
         flexDirection: 'row',

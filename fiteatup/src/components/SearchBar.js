@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         backgroundColor: `${theme.searchBarInput}`,
         paddingVertical: 15,
         paddingHorizontal: 17,
-        fontSize: 16,
+        fontFamily: 'netmarbleLight',
+        fontSize: 15,
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
         //ios 그림자 설정

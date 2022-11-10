@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet,TouchableOpacity } from 'react-native';
+import CustomText from './CustomText';
 import FriendProfileImage from './FriendProfileImage';
 import CHECK from '../../assets/check.png'
 import { theme } from '../styles/theme';
@@ -14,11 +15,13 @@ const FriendProfile = ({ item, url, onPressOut }) => {
                 <FriendProfileImage url={url}/>
             }
         </TouchableOpacity>
-            <Text style={item.selected? 
+            <CustomText style={item.selected? 
                             styles.itemNickNameSelected : 
-                            styles.itemNickName}>
+                            styles.itemNickName}
+                        fontType="Light"
+            >
                 {item.nickname}
-            </Text>
+            </CustomText>
         </View>
 
     );
@@ -40,12 +43,10 @@ const styles = StyleSheet.create({
     },
     itemNickName: {
         fontSize: 14,
-        fontWeight: '500',
         color: `${theme.notSelectTitleColor}`,
     },
     itemNickNameSelected: {
         fontSize: 14,
-        fontWeight: '500',
         color: `${theme.selectTitleColor}`,
     }
 });

@@ -14,8 +14,7 @@ export const globalStyles = StyleSheet.create({
         paddingVertical: 20,
     },
     tabScreenTitle: {
-        fontSize: 23,
-        fontWeight: '700',
+        fontSize: 24,
         color: `${theme.title}`,
     },
     tabScreenSmallTitle: {

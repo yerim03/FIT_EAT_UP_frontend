@@ -1,6 +1,7 @@
 //친구 목록
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList, Modal } from 'react-native';
+import { View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import CustomText from '../../components/CustomText';
 import FriendProfileImage from '../../components/FriendProfileImage';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
@@ -55,12 +56,12 @@ const Friend = ({ navigation }) => {
                 >
                     <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
                     <View style={{ flexDirection: 'column', flex: 1 }}>
-                        <Text style={styles.itemNickname}>{nickname}</Text>
-                        <Text style={styles.itemId}>{username}</Text>
+                        <CustomText style={styles.itemNickname} fontType="Medium">{nickname}</CustomText>
+                        <CustomText style={styles.itemId} fontType="Light">{username}</CustomText>
                     </View>
 
                     <TouchableOpacity style={styles.deleteButton} onPress={handleRemoveFriendButtononPress}>
-                        <Text style={styles.deleteTitle}>삭제</Text>
+                        <CustomText style={styles.deleteTitle} fontType="Light">삭제</CustomText>
                     </TouchableOpacity>
                 </TouchableOpacity>
             </View>
@@ -71,7 +72,7 @@ const Friend = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={globalStyles.container_2}>
                 <View style={styles.titleArea}>
-                    <Text style={[{flex: 1}, globalStyles.tabScreenTitle]}>친구 목록</Text>
+                    <CustomText style={[{flex: 1}, globalStyles.tabScreenTitle]} fontType="Bold">친구 목록</CustomText>
                     <TouchableOpacity 
                         activeOpacity={0.8} 
                         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10}} 
@@ -82,7 +83,7 @@ const Friend = ({ navigation }) => {
                 </View>
 
                 <View style={{ alignSelf: 'flex-end' }}>
-                    <Text style={{ fontSize: 15, color: `${theme.title_1}`}}>친구 수 : {friendList.length}</Text>
+                    <CustomText style={{ fontSize: 15, color: `${theme.title_1}`}} fontType="Light">친구 수 : {friendList.length}</CustomText>
                 </View>
                 
                 <View style={{ flex: 1 }}>
@@ -115,7 +116,6 @@ const styles = StyleSheet.create({
     },
     itemNickname: {
         fontSize: 19,
-        fontWeight: '500',
         color: `${theme.title_1}`,
         paddingHorizontal: 25,
     },

@@ -11,7 +11,8 @@ const colors = {
     purple_5: '#3B2C8A',
     grey_0: '#E9E9E9',
     grey_1: '#E0E0E0',
-    grey_2: '#A0A0A0'
+    grey_2: '#A0A0A0',
+    grey_3: '#404040'
 }
 
 export const theme = {
@@ -53,6 +54,7 @@ export const theme = {
 
     restInfoBackgroundColor: colors.grey_0,
     restInfoLineColor: colors.grey_2,
+    restInfoDataTextColor: colors.grey_3,
 
     percentBackgroundColor: colors.purple_0,
 

@@ -1,6 +1,7 @@
 //연령대를 표시할 수 있는 드롭다운
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import CustomText from './CustomText';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { theme } from '../styles/theme';
 
@@ -22,10 +23,10 @@ const AgeDropDown = () => {
 
     return(
         <View style={styles.input}>
-            <Text style={[styles.label, ageValue && {color: `${theme.dropdownColor}`}]}>연령대</Text>
+            <CustomText style={[styles.label, ageValue && {color: `${theme.dropdownColor}`}]} fontType="Medium">연령대</CustomText>
             <DropDownPicker 
                 style={styles.dropdown}
-                textStyle={{color: `${theme.dropdownColor}`, fontWeight: '500'}}
+                textStyle={{color: `${theme.dropdownColor}`, fontFamily: 'netmarbleMedium', fontWeight: '500'}}
                 open={ageOpen}
                 value={ageValue}
                 items={age}
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
     },
     label:{
         fontSize: 17,
-        fontWeight: 'bold',
         color: `${theme.inputNotFocusColor}`,
         paddingBottom: 10,
     },

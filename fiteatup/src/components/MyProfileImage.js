@@ -1,6 +1,6 @@
 //커스텀 컴포넌트 - 프로필이미지를 나타내는 컴포넌트
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, Alert, Platform, Modal } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../styles/theme';

@@ -47,28 +47,28 @@ const MainTab = () => {
                 name="HomeStack" 
                 component={HomeStack} 
                 options={{ tabBarLabel: '홈', 
-                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                            tabBarLabelStyle: { fontFamily: 'netmarbleMedium', fontSize: 12, marginBottom: 2 }
                         }} 
             />
             <Tab.Screen 
                 name="SearchStack" 
                 component={SearchStack} 
                 options={{ tabBarLabel: '검색', 
-                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                            tabBarLabelStyle: { fontFamily: 'netmarbleMedium', fontSize: 12, marginBottom: 2 }
                 }}
             />
             <Tab.Screen 
                 name="FreindStack" 
                 component={FreindStack} 
                 options={{ tabBarLabel: '친구', 
-                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                            tabBarLabelStyle: { fontFamily: 'netmarbleMedium', fontSize: 12, marginBottom: 2 }
                 }} 
             />
             <Tab.Screen 
                 name="MyPageStack" 
                 component={MyPageStack} 
                 options={{ tabBarLabel: '내정보', 
-                            tabBarLabelStyle: {fontSize: 11, marginBottom: 2 }
+                            tabBarLabelStyle: { fontFamily: 'netmarbleMedium', fontSize: 12, marginBottom: 2 }
                 }}
             />
         </Tab.Navigator>

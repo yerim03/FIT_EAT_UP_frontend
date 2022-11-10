@@ -1,6 +1,7 @@
 //커스텀 컴포넌트 - Button
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import CustomText from './CustomText';
 import { theme } from '../styles/theme';
 
 
@@ -12,7 +13,7 @@ const MyButton = ( props ) => {
             disabled={props.disabled}
             activeOpacity={0.8}
         >
-            <Text style={styles.bnttitle}>{props.title}</Text>
+            <CustomText style={styles.bnttitle} fontType="Light">{props.title}</CustomText>
         </TouchableOpacity>
     );
 

@@ -10,12 +10,14 @@ const Stack = createStackNavigator();
 
 const MainStack = () => {
     return(
-        <Stack.Navigator initialRouteName="Main"
-                        screenOptions={{
-                            cardStyle: { backgroundColor: `${theme.backgroundColor}`},
-                            headerBackTitleVisible: false,
-                            headerBackImage: HeaderBackButton,
-        }}>
+        <Stack.Navigator 
+            initialRouteName="Main"
+            screenOptions={{
+                cardStyle: { backgroundColor: `${theme.backgroundColor}`},
+                headerBackTitleVisible: false,
+                headerBackImage: HeaderBackButton,
+            }}
+        >
             <Stack.Screen 
                 name="Main" 
                 component={MainTab} 
@@ -24,7 +26,7 @@ const MainStack = () => {
             <Stack.Screen 
                 name="RestaurantInfo" 
                 component={RestaurantInfo}
-                options={{ headerTitleAlign: 'center', headerTitle: '' }}
+                options={{ headerTitle: '' }}
             />
         </Stack.Navigator>
     );

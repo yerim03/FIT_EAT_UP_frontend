@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, StyleSheet, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import CustomText from '../../components/CustomText';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
 import axios from 'axios';
@@ -30,7 +31,7 @@ const AddFriend = ({ navigation }) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
-                <Text style={styles.title}>친구의 ID를 검색해서 친구를 추가해보세요!</Text>
+                <CustomText style={styles.title} fontType="Light">친구의 ID를 검색해서 친구를 추가해보세요!</CustomText>
                 <MyInput
                         value={friendId}
                         onChangeText={text => setFriendId(text)}
