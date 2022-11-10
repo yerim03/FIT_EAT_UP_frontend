@@ -59,4 +59,6 @@ export const theme = {
     notSelectTitleColor: colors.purple_5,
     selectCheckColor: colors.base_purple,
     selectTitleColor: colors.base_purple,
+
+    activityIndicator: colors.purple_2,
 }

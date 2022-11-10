@@ -25,7 +25,7 @@ const VisitList = ({ navigation }) => {
         return(
             <TouchableOpacity 
                 style={styles.itemContainer} 
-                onPress={() => navigation.navigate('RestaurantInfo', {item, isSearch: false}) } 
+                onPress={() => navigation.navigate('RestaurantInfo', {item, isHome: false}) } 
             >
                 <FoodImage url={`${item.image}`} />
                 <Text style={styles.itemTitle}>{item.place_name}</Text>

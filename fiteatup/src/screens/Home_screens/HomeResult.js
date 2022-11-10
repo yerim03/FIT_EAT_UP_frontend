@@ -1,6 +1,6 @@
 //친구와의 공통 추천 맛집 결과화면
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import ResultImage from '../../components/ResultImage';
 import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
@@ -10,11 +10,13 @@ import { globalStyles } from '../../styles/styles';
 
 
 const HomeResult = ({ navigation, route }) => {
-    const [recommendResults, setRecommandResults] = useState([{}]); //추천 결과 data
+    const [recommendResults, setRecommendResults] = useState(); //추천 결과 data
+    const [isLoading, setIsLoading] = useState(true);  //Activity Indicator show 여부 관리
+
     const { user, headers } = useUserState();
     let friends = route.params; //Home.js에서 가져온 선택한 친구들 pk
     let data = {};  //선택한 친구들 data
-    let nicknames = '';
+    let nicknames = ''; //선택한 친구들 names
 
     //서버에 보낼 data
     data.model_name = 'model_5';
@@ -34,20 +36,26 @@ const HomeResult = ({ navigation, route }) => {
         console.log(data);
         const getResults = async() => {
             const results = await axios.post(`${API.RECOMMEND_RESULTS}`, data, {headers: headers})
-            setRecommandResults(results.data);
+            setRecommendResults(results.data);
         }
         getResults();
     }, [])
 
+    useEffect(() => {
+        if(recommendResults) {
+            setIsLoading(false);
+        }
+    }, [recommendResults])
+
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneResultArea}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item, isHome: true})}>
                     <ResultImage 
                         foodname={item.place_name} 
                         recommend
                         star={item.rating}
-                        url={item.image}          
+                        url={`${API.GET_RESTAURANT_IMAGE}/${item.image}`}          
                     />
                 </TouchableOpacity>
             </View>
@@ -59,13 +67,17 @@ const HomeResult = ({ navigation, route }) => {
         <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
             <Text style={styles.title}>{nicknames} 님과의 공통 추천 맛집 결과입니다!</Text>
             <View style={styles.resultArea}>
-                <FlatList 
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-                    numColumns={2}
-                    showsVerticalScrollIndicator ={false}
-                />
+                {isLoading ?
+                    <ActivityIndicator size="large" color={theme.activityIndicator} animating={true} />
+                    :
+                    <FlatList 
+                        data={recommendResults}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        numColumns={2}
+                        showsVerticalScrollIndicator ={false}
+                    />
+                }
             </View>         
         </View>
     );
@@ -81,6 +93,9 @@ const styles = StyleSheet.create({
     resultArea: {
         flex: 1,
         width: '100%',
+        // backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     oneResultArea: {
         flexDirection: 'row', 

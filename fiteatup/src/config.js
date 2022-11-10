@@ -8,18 +8,23 @@ export const API = {
     USER_DATA: `${BASE_URL}/accounts/user/`,
     USER_DATA_UPDATE: `${BASE_URL}/accounts/user/`,
     GET_PROFILEIMAGE: `${BASE_URL}`,
+
     ADD_FRIEND: `${BASE_URL}/accounts/follow/`,
     REMOVE_FRIEND: `${BASE_URL}/accounts/unfollow/`,
     FRIEND_LIST: `${BASE_URL}/accounts/suggestions/`,
+
     SAVE_GOODLIST: `${BASE_URL}/accounts/place/user/like/save/`,
     GET_GOODLIST: `${BASE_URL}/accounts/place/user/like/list/`,
     DELETE_GOODLIST: `${BASE_URL}/accounts/place/user/like/delete/`,
+    
     SAVE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/save/`,
     GET_VISITLIST: `${BASE_URL}/accounts/place/user/visit/list/`,
     DELETE_VISITLIST: `${BASE_URL}/accounts/place/user/visit/delete/`,
+
     SAVE_STAR_RATING: `${BASE_URL}/accounts/place/user/rating/`,
     GET_STAR_RATINGLIST: `${BASE_URL}/accounts/place/user/rating/list/`,
-    GET_RESTAURANT_IMAGE: `${BASE_URL}`,
+
+    GET_RESTAURANT_IMAGE: `${BASE_URL}/media/`,
     RECOMMEND_RESULTS: `${BASE_URL}/recommands/recommand/`,
     GET_FRIEND_GOODLIST: `${BASE_URL}/accounts/place/friend/like/list/`,
     GET_FRIEND_VISITLIST: `${BASE_URL}/accounts/place/friend/visit/list/`,

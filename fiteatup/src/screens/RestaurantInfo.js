@@ -19,7 +19,7 @@ const RestaurantInfo = ({ route }) => {
     const { user, headers } = useUserState();
     
     let foodData = route.params.item;    //Search.js에서 받아온 음식점 data
-    let isSearch = route.params.isSearch;   //Search.js인지 GoodList.js(VisitList.js)인지를 구분하는 변수
+    let isHome = route.params.isHome;   //Search.js인지 GoodList.js(VisitList.js)인지를 구분하는 변수
     
     useEffect(()=> {
         //Likeplaces 가져오기
@@ -178,9 +178,9 @@ const RestaurantInfo = ({ route }) => {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <Image style={styles.foodImageArea} 
-                       source={ isSearch ? 
-                                {uri: foodData.image} : 
-                                {uri: `${foodData.image}`}}
+                       source={ isHome ? 
+                                {uri: `${API.GET_RESTAURANT_IMAGE}/${foodData.image}`} : 
+                                {uri: foodData.image}}
                 />
                 <View style={styles.nameArea}>
                     <Text style={styles.title}>{foodData.place_name}</Text>

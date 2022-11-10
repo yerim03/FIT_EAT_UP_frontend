@@ -19,12 +19,12 @@ import { useUserState } from '../../context/UserContext';
 const Search = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
     const[searchWord, setSearchWord] = useState('');
-
+    // &y=${location.latitude}&x=${location.longitude}
     const { location } = useUserState();
     //장소 검색 
     const onPressSearchButton = () => {
         setFoodData([]);
-        let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&y=${location.latitude}&x=${location.longitude}&size=8`;  //카카오 로컬 API
+        let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8`;  //카카오 로컬 API
         let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=10`;  //카카오 이미지 검색 API
 
         const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
@@ -47,7 +47,7 @@ const Search = ({ navigation }) => {
             <View style={styles.oneItemArea}>
                 <TouchableOpacity 
                     activeOpacity={0.8} 
-                    onPress={() => navigation.navigate("RestaurantInfo", {item, isSearch: true})}
+                    onPress={() => navigation.navigate("RestaurantInfo", {item, isHome: false})}
                 >
                     <ResultImage 
                         foodname={item.place_name} 

@@ -3,33 +3,33 @@
 기본 Navigator 구조
 ![Navigator구조](./Navigator%20%EA%B5%AC%EC%A1%B0.png)
 
-
 version 0.0.0 
 + 프로젝트 생성
 
 version 0.0.1 
-+ Input 컴포넌트 : 커스텀 컴포넌트 생성
-+  로그인, 회원가입 UI 생성 및 구성
++ Input 컴포넌트 생성
++ 로그인, 회원가입 UI 생성 및 구성
 
 version 0.0.2 
 + 로그인, 회원가입 파일의 위치 변경
 + MyTextInput 컴포넌트 : version 0.0.1의 입력 컴포넌트 파일명 변경 후 일부 수정
-+ MyButton 컴포넌트 : 커스텀 버튼 컴포넌트 생성(로그인, 회원가입, 마이페이지 화면 등에 사용예정)
-+ 시작화면(splash.js) 생성 - 추후에 수정 혹은 삭제 예정
++ MyButton 컴포넌트 생성
++ ~~시작화면(splash.js) 생성 - 추후에 수정 혹은 삭제 예정~~ -> 삭제
 
 version 0.0.3
-+ 로그인, 회원가입 UI 수정(커스텀 컴포넌트 적용)
++ 로그인, 회원가입 UI 수정
 <br><br>
+
 
 version 0.1.0 
 + 내비게이션 기본 구조 생성 및 필요한 스크린 생성
 
 version 0.1.1 
-+ MyTextInput  컴포넌트 : editable 속성 추가(프로필 수정 화면에서 id, password는 수정 할 수 없도록 함)
-+ MyProfileImage 컴포넌트 : 커스텀 이미지 컴포넌트 생성(사용자의 프로필 이미지)
++ MyTextInput  컴포넌트 : editable 속성 추가
++ MyProfileImage 컴포넌트 생성(사용자의 프로필 이미지)
 + 친구 추가 UI(AddFriend.js) 구성
 + 프로필 수정 UI(EditProfile.js) 구성
-+ 회원가입 UI 수정 : MyProfileImage 컴포넌트 추가
++ 회원가입 UI 수정
 
 version 0.1.2
 + 마이페이지 UI(MyPage.js) 생성 및 구성
@@ -37,11 +37,11 @@ version 0.1.2
 
 version 0.1.3
 + 탭바 배경 색, 아이콘색 변경
-+ HeaderBackButton 컴포넌트 : 헤더의 뒤로가기 버튼 컴포넌트 생성
-+ FriendProfileImage 컴포넌트 : 친구목록 UI의 친구 프로필 이미지 컴포넌트 생성(MyProfileImage 컴포넌트와 크기만 다름)
++ HeaderBackButton 컴포넌트 생성(헤더 버튼)
++ FriendProfileImage 컴포넌트 생성(친구의 프로필 이미지)
 + 헤더 커스터마이즈
 + 친구목록 UI(Friend.js) 구성
-+ 모든 스크린의 기본 배경  및 정렬 적용
++ 모든 스크린의 기본 배경 및 정렬 적용
 
 version 0.1.4
 + 친구프로필 UI(FriendProfile.js) 구성
@@ -50,15 +50,14 @@ version 0.1.4
 <br><br>
 
 version 0.2.0
-+ 회원가입 기능 구현
++ 회원가입 및 로그인 기능 구현
 
 version 0.2.1
-+ 로그인 기능 구현
 + 로그인 성공 시 AsyncStorage 에 토큰 저장
 + ~~로그인 후 MainStack으로 화면전환(다시 수정할 예정)~~ --> version 0.2.5에서 수정 완료
 
 version 0.2.2
-+ ResultImage 컴포넌트 : 결과 UI 에 사용될 이미지 컴포넌트 생성
++ ResultImage 컴포넌트 생성(음식 이미지)
 + 추천결과 UI(HomeResult.js) 구성
 + 검색 UI(Search.js) 구성(추가수정 예정)
 + 검색결과 UI(SearchResult.js) 구성
@@ -160,3 +159,7 @@ version 0.6.0
 
 version 0.6.1
 - 친구 선택 기능에서 오류 수정
+
+version 0.7.0
+- 친구와 추천 맛집 검색 결과 출력 완료(HomeResult.js)
+- HomeResult.js에 Loading Indicator 추가
