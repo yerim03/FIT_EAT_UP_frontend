@@ -20,6 +20,8 @@ const Navigation = () => {
             setOk(false);
         }
         const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync();
+        // const location = await Location.reverseGeocodeAsync({ latitude, longitude });
+        // console.log(location);
         console.log('현재 나의 위치는\n', 'latitude: ',  latitude, '\nlongitude: ', longitude);
         dispatch({type: "LOCATION", 
                   userLocation : {

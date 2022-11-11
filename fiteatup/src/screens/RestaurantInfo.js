@@ -57,22 +57,16 @@ const RestaurantInfo = ({ route }) => {
 
     const makeFormdata = () => {
         const formdata = new FormData();
-        formdata.append('address_name', foodData.address_name);
-        formdata.append('category_group_code', foodData.category_group_code);
-        formdata.append('category_group_name', foodData.category_group_name);
-        formdata.append('category_name', foodData.category_name);
-        formdata.append('distance', foodData.distance);
-        formdata.append('id', foodData.id);
-        formdata.append('phone', foodData.phone);
-        formdata.append('place_name', foodData.place_name);
-        formdata.append('place_url', foodData.place_url);
-        formdata.append('road_address_name', foodData.road_address_name);
-        formdata.append('x', foodData.x);
-        formdata.append('y', foodData.y);
-        formdata.append('image', {
-            uri: foodData.image,
-            type: 'image/jpeg',
-            name: `${foodData.place_name}Image.jpg`
+        Object.keys(foodData).forEach(key => {
+            if(key === 'image') {
+                formdata.append(key, {
+                    uri: foodData[key],
+                    type: 'image/jpeg',
+                    name: `${foodData.place_name}Image.jpg`
+                })
+            } else {
+                formdata.append(key, foodData[key]);
+            }
         });
         return formdata;
     };

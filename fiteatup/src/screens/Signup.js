@@ -139,7 +139,7 @@ const Signup = ({ navigation }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAwareScrollView extraScrollHeight={40}>
                 <View style={globalStyles.container}>
-                    <MyProfileImage url={photoUrl} showButton onChangeImage={photo => {setPhotoUrl(photo.uri);}}/>
+                    <MyProfileImage url={photoUrl} showButton onChangeImage={uri => {setPhotoUrl(uri);}}/>
                     <MyInput
                         label="아이디"
                         value={id}

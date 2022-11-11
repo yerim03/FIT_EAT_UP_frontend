@@ -19,7 +19,7 @@ import { useUserState } from '../../context/UserContext';
 const Search = ({ navigation }) => {
     const [foodData, setFoodData] = useState([]);
     const[searchWord, setSearchWord] = useState('');
-    // &y=${location.latitude}&x=${location.longitude}
+
     const { location } = useUserState();
     //장소 검색 
     const onPressSearchButton = () => {

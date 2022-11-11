@@ -45,6 +45,7 @@ const Home = ({ navigation }) => {
         );
     };
 
+    //추천받을 친구선택
     const makeSelectFriends = ( item ) => {
         if(item.selected) {
             //삭제

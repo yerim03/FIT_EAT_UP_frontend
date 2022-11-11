@@ -37,7 +37,7 @@ const ProfileEdit = () => {
                     },
                     transformRequest: foodFormdata => foodFormdata,
         })
-            .then(res => {console.log('수정 후 data: ', res.data); 
+            .then(res => {console.log('프로필 수정 완료'); 
                           dispatch({type: "EDIT_NICKNAME",
                                     userData : { 
                                         pk: res.data.pk,
@@ -60,7 +60,7 @@ const ProfileEdit = () => {
     return(
         <KeyboardAwareScrollView extraScrollHeight={20}>
             <View style={styles.container}>
-                <MyProfileImage url={changePhotoUrl} showButton onChangeImage={url => setChangePhotoUrl(url)} />
+                <MyProfileImage url={changePhotoUrl} showButton onChangeImage={uri => setChangePhotoUrl(uri)} />
                 <MyInput value={user.userId} label="아이디" disabled  />
                 <View style={{ height: 10 }} />
                 <MyInput
