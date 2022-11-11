@@ -138,7 +138,6 @@ version 0.4.2
 version 0.4.3
 - 나이 드롭다운 생성(AgeDropDown.js)
 - 사용자 현재 위치 정보 얻기(expo-location)
-- 현재 위치를 기반으로 장소 검색하도록 기능 추가
 - HomeResult.js, Search.js 등 수정
 
 version 0.5.0
@@ -172,3 +171,6 @@ version 0.7.2
 - 회원가입에서 이미지 관련 오류 수정
 - 현재 위치 정보 가져오기 기능 오류 수정
 - 음식점 상세정보 화면 formdata 수정
+
+version 0.7.3
+- 현재 위치 정보 얻어서 검색하도록 기능 수정

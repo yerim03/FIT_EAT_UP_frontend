@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         color: theme.title,
     },
     smallTitle: {
-        fontSize: 17,
+        fontSize: 18,
         alignSelf: 'flex-start',
         color: theme.smallTitle,
         marginBottom: 40,

@@ -13,7 +13,7 @@ import { useUserDispatch, useUserState } from '../../context/UserContext';
 
 
 const ProfileEdit = () => {
-    const { user, headers } = useUserState();
+    const { user } = useUserState();
     const dispatch = useUserDispatch();
     const [changeNickname, setChangeNickname] = useState(user.userNickname);
     const [changePhotoUrl, setChangePhotoUrl] = useState(`${API.GET_PROFILEIMAGE}${user.userProfileImage}`);
