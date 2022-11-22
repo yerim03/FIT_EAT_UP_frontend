@@ -174,3 +174,9 @@ version 0.7.2
 
 version 0.7.3
 - 현재 위치 정보 얻어서 검색하도록 기능 수정
+
+version 0.7.4
+- Home.js 하단 디자인 수정
+
+version 0.8.0
+- 
