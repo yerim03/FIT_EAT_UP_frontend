@@ -4,7 +4,6 @@ import { View, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import CustomText from '../components/CustomText';
 import MyInput from '../components/MyInput';
 import MyButton from "../components/MyButton";
-import AgeDropDown from '../components/AgeDropDown';
 import MyProfileImage from '../components/MyProfileImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
@@ -174,9 +173,6 @@ const Signup = ({ navigation }) => {
                         onSubmitEditing={() => {}}
                         placeholder="사용할 이름을 입력하세요."
                     />
-                    {/* <View style={{ marginVertical: 10, alignSelf: 'flex-start'}}>
-                        <AgeDropDown />
-                    </View> */}
                     <View style={{ height: 50 }} />
                     <MyButton title="회원가입 완료" onPress={ handleSignupButtonPress } disabled={disabled} />
                 </View>

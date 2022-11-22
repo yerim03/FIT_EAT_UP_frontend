@@ -25,7 +25,7 @@ export const API = {
     GET_STAR_RATINGLIST: `${BASE_URL}/accounts/place/user/rating/list/`,
 
     GET_RESTAURANT_IMAGE: `${BASE_URL}/media/`,
-    RECOMMEND_RESULTS: `${BASE_URL}/recommands/recommand/`,
+    RECOMMEND_RESULTS: `${BASE_URL}/recommands/surprise/`,
     GET_FRIEND_GOODLIST: `${BASE_URL}/accounts/place/friend/like/list/`,
     GET_FRIEND_VISITLIST: `${BASE_URL}/accounts/place/friend/visit/list/`,
 };

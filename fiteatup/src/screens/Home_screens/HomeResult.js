@@ -15,7 +15,7 @@ const HomeResult = ({ navigation, route }) => {
     const [isLoading, setIsLoading] = useState(true);  //Activity Indicator show 여부 관리
 
     const { user, headers } = useUserState();
-    let friends = route.params; //Home.js에서 가져온 선택한 친구들 pk
+    let friends = route.params.selectedFriends; //Home.js에서 가져온 선택한 친구들 pk
     let data = {};  //선택한 친구들 data
     let nicknames = ''; //선택한 친구들 names
 
@@ -23,6 +23,7 @@ const HomeResult = ({ navigation, route }) => {
     data.model_name = 'model_5';
     data.num = friends.length + 1;
     data.user_id1 = user.userPk;
+    data.area = route.params.areaValue;
     for(let i=0; i<friends.length; i++){
         data['user_id' + (i+2)] = friends[i]['pk'];
         if(i === friends.length-1){

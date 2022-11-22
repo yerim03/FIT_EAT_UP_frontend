@@ -58,6 +58,9 @@ export const theme = {
 
     percentBackgroundColor: colors.purple_0,
 
+    randomRecommBackgroundColor: colors.purple_0,
+    randomQuestionImageColor: colors.purple_5,
+
     notSelectTitleColor: colors.purple_5,
     selectCheckColor: colors.base_purple,
     selectTitleColor: colors.base_purple,

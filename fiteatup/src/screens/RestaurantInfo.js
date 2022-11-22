@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     },
     data: {
         fontSize: 16,
-        color: `${theme.restInfoDataTextColor}`,
+        color: `${theme.title_1}`,
         paddingVertical: 5,
     },
     button: {
