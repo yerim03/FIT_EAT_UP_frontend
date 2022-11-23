@@ -26,7 +26,7 @@ const GoodList = ({ navigation }) => {
         return(
             <TouchableOpacity 
                 style={styles.itemContainer} 
-                onPress={() => navigation.navigate('RestaurantInfo', {item, isHome: false}) } 
+                onPress={() => navigation.navigate('RestaurantInfo', {item}) } 
             >
                 <FoodImage url={`${item.image}`} />
                 <CustomText style={styles.itemTitle} fontType="Medium">{item.place_name}</CustomText>

@@ -20,7 +20,6 @@ const RestaurantInfo = ({ route }) => {
     const { user, headers } = useUserState();
     
     let foodData = route.params.item;    //Search.js에서 받아온 음식점 data
-    let isHome = route.params.isHome;   //Search.js인지 GoodList.js(VisitList.js)인지를 구분하는 변수
     
     useEffect(()=> {
         //Likeplaces 가져오기
@@ -54,6 +53,17 @@ const RestaurantInfo = ({ route }) => {
         getVisitPlaces();
         getStarRating();
     }, [])
+
+    // useEffect(() => {
+    //     const removeRating = async () => {
+    //         setStarRating(0);
+    //     }
+    //     if(isLike == false && isVisit == false){
+    //         removeRating();
+    //         handleRatingFinishonPress();
+    //         console.log('finist');
+    //     }
+    // }, [isLike, isVisit])
 
     const makeFormdata = () => {
         const formdata = new FormData();
@@ -93,7 +103,7 @@ const RestaurantInfo = ({ route }) => {
 
     //좋아요 버튼 클릭 동작
     const handleGoodButtononPress = () => {
-        if(isLike){
+        if(isLike){   
             //isLike==False(좋아요 X)
             setIsLike(false);
             axios.post(`${API.DELETE_GOODLIST}`, {id: foodData.id}, { headers: headers })
@@ -173,9 +183,7 @@ const RestaurantInfo = ({ route }) => {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <Image style={styles.foodImageArea} 
-                       source={ isHome ? 
-                                {uri: `${API.GET_RESTAURANT_IMAGE}/${foodData.image}`} : 
-                                {uri: foodData.image}}
+                       source={{ uri: foodData.image }}
                 />
                 <View style={styles.nameArea}>
                     <CustomText style={styles.title} fontType="Medium">{foodData.place_name}</CustomText>

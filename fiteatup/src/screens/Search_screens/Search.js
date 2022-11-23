@@ -80,7 +80,7 @@ const Search = ({ navigation }) => {
             <View style={styles.oneItemArea}>
                 <TouchableOpacity 
                     activeOpacity={0.8} 
-                    onPress={() => navigation.navigate("RestaurantInfo", {item, isHome: false})}
+                    onPress={() => navigation.navigate("RestaurantInfo", {item})}
                 >
                     <ResultImage 
                         foodname={item.place_name} 

@@ -51,7 +51,7 @@ const HomeResult = ({ navigation, route }) => {
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneResultArea}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item, isHome: true})}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
                     <ResultImage 
                         foodname={item.place_name} 
                         recommend
