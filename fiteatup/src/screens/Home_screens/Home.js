@@ -32,11 +32,18 @@ const Home = ({ navigation }) => {
     //모달창 관련
 
     const [isRandomClick, setIsRandomClick] = useState(false);
+    const [randomRestaurant, setRandomRestaurant] = useState();
     const isFocused = useIsFocused();
     const { headers } = useUserState();
     
-    // 랜덤 추천 장소 가져올 부분
-    // useEffect(()=>{}, [])
+    // 랜덤 추천 장소 가져오기
+    useEffect(()=>{
+        const getRandomRest = async () => {
+            const randomData = await axios.get(`${API.GET_RANDOM_RESTAURANT}`, { headers: headers });
+            setRandomRestaurant(randomData.data);
+        };
+        getRandomRest();
+    }, [])
 
     useEffect(()=> {
         setSelectedFriends([]);
@@ -83,25 +90,25 @@ const Home = ({ navigation }) => {
             Alert.alert("맛집 추천 실패", '1명 이상의 친구를 선택해주세요!');
         } else {
             navigation.navigate("HomeResult", {selectedFriends, areaValue});
+            setAreaValue('');
         }
     };
 
     //지역 선택 드롭다운
     const AreaDropDown = () => {
         return(
-            <View style={styles.input}>
-                <DropDownPicker 
-                    style={styles.dropdown}
-                    textStyle={{color: `${theme.dropdownColor}`, fontFamily: 'netmarbleMedium', fontWeight: '500'}}
-                    open={areaOpen}
-                    value={areaValue}
-                    items={area}
-                    setOpen={setAreaOpen}
-                    setValue={setAreaValue}
-                    setItems={setArea}
-                    placeholder="지역을 선택하세요."
-                />
-            </View>
+            <DropDownPicker 
+                style={styles.dropdown}
+                dropDownContainerStyle={[styles.dropdown, { backgroundColor: `${theme.backgroundColor}` }]}
+                textStyle={{color: `${theme.dropdownColor}`, fontFamily: 'netmarbleMedium', fontWeight: '500'}}
+                open={areaOpen}
+                value={areaValue}
+                items={area}
+                setOpen={setAreaOpen}
+                setValue={setAreaValue}
+                setItems={setArea}
+                placeholder="지역을 선택하세요."
+            />
         );
     };
 
@@ -124,7 +131,7 @@ const Home = ({ navigation }) => {
                                 <CustomText style={[styles.modal, {marginBottom: 20}]}>추천 받을 맛집의 지역 선택해주세요!</CustomText>
                                 <AreaDropDown />
                                 <View style={{ flexDirection: 'row'}}>
-                                    <TouchableOpacity style={modalStyles.modalButton} onPress={() => {setModalVisible(false);}}>
+                                    <TouchableOpacity style={modalStyles.modalButton} onPress={() => {setModalVisible(false); setAreaValue('');}}>
                                             <CustomText style={modalStyles.modalButtonTitle}>취소</CustomText>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={modalStyles.modalButton} onPress={() => {setModalVisible(false); handleRecommendButtononPress(); }}>
@@ -146,16 +153,10 @@ const Home = ({ navigation }) => {
                 <CustomText style={globalStyles.tabScreenSmallTitle} fontType="Medium">오늘의 장소를 추천받아 보세요!</CustomText>
                 {isRandomClick ? 
                         <View style={styles.randomRecomm}>
-                            {/* 오늘의 랜덤 추천 장소 이미지 넣을 것 */}
-                            <Image style={styles.randomRecommPlaceImage} source={{uri : 'https://k.kakaocdn.net/dn/2yveN/btrA1BDPuuu/3oG4ZNI7uZCAIoKdZr9LR1/img.jpg'}}/>
+                            <Image style={styles.randomRecommPlaceImage} source={{uri : randomRestaurant.image }}/>
                             <View style={styles.randomRecommPlaceName}>
-                                <CustomText style={styles.randomRecommTitle} fontType="Medium">팬더스윗</CustomText>
-                                {/* 오늘의 랜덤 추천 장소 이름 넣을 것 */}
+                                <CustomText style={styles.randomRecommTitle} fontType="Medium">{randomRestaurant.place_name}</CustomText>
                             </View>
-                            {/* <View style={styles.buttonArea}>
-                                <OXButton name="heart" onPress={() => {console.log("사용자의 좋아요 장소 리스트에 추가되도록 작성")}}/>
-                                <OXButton name="heart-dislike" onPress={() => {console.log("아무반응 없")}}/>
-                            </View> */}
                         </View>  
                         :
                         <TouchableOpacity 

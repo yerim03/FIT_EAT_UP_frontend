@@ -56,7 +56,7 @@ const HomeResult = ({ navigation, route }) => {
                         foodname={item.place_name} 
                         recommend
                         star={item.rating}
-                        url={`${API.GET_RESTAURANT_IMAGE}/${item.image}`}          
+                        url={item.image}          
                     />
                 </TouchableOpacity>
             </View>
