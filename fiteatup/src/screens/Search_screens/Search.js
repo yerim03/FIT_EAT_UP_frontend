@@ -48,27 +48,31 @@ const Search = ({ navigation }) => {
 
     //장소 검색 
     const onPressSearchButton = () => {
-        if(!isLocate) {
-            Alert.alert('위치', '위치 버튼을 클릭해서 현재 위치로 검색을 해보세요!')
+        let URL1 = '';
+        if(isLocate) {
+            //위치 기반 검색
+            URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8&y=${location.latitude}&x=${location.longitude}`;  //카카오 로컬 API
         } else {
-            setFoodData([]);
-            let URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8&y=${location.latitude}&x=${location.longitude}`;  //카카오 로컬 API
-            let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=10`;  //카카오 이미지 검색 API
-
-            const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
-            const GETIMAGE = axios.get(URL2, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
-
-            Promise.all([GETDATA, GETIMAGE])
-                .then((res) => { let getdata = res[0].data.documents; 
-                                let getimage=res[1].data.documents;
-                                for(let i = 0; i < getdata.length; i++){
-                                    let oneData = getdata[i];
-                                    oneData.image = getimage[0].image_url;
-                                    setFoodData(prevData => [...prevData, oneData]);
-                                }
-                            })
-                .catch(err => console.log(err))
+            //그냥 검색
+            URL1 = `${KAKAO_API.LOCAL_API}query=${searchWord}&size=8`;  //카카오 로컬 API
+            
         }
+        setFoodData([]);
+        let URL2 = `${KAKAO_API.IMAGE_API}query=${searchWord}&size=10`;  //카카오 이미지 검색 API
+        
+        const GETDATA = axios.get(URL1, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
+        const GETIMAGE = axios.get(URL2, {headers: { Authorization: `KakaoAK ${KAKAO_API_KEY}` }});
+
+        Promise.all([GETDATA, GETIMAGE])
+            .then((res) => { let getdata = res[0].data.documents; 
+                            let getimage=res[1].data.documents;
+                            for(let i = 0; i < getdata.length; i++){
+                                let oneData = getdata[i];
+                                oneData.image = getimage[0].image_url;
+                                setFoodData(prevData => [...prevData, oneData]);
+                            }
+                        })
+            .catch(err => console.log(err))
     };
 
     const renderItem = ({ item }) => {
