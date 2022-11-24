@@ -54,26 +54,23 @@ const RestaurantInfo = ({ route }) => {
         getStarRating();
     }, [])
 
-    // useEffect(() => {
-    //     const removeRating = async () => {
-    //         setStarRating(0);
-    //     }
-    //     if(isLike == false && isVisit == false){
-    //         removeRating();
-    //         handleRatingFinishonPress();
-    //         console.log('finist');
-    //     }
-    // }, [isLike, isVisit])
-
     const makeFormdata = () => {
         const formdata = new FormData();
         Object.keys(foodData).forEach(key => {
             if(key === 'image') {
-                formdata.append(key, {
-                    uri: foodData[key],
-                    type: 'image/jpeg',
-                    name: `${foodData.place_name}Image.jpg`
-                })
+                if(foodData.image.charAt(0) == '/'){
+                    formdata.append(key, {
+                        uri: `${API.GET_PROFILEIMAGE}${foodData[key]}`,
+                        type: 'image/jpeg',
+                        name: `${foodData.place_name}Image.jpg`
+                    })
+                } else {
+                    formdata.append(key, {
+                        uri: foodData[key],
+                        type: 'image/jpeg',
+                        name: `${foodData.place_name}Image.jpg`
+                    })
+                }
             } else {
                 formdata.append(key, foodData[key]);
             }
@@ -112,7 +109,7 @@ const RestaurantInfo = ({ route }) => {
         }
         else{
             let foodFormdata =makeFormdata();
-            //isLike==True(좋아요 0)
+            //isLike == True(좋아요 0)
             setIsLike(true);
             foodFormdata.append('pk', user.userPk);    //json 데이터에 pk 추가
             axios.post(`${API.SAVE_GOODLIST}`, foodFormdata, { 
@@ -137,7 +134,7 @@ const RestaurantInfo = ({ route }) => {
         }
         else{
             let foodFormdata =makeFormdata();
-            //isLike==True(좋아요 0)
+            //isVisit == True(가봤어요 0)
             setIsVisit(true);
             foodFormdata.append('pk', user.userPk);    //json 데이터에 pk 추가
             axios.post(`${API.SAVE_VISITLIST}`, foodFormdata, { 
@@ -183,7 +180,7 @@ const RestaurantInfo = ({ route }) => {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <Image style={styles.foodImageArea} 
-                       source={{ uri: foodData.image }}
+                       source={{ uri: (foodData.image.charAt(0)=='/' || foodData.imag) ? `${API.GET_PROFILEIMAGE}${foodData.image}` : foodData.image }}
                 />
                 <View style={styles.nameArea}>
                     <CustomText style={styles.title} fontType="Medium">{foodData.place_name}</CustomText>
