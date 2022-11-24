@@ -19,7 +19,7 @@ const RestaurantInfo = ({ route }) => {
     
     const { user, headers } = useUserState();
     
-    let foodData = route.params.item;    //Search.js에서 받아온 음식점 data
+    let foodData = route.params.item;
     
     useEffect(()=> {
         //Likeplaces 가져오기

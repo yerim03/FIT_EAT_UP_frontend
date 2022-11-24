@@ -31,19 +31,10 @@ const Home = ({ navigation }) => {
     const [area, setArea] = useState(AREA_DATA);
     //모달창 관련
 
-    const [isRandomClick, setIsRandomClick] = useState(false);
-    const [randomRestaurant, setRandomRestaurant] = useState();
+    const [item, setItem] = useState();
     const isFocused = useIsFocused();
     const { headers } = useUserState();
     
-    // 랜덤 추천 장소 가져오기
-    useEffect(()=>{
-        const getRandomRest = async () => {
-            const randomData = await axios.get(`${API.GET_RANDOM_RESTAURANT}`, { headers: headers });
-            setRandomRestaurant(randomData.data);
-        };
-        getRandomRest();
-    }, [])
 
     useEffect(()=> {
         setSelectedFriends([]);
@@ -112,6 +103,13 @@ const Home = ({ navigation }) => {
         );
     };
 
+    //랜덤장소 클릭
+    const handleRandomClick = () => {
+        axios.get(`${API.GET_RANDOM_RESTAURANT}`, { headers: headers })
+            .then(res => {setItem(res.data)})
+    }
+
+
     return(
         <SafeAreaView style={{ flex: 1 }}>
             <View style={globalStyles.container_2}>
@@ -151,24 +149,28 @@ const Home = ({ navigation }) => {
                 <View style={{ height: 30 }} />
                 <CustomText style={globalStyles.tabScreenTitle} fontType="Bold">오늘의 랜덤 추천 장소</CustomText>
                 <CustomText style={globalStyles.tabScreenSmallTitle} fontType="Medium">오늘의 장소를 추천받아 보세요!</CustomText>
-                {isRandomClick ? 
-                        <View style={styles.randomRecomm}>
-                            <Image style={styles.randomRecommPlaceImage} source={{uri : randomRestaurant.image }}/>
-                            <View style={styles.randomRecommPlaceName}>
-                                <CustomText style={styles.randomRecommTitle} fontType="Medium">{randomRestaurant.place_name}</CustomText>
-                            </View>
-                        </View>  
-                        :
-                        <TouchableOpacity 
-                            style={[styles.randomRecomm, {alignItems: 'center', justifyContent:'center'}]} 
-                            onPress={() => {setIsRandomClick(true);}}
-                            activeOpacity={0.7}
-                        >
-                            <FontAwesome name="question" size={70} color={theme.randomQuestionImageColor} />
-                            <CustomText style={[styles.randomRecommTitle, {padding: 4, fontSize: 13}]}>이곳을 클릭해보세요!</CustomText>
-                        </TouchableOpacity> 
-                        
+                { (!item) && 
+                    <TouchableOpacity 
+                        style={[styles.randomRecomm, {alignItems: 'center', justifyContent:'center'}]} 
+                        onPress={handleRandomClick}
+                        activeOpacity={0.7}
+                    >
+                        <FontAwesome name="question" size={70} color={theme.randomQuestionImageColor} />
+                        <CustomText style={[styles.randomRecommTitle, {padding: 4, fontSize: 13}]}>이곳을 클릭해보세요!</CustomText>
+                    </TouchableOpacity> 
                 }
+                { item &&  
+                 <TouchableOpacity 
+                    style={styles.randomRecomm} 
+                    onPress={() => navigation.navigate("RestaurantInfo", {item})}
+                    activeOpacity={0.7}
+                >
+                    <Image style={styles.randomRecommPlaceImage} source={{ uri: item.image}}/>
+                    <View style={styles.randomRecommPlaceName}>
+                        <CustomText style={styles.randomRecommTitle} fontType="Medium">{item.place_name}</CustomText>
+                    </View>
+                </TouchableOpacity>  
+             }
             </View>
         </SafeAreaView>
     );
@@ -222,10 +224,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: `${theme.title_1}`,
         paddingVertical: 5,
-    },
-    input: {
-        marginVertical: 7,
-        width: '60%',
     },
     dropdown:{
         borderColor: `${theme.inputNotFocusColor}`,

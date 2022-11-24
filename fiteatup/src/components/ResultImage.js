@@ -17,7 +17,10 @@ const ResultImage = ( props ) => {
     }
     return(
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Image style={styles.image} source={{uri: props.url}}/>
+            <Image style={styles.image} source={ !(props.url== 'null') ? 
+                                                    {uri: props.url} : 
+                                                    require('./../../assets/restaurant_image.png')}
+            />
             {props.recommend && <Star />}
             <CustomText style={styles.foodName}  fontType="Light">{props.foodname}</CustomText>
         </View>
