@@ -9,6 +9,7 @@ import * as Font from 'expo-font';
 const App = () => {
     const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
+    //폰트 가져오기
     useEffect(() => {
         const prepare = async () => {
             await SplashScreen.preventAutoHideAsync();

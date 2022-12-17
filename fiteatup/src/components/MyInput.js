@@ -1,7 +1,6 @@
-//커스텀 컴포넌트 - TextInput
-//TextInput 안에 속성들 수정예정
+//[TextInput 커스텀]
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet} from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import CustomText from './CustomText';
 import { theme } from '../styles/theme';
 
@@ -11,11 +10,12 @@ const MyInput = ( props ) => {
 
     return(
         <View style={styles.input}>
-            <CustomText style={[styles.label, 
-                          isFocused && {color: `${theme.inputFocusColor}`}, 
-                          props.disabled && {color: `${theme.inputFocusColor}`}
-                        ]}
-                        fontType="Medium"
+            <CustomText 
+                style={[styles.label, 
+                        isFocused && {color: `${theme.inputFocusColor}`}, 
+                        props.disabled && {color: `${theme.inputFocusColor}`}
+                ]}
+                fontType="Medium"
             >
                 {props.label}
             </CustomText>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         paddingBottom: 14,
         fontSize: 15
     },
-    //이거는 MyProfile 수정에서 사용하는 input disabled
+    //MyProfile 수정에서 사용하는 input disabled
     disabledinputbox: {
         fontFamily: 'netmarbleMedium',
         backgroundColor: `${theme.inputDisabled}`,

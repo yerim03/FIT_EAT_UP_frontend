@@ -1,4 +1,4 @@
-//커스텀 컴포넌트 - 프로필이미지를 나타내는 컴포넌트
+//[프로필 이미지]
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../styles/theme';
 
 const MyProfileImage = ({ url, showButton, onChangeImage }) => {
-    //우측 하단에 카메라 버튼
+    //우측 하단의 카메라 버튼
     const PhotoButton = ({ onPress }) => {
         return(
             <TouchableOpacity style={styles.buttonContainer} 
@@ -38,7 +38,6 @@ const MyProfileImage = ({ url, showButton, onChangeImage }) => {
                 aspect: [1, 1],
                 quality: 1,
             });
-
             //cancelled가 true이면(사진을 선택했을 경우에만) 해당 사진으로 변경
             if(!result.cancelled) {
                 onChangeImage(result.uri);

@@ -1,35 +1,34 @@
 //홈 화면
-import React, { useEffect, useState } from 'react';
-import { Image,
-        View,
+import React, { useState, useEffect } from 'react';
+import { View,
+        Image,
         StyleSheet, 
         TouchableOpacity,
         SafeAreaView,
         FlatList, 
         Alert,
         Modal } from 'react-native';
-import HomeFriendProfile from '../../components/HomeFriendProfile';
 import CustomText from '../../components/CustomText';
+import HomeFriendProfile from '../../components/HomeFriendProfile';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { useIsFocused } from '@react-navigation/native';
-import { AntDesign, FontAwesome  } from '@expo/vector-icons';
 import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
 import { API } from '../../config';
 import { theme } from '../../styles/theme';
 import { globalStyles, modalStyles } from '../../styles/styles';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { AntDesign, FontAwesome  } from '@expo/vector-icons';
 
 
 const Home = ({ navigation }) => {
     const [friendsList, setFriendsList] = useState([{}]); //친구 리스트
     const [selectedFriends, setSelectedFriends] = useState([]);   //선택한 친구들
     
-    //모달창 관련
+    //모달창
     const [modalVisible, setModalVisible] = useState(false);    //모달 창 보이는 여부
     const [areaOpen, setAreaOpen] = useState(false);
     const [areaValue, setAreaValue] = useState('');     //area value값 관리
     const [area, setArea] = useState(AREA_DATA);
-    //모달창 관련
 
     const [item, setItem] = useState();
     const isFocused = useIsFocused();
@@ -123,6 +122,7 @@ const Home = ({ navigation }) => {
                         numColumns={3}
                         style={{ margin: 10 }}
                     />
+                    
                      <Modal animationType="fade" transparent={true} visible={modalVisible}>
                         <View style={modalStyles.centeredView}>
                             <View style={modalStyles.modalView}>

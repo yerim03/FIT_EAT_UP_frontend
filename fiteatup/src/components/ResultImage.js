@@ -1,4 +1,4 @@
-//[추천맛집결과(HomeResult.js), 검색결과(Search.js) 화면에서 나타나는 음식점 이미지 컴포넌트]
+//[결과 음식점 이미지] - 추천맛집결과(HomeResult.js), 검색결과(Search.js) 화면에서 사용
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import CustomText from './CustomText';

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity ,FlatList } from 'react-native';
 import CustomText from '../../components/CustomText';
 import FoodImage from '../../components/FoodImage';
+import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
 import { API } from '../../config';
-import { useUserState } from '../../context/UserContext';
 import { theme } from '../../styles/theme';
 
 

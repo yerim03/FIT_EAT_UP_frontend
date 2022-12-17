@@ -1,19 +1,19 @@
 //친구 프로필 화면
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import CustomText from '../../components/CustomText';
 import MyProfileImage from '../../components/MyProfileImage';
 import FoodImage from '../../components/FoodImage';
-import { Ionicons } from '@expo/vector-icons'; 
 import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
 import { API } from '../../config';
 import { theme } from '../../styles/theme';
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 const FriendProfile = ({ route }) => {
     const [goodList, setGoodList] = useState(); //친구의 좋아요 장소
-    const [visitList, setVisitList] = useState();// 친구의 가봤어요 장소
+    const [visitList, setVisitList] = useState(); // 친구의 가봤어요 장소
     const { headers } = useUserState();
 
     //친구의 좋아요, 가봤어요 리스트 가져오기
@@ -36,7 +36,7 @@ const FriendProfile = ({ route }) => {
     }, [])
 
 
-    const renderItem = ({item: {place_name, image}}) => {
+    const renderItem = ({ item: {place_name, image} }) => {
         return(
             <View style={styles.renderItem}>
                 <FoodImage url={image}/>

@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { View, 
          StyleSheet, 
+         TouchableOpacity,
          SafeAreaView, 
          FlatList, 
-         TouchableOpacity,
          TouchableWithoutFeedback,
-         Keyboard, 
-         Alert} from 'react-native';
+         Keyboard } from 'react-native';
 import CustomText from '../../components/CustomText';
 import SearchBar from '../../components/SearchBar';
 import ResultImage from '../../components/ResultImage';
-import { MaterialIcons } from '@expo/vector-icons';
+import * as Location from 'expo-location';
+import { useUserState, useUserDispatch } from '../../context/UserContext';
+import axios from 'axios';
 import { KAKAO_API_KEY } from '../../cofig/config_secret';
 import { KAKAO_API } from '../../config';
-import axios from 'axios';
-import { globalStyles } from '../../styles/styles';
-import { useUserState, useUserDispatch } from '../../context/UserContext';
 import { theme } from '../../styles/theme';
-import * as Location from 'expo-location';
+import { globalStyles } from '../../styles/styles';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 const Search = ({ navigation }) => {
@@ -79,7 +78,7 @@ const Search = ({ navigation }) => {
         return(
             <View style={styles.oneItemArea}>
                 <TouchableOpacity 
-                    activeOpacity={0.8} 
+                    activeOpacity={0.7} 
                     onPress={() => navigation.navigate("RestaurantInfo", {item})}
                 >
                     <ResultImage 

@@ -1,4 +1,4 @@
-//커스텀 컴포넌트 - Button
+//[버튼 커스텀]
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import CustomText from './CustomText';
@@ -11,7 +11,7 @@ const MyButton = ( props ) => {
             style={props.disabled ? [styles.bnt, {opacity:0.5}] : styles.bnt}
             onPress={props.onPress}
             disabled={props.disabled}
-            activeOpacity={0.8}
+            activeOpacity={0.7}
         >
             <CustomText style={styles.bnttitle} fontType="Light">{props.title}</CustomText>
         </TouchableOpacity>

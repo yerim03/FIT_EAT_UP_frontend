@@ -1,3 +1,4 @@
+// [커스텀 텍스트]
 import React from 'react';
 import { Text } from 'react-native';
 

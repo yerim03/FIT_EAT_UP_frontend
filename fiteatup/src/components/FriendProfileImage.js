@@ -1,4 +1,4 @@
-//[친구의 프로필 이미지를 나타내는 컴포넌트]
+//[친구의 프로필 이미지] - Friend 목록에서 사용
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { theme } from '../styles/theme';

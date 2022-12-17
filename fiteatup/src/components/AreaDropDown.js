@@ -1,4 +1,4 @@
-//연령대를 표시할 수 있는 드롭다운
+//[지역구 드롭다운] -> 삭제
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         width: '60%',
     },
     dropdown:{
-        borderColor: `${theme.inputNotFocusColor}`,
+        borderColor: `${theme.dropdownBorderColor}`,
     }
 })
 

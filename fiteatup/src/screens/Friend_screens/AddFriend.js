@@ -1,18 +1,18 @@
+//친구 추가
 import React, { useState } from 'react';
 import { View, StyleSheet, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import CustomText from '../../components/CustomText';
 import MyInput from '../../components/MyInput';
 import MyButton from '../../components/MyButton';
+import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
 import { API } from '../../config';
-import { useUserState } from '../../context/UserContext';
-import { globalStyles } from '../../styles/styles';
 import { theme } from '../../styles/theme';
+import { globalStyles } from '../../styles/styles';
 
 
 const AddFriend = ({ navigation }) => {
     const [friendId, setFriendId] = useState('');
-    
     const { headers } = useUserState();
     
     //버튼 클릭 시 친구 추가 기능
@@ -33,9 +33,9 @@ const AddFriend = ({ navigation }) => {
             <View style={[globalStyles.container_2, {alignItems: 'center'}]}>
                 <CustomText style={styles.title} fontType="Light">친구의 ID를 검색해서 친구를 추가해보세요!</CustomText>
                 <MyInput
-                        value={friendId}
-                        onChangeText={text => setFriendId(text)}
-                        placeholder="친구의 ID를 입력하세요."
+                    value={friendId}
+                    onChangeText={text => setFriendId(text)}
+                    placeholder="친구의 ID를 입력하세요."
                 />
                     <View style={{height: 50}} />
                 <MyButton title="친구 추가" onPress={ handleAddFriendButtononPress } />

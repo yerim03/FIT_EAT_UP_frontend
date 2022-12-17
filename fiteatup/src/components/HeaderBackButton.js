@@ -1,4 +1,4 @@
-//헤더 오른쪽의 뒤로가기 버튼을 커스텀한 컴포넌트
+//헤더의 뒤로가기 버튼을 커스텀
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

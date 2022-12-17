@@ -8,12 +8,11 @@ import { View,
 import CustomText from '../../components/CustomText';
 import MyButton from '../../components/MyButton';
 import MyProfileImage from '../../components/MyProfileImage';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useUserDispatch, useUserState } from '../../context/UserContext';
 import { API } from '../../config';
 import { theme } from '../../styles/theme';
 import { globalStyles } from '../../styles/styles';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
 
 
 const MyPage = ({ navigation }) => {
@@ -68,7 +67,7 @@ const MyPage = ({ navigation }) => {
                 >
                     <MaterialIcons name="edit" size={26} color={`${theme.iconColor}`} style={{ marginHorizontal: 10 }} />
                     <CustomText style={styles.settingTitle} fontType="Medium">프로필 수정</CustomText>
-                    </TouchableOpacity>
+                </TouchableOpacity>
                 <View style={{ height: 100 }} />
                 <MyButton title="로그아웃" onPress={ handleLogoutButtononPress } />
             </View>
@@ -103,4 +102,5 @@ const styles = StyleSheet.create({
         borderColor: `${theme.flatlistLineColor}`,
     },
 });
+
 export default MyPage;

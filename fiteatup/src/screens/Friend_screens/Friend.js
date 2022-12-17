@@ -1,15 +1,15 @@
 //친구 목록
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, SafeAreaView, FlatList } from 'react-native';
 import CustomText from '../../components/CustomText';
 import FriendProfileImage from '../../components/FriendProfileImage';
 import { useIsFocused } from '@react-navigation/native';
+import { useUserState } from '../../context/UserContext';
 import axios from 'axios';
 import { API } from '../../config';
-import { useUserState } from '../../context/UserContext';
-import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../../styles/theme';
 import { globalStyles } from '../../styles/styles';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const Friend = ({ navigation }) => {
@@ -51,7 +51,7 @@ const Friend = ({ navigation }) => {
             <View>
                 <TouchableOpacity 
                     style={styles.itemContainer} 
-                    activeOpacity={0.8}
+                    activeOpacity={0.7}
                     onPress={() => navigation.navigate('FriendProfile', { pk, username, nickname, avatar_url })} 
                 >
                     <FriendProfileImage url={`${API.GET_PROFILEIMAGE}${avatar_url}`}/>
@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 14,
         borderRadius: 12,
         //ios 그림자 설정
-        shadowColor: "#000",    //그림자 색
-        shadowOffset: { //그림자 위치
+        shadowColor: "#000",
+        shadowOffset: {
             width: 5,
             height: 5
         },
-        shadowOpacity: 0.2,    //그림자 투명도
+        shadowOpacity: 0.2,
         shadowRadius: 5,
         //android 그림자 설정
         elevation: 5

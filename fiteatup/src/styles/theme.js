@@ -17,40 +17,47 @@ const colors = {
 
 export const theme = {
     backgroundColor: colors.white,
+    imageBackgroundColor: colors.grey_1,
 
     title: colors.purple_4,
     title_1: colors.purple_5,
     title_2: colors.purple_3,
     smallTitle: colors.base_purple,
 
-    cameraButtonImageColor: colors.grey_2,
+    backButtonColor: colors.purple_4,
 
     tabInActiveTint: colors.grey_2,
     tabActiveTint: colors.purple_4,
 
-    backButtonColor: colors.purple_4,
+    cameraButtonImageColor: colors.grey_2,
 
+    //button
     buttonBackgroundColor: colors.base_purple,
     buttonTitleColor: colors.white,
+
     buttonLineColor: colors.purple_1,
 
+    //textinput
     inputFocusColor: colors.purple_4,   //input focus on
     inputNotFocusColor: colors.purple_1,    //input focus out
     inputDisabled: colors.purple_0, //input disabled
     inputPlaceholder: colors.grey_2,
 
+    //에러메시지
     errorMessage: colors.red,
     correctMesage: colors.purple_4,
 
+    //지역구 드롭다운
     dropdownColor: colors.purple_4,
-
+    dropdownBorderColor: colors.purple_1,
+    
+    //검색창
     searchBarInput: colors.purple_0,
     searchBarButton: colors.base_purple,
 
     iconColor: colors.base_purple,
-    flatlistLineColor: colors.purple_1,
 
-    imageBackgroundColor: colors.grey_1,
+    flatlistLineColor: colors.purple_1,
 
     restInfoBackgroundColor: colors.grey_0,
     restInfoLineColor: colors.grey_2,

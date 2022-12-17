@@ -36,7 +36,7 @@ const HomeResult = ({ navigation, route }) => {
     useEffect(() => {
         console.log(data);
         const getResults = async() => {
-            const results = await axios.post(`${API.RECOMMEND_RESULTS}`, data, {headers: headers})
+            const results = await axios.post(`${API.RECOMMEND_RESULTS}`, data, { headers: headers })
             setRecommendResults(results.data);
         }
         getResults();
@@ -51,7 +51,7 @@ const HomeResult = ({ navigation, route }) => {
     const renderItem = ({ item }) => {
         return(
             <View style={styles.oneResultArea}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate("RestaurantInfo", {item})}>
                     <ResultImage 
                         foodname={item.place_name} 
                         recommend
@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     resultArea: {
         flex: 1,
         width: '100%',
-
         alignItems: 'center',
         justifyContent: 'center',
     },

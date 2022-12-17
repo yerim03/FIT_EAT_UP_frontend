@@ -1,7 +1,7 @@
 //두 번째 스택 - Search
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Search, SearchResult } from '../screens';
+import { Search } from '../screens';
 import HeaderBackButton from '../components/HeaderBackButton';
 import { theme } from '../styles/theme';
 

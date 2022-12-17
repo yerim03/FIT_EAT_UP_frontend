@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import CustomText from '../components/CustomText';
 import { Ionicons } from '@expo/vector-icons';
-import { useUserState } from '../context/UserContext';
 import { Rating } from 'react-native-ratings';
+import { useUserState } from '../context/UserContext';
 import axios from 'axios';
 import { API } from "../config";
 import { theme } from '../styles/theme';
@@ -53,6 +53,7 @@ const RestaurantInfo = ({ route }) => {
         getVisitPlaces();
         getStarRating();
     }, [])
+
 
     const makeFormdata = () => {
         const formdata = new FormData();
@@ -148,6 +149,17 @@ const RestaurantInfo = ({ route }) => {
         }
     };
 
+    //별점데이터를 백엔드 서버에 보내는 함수
+    const handleRatingFinishonPress = () => {
+        let data = {
+            user: user.userPk,
+            place: foodData.id,
+            rating: starRating
+        }
+        axios.post(`${API.SAVE_STAR_RATING}`, data, { headers: headers })
+            .then(res => {console.log('rating 저장성공 \n', res.data);})
+            .catch(err => {console.log(err.response.data)})
+    };
 
     //연락처, 음식점 카테고리 등 정보
     const Info = () => {
@@ -164,17 +176,6 @@ const RestaurantInfo = ({ route }) => {
         );
     };
     
-    //별점데이터를 백엔드 서버에 보내는 함수
-    const handleRatingFinishonPress = () => {
-        let data = {
-            user: user.userPk,
-            place: foodData.id,
-            rating: starRating
-        }
-        axios.post(`${API.SAVE_STAR_RATING}`, data, { headers: headers })
-            .then(res => {console.log('rating 저장성공 \n', res.data);})
-            .catch(err => {console.log(err.response.data)})
-    };
 
     return(
         <View style={styles.container}>
@@ -231,9 +232,6 @@ const RestaurantInfo = ({ route }) => {
                 <View style={styles.locationArea}>
                     <CustomText style={styles.dataTitle} fontType="Medium">{foodData.road_address_name}</CustomText>
                     <CustomText style={styles.data} fontType="Light">{foodData.address_name}</CustomText>
-                    {/* <View style={{flex: 1, backgroundColor: 'orange'}}>
-                        <Text>지도영역</Text>
-                    </View> */}
                 </View>
 
                 <View style={styles.infoArea}>
