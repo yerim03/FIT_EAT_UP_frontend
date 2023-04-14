@@ -1,7 +1,79 @@
-# 졸업 프로젝트
-## FIT_EAT_UP_frontend
-기본 Navigator 구조
-![Navigator구조](./Navigator%20%EA%B5%AC%EC%A1%B0.png)
+# FIT EAT UP - Frontend
+> ### 🎓 2022년 홍익대학교 컴퓨터공학과 졸업 프로젝트
+'FIT EAT UP' 프로젝트는 본인과 친구들 각각의 취향을 모두 고려한 공통 맛집을 추천받을 수 있는 서비스를 제공하는 모바일 애플리케이션입니다.
+<br/><br/><br/><br/>
+
+## 프로젝트 배경 및 목적
+---
+우리는 일상생활에서 어떤 음식점 또는 카페를 갈지 고민합니다. 특히 여러 사람들이 모여
+음식점 또는 카페를 가기 위해 장소를 선택할 때, 서로의 취향이 크게 차이가 날 경우 문
+제가 종종 발생하기도 합니다. 예를 들어 각자 본인의 취향을 고집한다면 선택하는데 시간
+이 오래 걸리고, 상대방에게만 맞추어 선택하면 장소에 대한 만족도가 떨어질 수 있습니다.   
+따라서 각자의 취향에 맞는 장소를 기반으로 하여 모두가 만족할 수 있는 최적의 장소를
+추천해주는 애플리케이션을 구상하게 되었습니다.
+<br/><br/><br/><br/>
+
+## 개발 환경 소개
+---
+![소프트웨어구성도](https://user-images.githubusercontent.com/103301583/218037830-c9a47b8b-d0cb-46a8-a595-8bd5d3bb4974.png)
+<br/><br/><br/><br/>
+
+## Frontend Navigator 구조
+---
+![네비게이션 구조](https://user-images.githubusercontent.com/103301583/218037835-0c1eb2be-80a7-4797-b45c-80bf2096fe32.png)
+<br/><br/><br/><br/>
+
+## 프로젝트 주요 기능 소개
+---
+1️⃣ 로그인 및 회원가입 기능
++ 회원가입 및 로그인을 통해 애플리케이션 이용 가능  
+
+2️⃣ 친구와의 음식점 추천 기능  
++ 원하는 친구를 선택하여 모두의 취향에 맞는 음식점을 추천해주는 기능 
+
+3️⃣ 음식점 검색 기능
++ 음식점명을 직접 입력하여 음식점을 검색하는 기능 
+
+4️⃣ 친구 관리 기능
++ 함께 음식점을 추천받을 친구를 추가 및 삭제하는 기능
+
+5️⃣ 프로필 관리 기능
++ 사용자의 좋아요 장소 및 가본 장소 리스트 등 사용자의 정보를 관리하는 기능
+<br/><br/><br/><br/>
+
+## 음식점 추천 기능 시연 영상
+---
+<p align="center">
+<img src="https://user-images.githubusercontent.com/103301583/232123845-e4c434c3-0848-4d28-ae7f-376db402161a.gif
+" >
+</p>
+<br/>
+
+---
+<br/>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/103301583/232125525-96adb77a-61a8-4ccf-9322-e329d2bf4a4e.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232125534-3b794a8d-900f-4941-af67-4f7b2a151cdd.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232125755-1369e535-5d89-4036-8b9e-a67b2a742655.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232126448-74c117de-b823-43c7-a240-7b1df74e3aaa.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232126459-0fcfddd9-7d84-4a4c-9675-b19471d6136d.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232126602-25f24345-13fd-42c3-a56f-606cb3d54451.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232126607-45a03606-9b80-46aa-819a-a50851eabaf4.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232126613-cd63208c-4716-4478-bd82-6c1c862aa24b.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232127142-9a01bcdd-f22e-49b2-bfb8-b063edc3fcec.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232127162-19d7d72d-c16a-4b23-8512-5949bfa8d803.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232127169-fd1c929b-2606-4536-a7f7-36c37fd857ab.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232127186-12d30c14-b326-465e-8c01-95531e284e70.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232127213-cb90923a-24a0-437a-901d-83a66d21744c.jpg" width="210">
+</p>
+<br/><br/><br/><br/>
+
+[💻 FIT EAT UP Backend Github Repo 바로가기](https://github.com/wjdansrl7/FIT_EAT_UP_backend)  
+[💻 FIT EAT UP 소개 영상 바로가기](https://www.youtube.com/watch?v=MTsxdkUxlgE)
+
+<br/>
+
+---
 
 version 0.0.0 
 + 프로젝트 생성
@@ -14,7 +86,7 @@ version 0.0.2
 + 로그인, 회원가입 파일의 위치 변경
 + MyTextInput 컴포넌트 : version 0.0.1의 입력 컴포넌트 파일명 변경 후 일부 수정
 + MyButton 컴포넌트 생성
-+ ~~시작화면(splash.js) 생성 - 추후에 수정 혹은 삭제 예정~~ -> 삭제
++ ~~시작화면(splash.js) 생성~~ -> 삭제
 
 version 0.0.3
 + 로그인, 회원가입 UI 수정
@@ -27,8 +99,7 @@ version 0.1.0
 version 0.1.1 
 + MyTextInput  컴포넌트 : editable 속성 추가
 + MyProfileImage 컴포넌트 생성(사용자의 프로필 이미지)
-+ 친구 추가 UI(AddFriend.js) 구성
-+ 프로필 수정 UI(EditProfile.js) 구성
++ 친구 추가 UI(AddFriend.js), 프로필 수정 UI(EditProfile.js) 구성
 + 회원가입 UI 수정
 
 version 0.1.2
@@ -58,9 +129,7 @@ version 0.2.1
 
 version 0.2.2
 + ResultImage 컴포넌트 생성(음식 이미지)
-+ 추천결과 UI(HomeResult.js) 구성
-+ 검색 UI(Search.js) 구성(추가수정 예정)
-+ 검색결과 UI(SearchResult.js) 구성
++ 추천결과 UI(HomeResult.js), 검색 UI(Search.js), 검색결과 UI(SearchResult.js) 구성
 + 검색결과 UI에서 해당 음식점 사진을 누르면 음식점 상세정보 UI(RestuarantInfo.js)로 이동
 + ~~SafeAreaView 적용~~
 
@@ -71,7 +140,7 @@ version 0.2.3
 
 version 0.2.4
 - 회원가입 완료하면 로그인 화면으로 전환
-- 로그인, 회원가입 버튼 비활성화 : 모든 입력값을 입력했을 때만 로그인 버튼, 회원가입 버튼 활성화 되도록 설정
+- 로그인, 회원가입 버튼 비활성화 : 모든 입력값을 입력했을 때 버튼 활성화
 - 회원가입 에러메세지 완료
 - 회원가입 id, nickname 중복확인 완료
 
