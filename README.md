@@ -4,7 +4,6 @@
 <br/><br/><br/><br/>
 
 ## 프로젝트 배경 및 목적
----
 우리는 일상생활에서 어떤 음식점 또는 카페를 갈지 고민합니다. 특히 여러 사람들이 모여
 음식점 또는 카페를 가기 위해 장소를 선택할 때, 서로의 취향이 크게 차이가 날 경우 문
 제가 종종 발생하기도 합니다. 예를 들어 각자 본인의 취향을 고집한다면 선택하는데 시간
@@ -14,17 +13,14 @@
 <br/><br/><br/><br/>
 
 ## 개발 환경 소개
----
-![소프트웨어구성도](https://user-images.githubusercontent.com/103301583/218037830-c9a47b8b-d0cb-46a8-a595-8bd5d3bb4974.png)
+<img src="https://user-images.githubusercontent.com/103301583/218037830-c9a47b8b-d0cb-46a8-a595-8bd5d3bb4974.png" width="700">
 <br/><br/><br/><br/>
 
 ## Frontend Navigator 구조
----
-![네비게이션 구조](https://user-images.githubusercontent.com/103301583/218037835-0c1eb2be-80a7-4797-b45c-80bf2096fe32.png)
+<img src="https://user-images.githubusercontent.com/103301583/218037835-0c1eb2be-80a7-4797-b45c-80bf2096fe32.png" width="700">
 <br/><br/><br/><br/>
 
 ## 프로젝트 주요 기능 소개
----
 1️⃣ 로그인 및 회원가입 기능
 + 회원가입 및 로그인을 통해 애플리케이션 이용 가능  
 
@@ -42,9 +38,8 @@
 <br/><br/><br/><br/>
 
 ## 음식점 추천 기능 시연 영상
----
 <p align="center">
-<img src="https://user-images.githubusercontent.com/103301583/232123845-e4c434c3-0848-4d28-ae7f-376db402161a.gif
+<img src="https://user-images.githubusercontent.com/103301583/232130637-687df206-af68-4b8a-964f-9b375d299f96.gif
 " >
 </p>
 <br/>
@@ -52,19 +47,19 @@
 ---
 <br/>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/103301583/232125525-96adb77a-61a8-4ccf-9322-e329d2bf4a4e.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232125534-3b794a8d-900f-4941-af67-4f7b2a151cdd.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232125755-1369e535-5d89-4036-8b9e-a67b2a742655.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232126448-74c117de-b823-43c7-a240-7b1df74e3aaa.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232126459-0fcfddd9-7d84-4a4c-9675-b19471d6136d.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232126602-25f24345-13fd-42c3-a56f-606cb3d54451.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232126607-45a03606-9b80-46aa-819a-a50851eabaf4.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232126613-cd63208c-4716-4478-bd82-6c1c862aa24b.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232127142-9a01bcdd-f22e-49b2-bfb8-b063edc3fcec.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232127162-19d7d72d-c16a-4b23-8512-5949bfa8d803.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232127169-fd1c929b-2606-4536-a7f7-36c37fd857ab.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232127186-12d30c14-b326-465e-8c01-95531e284e70.jpg" width="210">
-<img src="https://user-images.githubusercontent.com/103301583/232127213-cb90923a-24a0-437a-901d-83a66d21744c.jpg" width="210">
+<img src="https://user-images.githubusercontent.com/103301583/232125525-96adb77a-61a8-4ccf-9322-e329d2bf4a4e.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232125534-3b794a8d-900f-4941-af67-4f7b2a151cdd.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232125755-1369e535-5d89-4036-8b9e-a67b2a742655.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232126448-74c117de-b823-43c7-a240-7b1df74e3aaa.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232126459-0fcfddd9-7d84-4a4c-9675-b19471d6136d.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232126602-25f24345-13fd-42c3-a56f-606cb3d54451.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232126607-45a03606-9b80-46aa-819a-a50851eabaf4.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232126613-cd63208c-4716-4478-bd82-6c1c862aa24b.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232127142-9a01bcdd-f22e-49b2-bfb8-b063edc3fcec.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232127162-19d7d72d-c16a-4b23-8512-5949bfa8d803.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232127169-fd1c929b-2606-4536-a7f7-36c37fd857ab.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232127186-12d30c14-b326-465e-8c01-95531e284e70.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232127213-cb90923a-24a0-437a-901d-83a66d21744c.jpg" width="210" style="border:1px solid">
 </p>
 <br/><br/><br/><br/>
 
