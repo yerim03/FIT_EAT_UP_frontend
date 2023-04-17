@@ -1,6 +1,10 @@
 # FIT EAT UP - Frontend
-> ### 🎓 2022년 홍익대학교 컴퓨터공학과 졸업 프로젝트
+### 🎓 2022년 홍익대학교 컴퓨터공학과 졸업 프로젝트
 'FIT EAT UP' 프로젝트는 본인과 친구들 각각의 취향을 모두 고려한 공통 맛집을 추천받을 수 있는 서비스를 제공하는 모바일 애플리케이션입니다.
+<br/><br/>
+
+[💻 FIT EAT UP Backend Github Repo](https://github.com/wjdansrl7/FIT_EAT_UP_backend)  
+[💻 FIT EAT UP 소개 영상](https://www.youtube.com/watch?v=MTsxdkUxlgE)
 <br/><br/><br/><br/>
 
 ## 프로젝트 배경 및 목적
@@ -17,55 +21,49 @@
 <br/><br/><br/><br/>
 
 ## Frontend Navigator 구조
-<img src="https://user-images.githubusercontent.com/103301583/218037835-0c1eb2be-80a7-4797-b45c-80bf2096fe32.png" width="700">
+<img src="https://user-images.githubusercontent.com/103301583/232432000-d12a613b-f139-4b23-a487-1fa1863f21c7.png" width="700">
 <br/><br/><br/><br/>
 
 ## 프로젝트 주요 기능 소개
-1️⃣ 로그인 및 회원가입 기능
+🟣 로그인 및 회원가입 기능
 + 회원가입 및 로그인을 통해 애플리케이션 이용 가능  
 
-2️⃣ 친구와의 음식점 추천 기능  
+🟣 친구와의 음식점 추천 기능  
 + 원하는 친구를 선택하여 모두의 취향에 맞는 음식점을 추천해주는 기능 
 
-3️⃣ 음식점 검색 기능
+🟣 음식점 검색 기능
 + 음식점명을 직접 입력하여 음식점을 검색하는 기능 
 
-4️⃣ 친구 관리 기능
+🟣 친구 관리 기능
 + 함께 음식점을 추천받을 친구를 추가 및 삭제하는 기능
 
-5️⃣ 프로필 관리 기능
+🟣 프로필 관리 기능
 + 사용자의 좋아요 장소 및 가본 장소 리스트 등 사용자의 정보를 관리하는 기능
 <br/><br/><br/><br/>
 
 ## 음식점 추천 기능 시연 영상
 <p align="center">
-<img src="https://user-images.githubusercontent.com/103301583/232130637-687df206-af68-4b8a-964f-9b375d299f96.gif
-" >
+<img src="https://user-images.githubusercontent.com/103301583/232430966-97c100d0-806e-44c1-b356-3b127cd4b821.gif" width="300">
 </p>
 <br/>
 
 ---
 <br/>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/103301583/232125525-96adb77a-61a8-4ccf-9322-e329d2bf4a4e.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232125534-3b794a8d-900f-4941-af67-4f7b2a151cdd.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232125755-1369e535-5d89-4036-8b9e-a67b2a742655.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232126448-74c117de-b823-43c7-a240-7b1df74e3aaa.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232126459-0fcfddd9-7d84-4a4c-9675-b19471d6136d.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232126602-25f24345-13fd-42c3-a56f-606cb3d54451.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232126607-45a03606-9b80-46aa-819a-a50851eabaf4.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232126613-cd63208c-4716-4478-bd82-6c1c862aa24b.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232127142-9a01bcdd-f22e-49b2-bfb8-b063edc3fcec.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232127162-19d7d72d-c16a-4b23-8512-5949bfa8d803.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232127169-fd1c929b-2606-4536-a7f7-36c37fd857ab.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232127186-12d30c14-b326-465e-8c01-95531e284e70.jpg" width="210" style="border:1px solid">
-<img src="https://user-images.githubusercontent.com/103301583/232127213-cb90923a-24a0-437a-901d-83a66d21744c.jpg" width="210" style="border:1px solid">
+<img src="https://user-images.githubusercontent.com/103301583/232125525-96adb77a-61a8-4ccf-9322-e329d2bf4a4e.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232125534-3b794a8d-900f-4941-af67-4f7b2a151cdd.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232125755-1369e535-5d89-4036-8b9e-a67b2a742655.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232126448-74c117de-b823-43c7-a240-7b1df74e3aaa.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232126459-0fcfddd9-7d84-4a4c-9675-b19471d6136d.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232126602-25f24345-13fd-42c3-a56f-606cb3d54451.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232126607-45a03606-9b80-46aa-819a-a50851eabaf4.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232126613-cd63208c-4716-4478-bd82-6c1c862aa24b.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232127142-9a01bcdd-f22e-49b2-bfb8-b063edc3fcec.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232127162-19d7d72d-c16a-4b23-8512-5949bfa8d803.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232127169-fd1c929b-2606-4536-a7f7-36c37fd857ab.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232127186-12d30c14-b326-465e-8c01-95531e284e70.jpg" width="210" style="border:1px solid black">
+<img src="https://user-images.githubusercontent.com/103301583/232127213-cb90923a-24a0-437a-901d-83a66d21744c.jpg" width="210" style="border:1px solid black">
 </p>
-<br/><br/><br/><br/>
-
-[💻 FIT EAT UP Backend Github Repo 바로가기](https://github.com/wjdansrl7/FIT_EAT_UP_backend)  
-[💻 FIT EAT UP 소개 영상 바로가기](https://www.youtube.com/watch?v=MTsxdkUxlgE)
-
 <br/>
 
 ---
